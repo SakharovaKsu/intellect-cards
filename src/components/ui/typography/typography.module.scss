@@ -1,0 +1,77 @@
+@use 'src/styles/helpers' as *;
+
+@mixin typography($size: null, $weight: null, $line-height: null) {
+  margin: 0;
+
+  @if $size {
+    font-size: var(--font-size-#{$size});
+  }
+
+  @if $weight {
+    font-weight: var(--font-weight-#{$weight});
+  }
+
+  @if $line-height {
+    line-height: var(--line-height-#{$line-height});
+  }
+}
+
+.large {
+  @include typography(xxl, bold);
+
+  line-height: 1.38;
+}
+
+.h1 {
+  @include typography($size: xl, $weight: bold, $line-height: xl);
+}
+
+.h2 {
+  @include typography($size: l, $weight: bold, $line-height: s);
+}
+
+.h3 {
+  @include typography($weight: bold);
+}
+
+.body1 {
+  @include typography;
+}
+
+.subtitle1 {
+  @include typography($weight: bold);
+}
+
+.body2 {
+  @include typography($size: s, $line-height: l);
+}
+
+.subtitle2 {
+  @include typography($size: s, $weight: bold, $line-height: l);
+}
+
+.caption {
+  @include typography($size: xs, $line-height: s);
+}
+
+.overline {
+  @include typography($size: xs, $weight: bold, $line-height: s);
+}
+
+%link-shared {
+  cursor: pointer;
+  color: var(--color-info-500);
+  text-decoration: underline;
+}
+
+.link1 {
+  @extend %link-shared;
+
+  @include typography($size: s, $line-height: l);
+}
+
+.link2 {
+  @extend %link-shared;
+
+  @include typography($size: xs, $line-height: s);
+}
