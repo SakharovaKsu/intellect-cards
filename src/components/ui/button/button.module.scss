@@ -1,0 +1,102 @@
+@use '@/styles/helpers' as *;
+
+.root {
+  cursor: pointer;
+
+  height: em(36);
+  padding: 0 em(28);
+
+  text-align: center;
+
+  border: none;
+  border-radius: 4px;
+
+  &Primary {
+    background-color: var(--color-accent-500);
+
+    &:hover {
+      background-color: var(--color-accent-300);
+    }
+
+    &:focus-visible,
+    &:active {
+      background-color: var(--color-accent-700);
+    }
+
+    &:disabled {
+      cursor: default;
+      color: var(--color-light-900);
+      background-color: var(--color-accent-900);
+    }
+  }
+
+  &Secondary {
+    background-color: var(--color-dark-300);
+
+    &:hover {
+      background-color: var(--color-dark-100);
+    }
+
+    &:focus-visible,
+    &:active {
+      background-color: var(--color-dark-500);
+    }
+
+    &:disabled {
+      cursor: default;
+      color: var(--color-light-900);
+      background-color: var(--color-dark-300);
+    }
+  }
+
+  &Tertiary {
+    color: var(--color-accent-500);
+    background-color: transparent;
+    border: 1px solid var(--color-accent-500);
+
+    &:is(:hover, :active, :focus-visible) {
+      color: var(--color-accent-700);
+      border-color: var(--color-accent-700);
+    }
+
+    &:hover {
+      background-color: var(--color-dark-500);
+    }
+
+    &:focus-visible,
+    &:active {
+      background-color: var(--color-accent-900);
+    }
+
+    &:disabled {
+      cursor: default;
+      color: var(--color-accent-900);
+      background-color: transparent;
+      border-color: var(--color-accent-900);
+    }
+  }
+
+  &Link {
+    color: var(--color-accent-500);
+    background-color: transparent;
+    border-radius: em(36);
+
+    &:hover {
+      color: var(--color-accent-300);
+    }
+
+    &:focus-visible,
+    &:active {
+      color: var(--color-accent-700);
+    }
+
+    &:disabled {
+      cursor: default;
+      color: var(--color-accent-900);
+    }
+  }
+
+  &FullWidth {
+    width: 100%;
+  }
+}
