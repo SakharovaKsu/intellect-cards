@@ -1,0 +1,23 @@
+:root {
+  --font-family-primary: 'Roboto', sans-serif;
+
+  // line heights
+  --line-height-xs: 1;
+  --line-height-s: 1.33;
+  --line-height-m: 1.5;
+  --line-height-l: 1.71;
+  --line-height-xl: 1.8;
+  --line-height-xxl: 2.25;
+
+  // font sizes
+  --font-size-xs: 0.75rem; // 12 px
+  --font-size-s: 0.875rem; // 14 px
+  --font-size-m: 1rem; // 16 px
+  --font-size-l: 1.125rem; // 18 px
+  --font-size-xl: 1.25rem; // 20 px
+  --font-size-xxl: 1.625rem; // 26 px
+
+  // font weights
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+}
