@@ -1,0 +1,94 @@
+button {
+  all: unset;
+}
+
+.container {
+  .labelWrapper {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+
+    &.disabled {
+      cursor: context-menu;
+      color: var(--color-dark-100);
+    }
+
+    .buttonCheckBox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      box-sizing: border-box;
+      width: 32px;
+      height: 32px;
+      margin-right: 3px;
+
+      color: var(--color-dark-900);
+
+      border-radius: 16px;
+
+      &:focus-visible {
+        background-color: var(--color-dark-100);
+        outline: none;
+
+        .root[data-state='unchecked'] {
+          background-color: var(--color-dark-100);
+        }
+      }
+
+      .root {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        box-sizing: border-box;
+        width: 18px;
+        height: 18px;
+
+        background-color: var(--color-light-100);
+        border-radius: 3px;
+
+        &[data-state='unchecked'] {
+          background-color: var(--color-dark-900);
+          border: 2px solid var(--color-light-900);
+        }
+
+        &[data-state='unchecked']:disabled {
+          border: 2px solid var(--color-dark-100);
+        }
+
+        &[data-state='checked']:disabled {
+          color: var(--color-light-700);
+          background-color: var(--color-dark-100);
+        }
+
+        .indicator {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          box-sizing: border-box;
+          min-width: 18px;
+          height: 18px;
+        }
+      }
+    }
+
+    &:hover:not(.disabled) .buttonCheckBox {
+      background-color: var(--color-dark-500);
+
+      .root[data-state='unchecked'] {
+        background-color: var(--color-dark-500);
+      }
+    }
+
+    &:active:not(.disabled) .buttonCheckBox {
+      background-color: var(--color-dark-100);
+
+      .root[data-state='unchecked'] {
+        background-color: var(--color-dark-100);
+      }
+    }
+  }
+}
