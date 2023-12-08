@@ -23,7 +23,8 @@
     "clsx": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.48.2"
+    "react-hook-form": "^7.48.2",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@hookform/devtools": "^4.3.1",
