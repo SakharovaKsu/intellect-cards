@@ -1,0 +1,43 @@
+.container {
+  max-width: 420px;
+  padding: 24px 30px;
+}
+
+.header {
+  margin-bottom: 27px;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .button {
+    background-color: red;
+  }
+}
+
+.forgotPassword {
+  cursor: pointer;
+  align-self: flex-end;
+  margin-bottom: 48px;
+  color: var(--color-light-100);
+}
+
+.haveAccount {
+  cursor: pointer;
+  align-self: center;
+  color: var(--color-light-900);
+}
+
+.signUp {
+  cursor: pointer;
+
+  align-self: center;
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--color-accent-500);
+}
