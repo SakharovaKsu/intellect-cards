@@ -7,7 +7,7 @@ import { clsx } from 'clsx'
 
 import s from './checkbox.module.scss'
 
-export type CheckBoxProps = {
+export type CheckboxProps = {
   checked?: boolean
   className?: string
   disabled?: boolean
@@ -15,10 +15,10 @@ export type CheckBoxProps = {
   onCheckedChange?: (checked: boolean) => void
 }
 
-export const CheckBox = forwardRef<HTMLButtonElement, CheckBoxProps>(
+export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
   ({ checked, className, disabled, label, onCheckedChange }, ref) => {
     const classNames = {
-      buttonCheckBox: clsx(s.buttonCheckBox, disabled && s.disabled),
+      buttonCheckBox: clsx(s.buttonCheckbox, disabled && s.disabled),
       container: clsx(s.container, className),
       indicator: clsx(s.indicator),
       labelWrapper: clsx(s.labelWrapper, disabled && s.disabled),
