@@ -10,7 +10,7 @@ const meta = {
   },
   component: SignInForm,
   tags: ['autodocs'],
-  title: 'Components/Sign-In',
+  title: 'Auth/Sign-In',
 } satisfies Meta<typeof SignInForm>
 
 export default meta

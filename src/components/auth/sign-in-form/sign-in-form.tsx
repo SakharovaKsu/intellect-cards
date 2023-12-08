@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form'
 
-import { TextField } from '@//components/ui/text-field'
+import { ControlledCheckbox } from '@/components/controlled/controlled-checkbox'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { CheckBox } from '@/components/ui/checkbox'
+import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -52,7 +52,7 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
           label={'Password'}
           type={'password'}
         />
-        <CheckBox {...register('rememberMe')} label={'Remember me'}></CheckBox>
+        <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
         <Typography className={s.forgotPassword} variant={'body2'}>
           Forgot Password?
         </Typography>
