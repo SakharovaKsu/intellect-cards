@@ -1,0 +1,162 @@
+.label {
+  width: 65px;
+  height: 24px;
+  margin: 0;
+
+  color: var(--color-dark-100);
+  text-align: start;
+
+  &.disabled {
+    color: var(--color-dark-300);
+  }
+}
+
+.selectBlockIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-right: 12px;
+
+  &:disabled {
+    color: var(--color-dark-300);
+  }
+}
+
+.trigger {
+  pointer-events: auto;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+
+  &[data-disabled] {
+    cursor: initial;
+    color: var(--color-dark-300);
+    border-color: var(--color-dark-300);
+  }
+
+  &[data-state='open'] {
+    background-color: var(--color-dark-900);
+    border-color: var(--color-dark-100);
+    border-radius: 2px 2px 0 0;
+  }
+
+  .icon {
+    pointer-events: auto;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  &:focus {
+    border: 1px solid var(--color-info-700);
+    outline: 1px solid var(--color-info-700);
+  }
+
+  &:hover:not([data-disabled]) {
+    background-color: var(--color-dark-500);
+  }
+
+  &[data-state='open'] .icon {
+    transform: rotate(180deg);
+  }
+
+  &[data-disabled] .text {
+    color: var(--color-dark-300);
+  }
+
+  &[data-disabled] svg path {
+    fill: var(--color-dark-300);
+  }
+}
+
+.content {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  &[data-disabled] {
+    cursor: initial;
+    color: var(--color-dark-300);
+    border-color: var(--color-dark-300);
+  }
+
+  &[data-state='open'] {
+    border-color: var(--color-dark-100);
+    border-top: none;
+    border-radius: 0 0 2px 2px;
+  }
+}
+
+.selectItem {
+  cursor: pointer;
+  user-select: none;
+
+  background-color: var(--color-dark-900);
+  border: 1px solid var(--color-dark-100);
+  border-top: none;
+
+  &:last-child {
+    border-radius: 0 0 2px 2px;
+  }
+
+  &:not(:last-child) {
+    border-bottom: none;
+  }
+
+  &:hover:not([data-disabled]) {
+    background-color: var(--color-accent-900);
+  }
+
+  &:active:not([data-disabled]) {
+    background-color: initial;
+  }
+
+  &[data-highlighted] {
+    color: var(--color-accent-300);
+    background-color: var(--color-accent-900);
+    outline: none;
+  }
+}
+
+.default {
+  width: 210px;
+}
+
+.pagination {
+  width: 50px;
+}
+
+.defaultPaddings {
+  padding: 6px 12px;
+}
+
+.paginationPaddings {
+  padding: 0 2px 0 6px;
+}
+
+.typography {
+  margin: 0;
+  padding: 0;
+}
+
+.placeholder {
+  &:hover {
+    color: var(--color-accent-300);
+  }
+
+  &:active {
+    color: var(--color-light-100);
+  }
+}
