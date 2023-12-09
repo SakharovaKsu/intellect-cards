@@ -1,0 +1,70 @@
+@mixin pagination-numbers {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+}
+
+.root {
+  display: flex;
+}
+
+.container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-right: 24px;
+}
+
+.dots {
+  @include pagination-numbers;
+}
+
+.numbers {
+  @include pagination-numbers;
+
+  border-radius: 2px;
+
+  &:focus {
+    border-radius: 2px;
+    outline: 2px solid var(--color-info-900);
+  }
+
+  &:hover {
+    background-color: var(--color-dark-500);
+  }
+
+  &.activePage {
+    background-color: var(--color-light-100);
+
+    p {
+      color: var(--color-dark-900);
+    }
+  }
+}
+
+.arrows {
+  @include pagination-numbers;
+
+  &.disabledArrows {
+    cursor: default;
+    color: var(--color-dark-100);
+  }
+}
+
+.selectContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select {
+  margin-right: 10px;
+  margin-left: 16px;
+}
