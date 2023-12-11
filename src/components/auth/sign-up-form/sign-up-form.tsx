@@ -76,7 +76,7 @@ export const SignUpForm = () => {
           label={'Confirm password'}
           type={'password'}
         />
-        <Button disabled={isSubmitting} style={{ marginTop: '33px' }}>
+        <Button disabled={isSubmitting} style={{ marginTop: '33px' }} type={'submit'}>
           Submit
         </Button>
         <Typography as={'h4'} className={s.haveAccount} variant={'body2'}>
