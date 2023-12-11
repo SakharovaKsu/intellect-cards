@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { CheckBox } from './checkbox'
+import { Checkbox } from './checkbox'
 
 const meta = {
   argTypes: {
@@ -9,10 +9,10 @@ const meta = {
       options: ['with label', 'without label'],
     },
   },
-  component: CheckBox,
+  component: Checkbox,
   tags: ['autodocs'],
   title: 'Components/CheckBox',
-} satisfies Meta<typeof CheckBox>
+} satisfies Meta<typeof Checkbox>
 
 export default meta
 type Story = StoryObj<typeof meta>
