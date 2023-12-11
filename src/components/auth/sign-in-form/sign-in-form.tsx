@@ -36,8 +36,6 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
     resolver: zodResolver(signInSchema),
   })
 
-  console.log('errors: ', errors)
-
   return (
     <Card className={s.container}>
       <Typography className={s.header} variant={'large'}>
