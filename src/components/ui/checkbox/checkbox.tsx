@@ -15,7 +15,7 @@ export type CheckboxProps = {
   onCheckedChange?: (checked: boolean) => void
 }
 
-export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
+export const CheckBox = forwardRef<HTMLButtonElement, CheckboxProps>(
   ({ checked, className, disabled, label, onCheckedChange }, ref) => {
     const classNames = {
       buttonCheckBox: clsx(s.buttonCheckbox, disabled && s.disabled),
