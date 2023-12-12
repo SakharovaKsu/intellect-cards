@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import userAvatar from '@/assets/userAvatar.png'
 import { Button } from '@/components/ui/button'
-import { Logo } from '@/icons/logo'
+import { Logo } from '@/icons/icon-components/logo'
 
 import s from './header.module.scss'
 type HeaderProps = {

@@ -1,8 +1,8 @@
 import { ChangeEvent, ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
 
-import { EyeIcon } from '@/icons/eye-icon'
-import { EyeOffIcon } from '@/icons/eye-off-icon'
-import { SearchIcon } from '@/icons/search-icon'
+import { EyeIcon } from '@/icons/icon-components/eye-icon'
+import { EyeOffIcon } from '@/icons/icon-components/eye-off-icon'
+import { SearchIcon } from '@/icons/icon-components/search-icon'
 import clsx from 'clsx'
 
 import s from './text-field.module.scss'

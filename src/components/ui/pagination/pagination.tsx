@@ -1,5 +1,5 @@
-import {ArrowMiniRightIcon} from '@/icons/ArrowMiniRightIcon'
-import {ArrowMiniLeftIcon} from '@/icons/ArrowMiniLeftIcon'
+import {ArrowMiniRightIcon} from '@/icons/icon-components/arrow-mini-right-icon'
+import {ArrowMiniLeftIcon} from '@/icons/icon-components/arrow-mini-left-icon'
 import {usePagination} from '@/components/ui/pagination/usePagination'
 import { Select, SelectProps } from '@/components/ui/select'
 import {Typography} from '@/components/ui/typography'
