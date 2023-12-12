@@ -23,6 +23,7 @@ type Story = StoryObj<typeof meta>
 
 export const MenuUser: Story = {
   args: {
+    align: 'start',
     children: (
       <>
         <DropdownItem>
@@ -39,6 +40,7 @@ export const MenuUser: Story = {
 
 export const Default: Story = {
   args: {
+    align: 'start',
     children: (
       <>
         <DropdownItemWithIcon icon={<LearnIcon />} label={'Learn'} />

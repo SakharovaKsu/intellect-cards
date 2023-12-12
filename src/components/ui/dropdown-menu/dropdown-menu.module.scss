@@ -1,4 +1,5 @@
 .buttonAvatar {
+  cursor: pointer;
   width: 36px;
   height: 36px;
   padding: 0;
@@ -45,7 +46,7 @@
     content: '';
     position: absolute;
     top: -5px;
-    right: calc(10% - 3px);
+    left: calc(10% - 3px);
     transform: rotate(-135deg);
     width: 8px;
     height: 8px;

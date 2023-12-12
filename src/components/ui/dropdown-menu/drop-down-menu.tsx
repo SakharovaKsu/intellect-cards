@@ -11,14 +11,16 @@ export type DropDownMenuProps = {
   user?: boolean
 } & ComponentPropsWithoutRef<typeof Root>
 
-export const DropDownMenu: FC<DropDownMenuProps> = ({ children, img, user }) => {
+export const DropDownMenu: FC<DropDownMenuProps> = ({ align, children, img, user }) => {
   return (
     <Root>
       <Group>
         <Trigger className={s.buttonAvatar}>
           {user && <img alt={'Фото пользователя.'} className={s.picture} src={img} />}
         </Trigger>
-        <Content className={s.group}>{children}</Content>
+        <Content align={align} className={s.group} sideOffset={15}>
+          {children}
+        </Content>
       </Group>
     </Root>
   )
