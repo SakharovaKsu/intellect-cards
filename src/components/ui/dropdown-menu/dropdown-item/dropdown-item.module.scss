@@ -1,0 +1,37 @@
+.item {
+  cursor: pointer;
+  user-select: none;
+
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+  padding-top: 6px;
+  padding-bottom: 6px;
+
+  border-bottom: 1px solid var(--color-dark-500);
+  outline: none;
+
+  fill: var(--color-light-100);
+
+  &:last-child {
+    border: none;
+    padding-bottom: 0;
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 0.85;
+  }
+}
+
+.itemIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+}
