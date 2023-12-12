@@ -1,0 +1,88 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 27px;
+  padding: 30px 30px 40px 30px;
+  max-width: 420px;
+}
+
+.containerEdit {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.photoAvatar {
+  position: relative;
+  max-width: 96px;
+  max-height: 96px;
+}
+
+.buttonEditPhoto {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border: none;
+  border-radius: 4px;
+  background: var(--color-dark-300);
+  padding: 4px 4px 0 4px;
+  box-shadow: 0 2px 10px 0 rgba(109, 109, 109, 0.25);
+
+  &:hover {
+    background-color: var(--color-dark-100);
+  }
+
+  &:focus-visible,
+  &:active {
+    background-color: var(--color-dark-500);
+  }
+
+  &:disabled {
+    cursor: default;
+    color: var(--color-light-900);
+    background-color: var(--color-dark-300);
+  }
+}
+
+.containerName {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: flex-end;
+  padding-top: 10px;
+}
+
+.subTitle {
+  font-size: 16px;
+}
+
+.buttonEditName {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &:active,
+  &:focus-visible {
+    opacity: 0.3;
+  }
+}
+
+.text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-dark-100);
+  margin-bottom: 15px;
+}
+
+.buttonLogout {
+  display: flex;
+  gap: 10px;
+}
