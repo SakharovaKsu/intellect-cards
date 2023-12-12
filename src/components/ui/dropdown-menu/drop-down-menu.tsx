@@ -14,7 +14,7 @@ export type DropDownMenuProps = {
 export const DropDownMenu: FC<DropDownMenuProps> = ({ align, children, img, user }) => {
   return (
     <Root>
-      <Group>
+      <Group className={s.box}>
         <Trigger className={s.buttonAvatar}>
           {user && <img alt={'Фото пользователя.'} className={s.picture} src={img} />}
         </Trigger>
