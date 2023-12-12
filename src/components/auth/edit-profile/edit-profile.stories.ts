@@ -10,8 +10,18 @@ const meta = {
 
 export default meta
 type Story = StoryObj<typeof meta>
+export const Default: Story = {
+  args: {
+    edit: false,
+    emailUser: 'j&johnson@gmail.com',
+    imgAvatar: avatar,
+    nameUser: 'Ivan',
+  },
+}
+
 export const Edit: Story = {
   args: {
+    edit: true,
     emailUser: 'j&johnson@gmail.com',
     imgAvatar: avatar,
     nameUser: 'Ivan',
