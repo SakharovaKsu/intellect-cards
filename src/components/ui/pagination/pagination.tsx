@@ -1,9 +1,9 @@
-import {ArrowMiniRightIcon} from '@/icons/ArrowMiniRightIcon'
-import {ArrowMiniLeftIcon} from '@/icons/ArrowMiniLeftIcon'
-import {usePagination} from '@/components/ui/pagination/usePagination'
+import { usePagination } from '@/components/ui/pagination/usePagination'
 import { Select, SelectProps } from '@/components/ui/select'
-import {Typography} from '@/components/ui/typography'
-import {clsx} from 'clsx'
+import { Typography } from '@/components/ui/typography'
+import { ArrowMiniLeftIcon } from '@/icons/icon-components/arrow-mini-left-icon'
+import { ArrowMiniRightIcon } from '@/icons/icon-components/arrow-mini-right-icon'
+import { clsx } from 'clsx'
 
 import s from './pagination.module.scss'
 
@@ -16,13 +16,13 @@ export type PaginationProps = {
 } & SelectProps
 
 export const Pagination = ({
-                             currentPage,
-                             onPageChange,
-                             pageSize,
-                             siblingsCount = 1,
-                             totalCount,
-                             ...rest
-                           }: PaginationProps) => {
+  currentPage,
+  onPageChange,
+  pageSize,
+  siblingsCount = 1,
+  totalCount,
+  ...rest
+}: PaginationProps) => {
   const classNames = {
     arrows(disabled: boolean) {
       return clsx(s.arrows, disabled && s.disabledArrows)
@@ -39,7 +39,7 @@ export const Pagination = ({
 
   const totalPageCount = Math.ceil(totalCount / pageSize)
 
-  const pageNumbers = usePagination({currentPage, siblingsCount, totalPageCount})
+  const pageNumbers = usePagination({ currentPage, siblingsCount, totalPageCount })
 
   const setNextPage = () => {
     if (currentPage !== totalPageCount) {
@@ -57,7 +57,7 @@ export const Pagination = ({
     <div className={classNames.root}>
       <div className={classNames.container}>
         <button className={classNames.arrows(currentPage === 1)} onClick={setPrevPage}>
-          <ArrowMiniLeftIcon size={16}/>
+          <ArrowMiniLeftIcon size={16} />
         </button>
         {pageNumbers.map((num, index) => {
           if (num === '...') {
@@ -79,7 +79,7 @@ export const Pagination = ({
           }
         })}
         <button className={classNames.arrows(currentPage === totalPageCount)} onClick={setNextPage}>
-          <ArrowMiniRightIcon size={16}/>
+          <ArrowMiniRightIcon size={16} />
         </button>
       </div>
       <div className={classNames.selectContainer}>

@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
 
-import { ArrowMiniDownIcon } from '@/icons/ArrowMiniDownIcon'
 import { SelectItem } from '@/components/ui/select/selectItem'
 import { Typography } from '@/components/ui/typography'
+import { ArrowMiniDownIcon } from '@/icons/icon-components/arrow-mini-down-icon'
 import {
   Content,
   Group,

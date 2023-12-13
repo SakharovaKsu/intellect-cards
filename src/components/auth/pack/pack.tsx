@@ -5,7 +5,8 @@ import { Card } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
-import { CloseIcon } from '@/icons/close-icon'
+import { CloseIcon } from '@/icons'
+import { clsx } from 'clsx'
 
 import s from './pack.module.scss'
 
@@ -16,10 +17,19 @@ type PackType = {
 }
 
 export const Pack: FC<PackType> = ({ deletePack = false, nameButton, title }) => {
+  const classNames = {
+    buttonClose: clsx(s.buttonClose),
+    container: clsx(s.container),
+    containerButton: clsx(s.containerButton),
+    containerCheckbox: clsx(s.containerCheckbox),
+    containerEdit: clsx(s.containerEdit),
+    containerTitle: clsx(s.containerTitle),
+  }
+
   const content = !deletePack ? (
     <>
       <TextField label={'Name Pack'} placeholder={'Name'} />
-      <div className={s.containerCheckbox}>
+      <div className={classNames.containerCheckbox}>
         <Checkbox />
         <Typography variant={'body2'}>Private pack</Typography>
       </div>
@@ -31,15 +41,15 @@ export const Pack: FC<PackType> = ({ deletePack = false, nameButton, title }) =>
   )
 
   return (
-    <Card className={s.container}>
-      <div className={s.containerTitle}>
+    <Card className={classNames.container}>
+      <div className={classNames.containerTitle}>
         <Typography variant={'large'}>{title}</Typography>
         <button>
-          <CloseIcon className={s.buttonClose} />
+          <CloseIcon className={classNames.buttonClose} />
         </button>
       </div>
-      <div className={s.containerEdit}>{content}</div>
-      <div className={s.containerButton}>
+      <div className={classNames.containerEdit}>{content}</div>
+      <div className={classNames.containerButton}>
         <Button variant={'secondary'}>{nameButton}</Button>
         <Button variant={'primary'}>{nameButton}k</Button>
       </div>

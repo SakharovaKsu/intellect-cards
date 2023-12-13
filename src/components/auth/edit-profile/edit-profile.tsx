@@ -4,8 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
-import { EditIcon } from '@/icons/edit-icon'
-import { LogOutIcon } from '@/icons/log-out-icon'
+import { EditIcon, LogOutIcon } from '@/icons'
 
 import s from './edit-profile.module.scss'
 
