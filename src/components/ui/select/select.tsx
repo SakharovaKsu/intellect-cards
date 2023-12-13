@@ -22,7 +22,7 @@ export type ItemsType = {
   value: string
 }
 
-export type SelectVariant = 'default' | 'pagination'
+export type SelectVariant = 'default' | 'fullWidth' | 'pagination'
 
 export type SelectProps = {
   className?: string

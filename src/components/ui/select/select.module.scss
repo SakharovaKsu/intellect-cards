@@ -96,6 +96,7 @@
     border-color: var(--color-dark-100);
     border-top: none;
     border-radius: 0 0 2px 2px;
+    width: 100%;
   }
 }
 
@@ -106,6 +107,7 @@
   background-color: var(--color-dark-900);
   border: 1px solid var(--color-dark-100);
   border-top: none;
+  width: 100%;
 
   &:last-child {
     border-radius: 0 0 2px 2px;
@@ -134,11 +136,16 @@
   width: 210px;
 }
 
+.fullWidth {
+  width: 100%;
+}
+
 .pagination {
   width: 50px;
 }
 
-.defaultPaddings {
+.defaultPaddings,
+.fullWidthPaddings {
   padding: 6px 12px;
 }
 
