@@ -33,7 +33,7 @@ export const PacksList: FC<PackType> = ({
     containerCheckbox: clsx(s.containerCheckbox),
     containerEdit: clsx(s.containerEdit),
     containerTitle: clsx(s.containerTitle),
-    select: clsx(s.select),
+    select: clsx(s.select, s.fullWidth),
   }
 
   const content = !deletePack ? (
@@ -42,8 +42,8 @@ export const PacksList: FC<PackType> = ({
       {!isPack && (
         <>
           <Select className={classNames.select} items={items || []} variant={'fullWidth'} />
-          <TextField label={'Question'} placeholder={'How "This" works in JavaScript?'} />
-          <TextField label={'Answer'} placeholder={'This is how "This" works in JavaScript'} />
+          <TextField label={'Question'} placeholder={''} />
+          <TextField label={'Answer'} placeholder={''} />
         </>
       )}
       {isPack && (
