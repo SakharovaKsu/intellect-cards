@@ -33,7 +33,7 @@ export const PacksList: FC<PackType> = ({
     containerCheckbox: clsx(s.containerCheckbox),
     containerEdit: clsx(s.containerEdit),
     containerTitle: clsx(s.containerTitle),
-    select: clsx(s.select),
+    select: clsx(s.select, s.fullWidth),
   }
 
   const content = !deletePack ? (
