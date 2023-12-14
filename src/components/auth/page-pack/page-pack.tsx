@@ -2,7 +2,8 @@ import { FC } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
+import { RadioGroup } from '@/components/ui/radio-group'
+import { RadioItemProps } from '@/components/ui/radio-group/radio-item'
 import { Typography } from '@/components/ui/typography'
 import { clsx } from 'clsx'
 
@@ -15,6 +16,14 @@ type PagePackProps = {
   text?: string
 }
 
+const evaluationOptions = [
+  { id: 1, label: 'Did not know', value: 'did_not_know' },
+  { id: 2, label: 'Forgot', value: 'forgot' },
+  { id: 3, label: 'A lot of thought', value: 'a_lot_of_thought' },
+  { id: 4, label: 'Сonfused', value: 'confused' },
+  { id: 5, label: 'Knew the answer', value: 'knew_the_answer' },
+]
+
 export const PagePack: FC<PagePackProps> = ({ numberOfAttempts = 0, openAnswer = false, text }) => {
   const classNames = {
     container: clsx(s.container),
@@ -23,14 +32,6 @@ export const PagePack: FC<PagePackProps> = ({ numberOfAttempts = 0, openAnswer =
     text: clsx(s.text),
     title: clsx(s.title),
   }
-
-  const evaluationOptions = [
-    { id: 1, text: 'Did not know' },
-    { id: 2, text: 'Forgot' },
-    { id: 3, text: 'A lot of thought' },
-    { id: 4, text: 'Сonfused' },
-    { id: 5, text: 'Knew the answer' },
-  ]
 
   return (
     <Card className={classNames.container}>
@@ -53,13 +54,7 @@ export const PagePack: FC<PagePackProps> = ({ numberOfAttempts = 0, openAnswer =
           <Typography className={classNames.content} variant={'body1'}>
             <b>Rate yourself:</b>
           </Typography>
-          {evaluationOptions.map(value => {
-            return (
-              <div key={value.id}>
-                <Checkbox label={value.text} />
-              </div>
-            )
-          })}
+          <RadioGroup items={evaluationOptions as unknown as RadioItemProps[]} />
         </div>
       )}
       {openAnswer ? (

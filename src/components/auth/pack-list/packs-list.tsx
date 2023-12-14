@@ -42,8 +42,8 @@ export const PacksList: FC<PackType> = ({
       {!isPack && (
         <>
           <Select className={classNames.select} items={items || []} variant={'fullWidth'} />
-          <TextField label={'Question'} placeholder={'How "This" works in JavaScript?'} />
-          <TextField label={'Answer'} placeholder={'This is how "This" works in JavaScript'} />
+          <TextField label={'Question'} placeholder={''} />
+          <TextField label={'Answer'} placeholder={''} />
         </>
       )}
       {isPack && (
