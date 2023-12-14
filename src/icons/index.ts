@@ -16,4 +16,5 @@ export { ProfileAvatarIcon } from './icon-components/profile-avatar-icon'
 export { SearchIcon } from './icon-components/search-icon'
 export { ThrashIcon } from './icon-components/thrash-icon'
 export { UserIcon } from './icon-components/user-icon'
+export { CloseIcon } from './icon-components/close-icon'
 
