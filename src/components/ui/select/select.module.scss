@@ -86,6 +86,9 @@
 
   box-sizing: border-box;
 
+  width: var(--radix-select-trigger-width);
+  max-height: var(--radix-select-content-available-height);
+
   &[data-disabled] {
     cursor: initial;
     color: var(--color-dark-300);
@@ -96,7 +99,7 @@
     border-color: var(--color-dark-100);
     border-top: none;
     border-radius: 0 0 2px 2px;
-    width: 100%;
+
   }
 }
 
@@ -107,7 +110,6 @@
   background-color: var(--color-dark-900);
   border: 1px solid var(--color-dark-100);
   border-top: none;
-  width: 100%;
 
   &:last-child {
     border-radius: 0 0 2px 2px;

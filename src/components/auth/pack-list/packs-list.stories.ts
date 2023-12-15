@@ -41,7 +41,7 @@ export const DeletePack: Story = {
   },
 }
 
-export const AddCard: Story = {
+export const AddNewCard: Story = {
   args: {
     items: items,
     nameButton: 'Add New Card',
