@@ -1,5 +1,6 @@
 import { FC } from 'react'
 
+import picture from '@/assets/picture.png'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -7,12 +8,14 @@ import { ItemsType, Select } from '@/components/ui/select'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 import { CloseIcon } from '@/icons'
+import { PictureIcon } from '@/icons/icon-components/picture'
 import { clsx } from 'clsx'
 
 import s from './packs-list.module.scss'
 
 type PackType = {
   deletePack?: boolean
+  img?: boolean
   isPack?: boolean
   items?: ItemsType[] | undefined
   nameButton: string
@@ -21,6 +24,7 @@ type PackType = {
 
 export const PacksList: FC<PackType> = ({
   deletePack = false,
+  img,
   isPack,
   items,
   nameButton,
@@ -30,11 +34,25 @@ export const PacksList: FC<PackType> = ({
     buttonClose: clsx(s.buttonClose),
     container: clsx(s.container),
     containerButton: clsx(s.containerButton),
+    containerButtonPct: clsx(s.containerButtonPct),
     containerCheckbox: clsx(s.containerCheckbox),
     containerEdit: clsx(s.containerEdit),
     containerTitle: clsx(s.containerTitle),
+    picture: clsx(s.picture),
     select: clsx(s.select, s.fullWidth),
   }
+
+  const addPicture = (
+    <div>
+      <img alt={'Картинка заглошка'} className={classNames.picture} src={picture} />
+      <Button fullWidth variant={'secondary'}>
+        <span className={classNames.containerButtonPct}>
+          <PictureIcon />
+          Change Cover
+        </span>
+      </Button>
+    </div>
+  )
 
   const content = !deletePack ? (
     <>
@@ -42,8 +60,22 @@ export const PacksList: FC<PackType> = ({
       {!isPack && (
         <>
           <Select className={classNames.select} items={items || []} variant={'fullWidth'} />
-          <TextField label={'Question'} placeholder={''} />
-          <TextField label={'Answer'} placeholder={''} />
+          {img ? (
+            <>
+              {!isPack && <Typography variant={'subtitle2'}>Question:</Typography>}
+              {addPicture}
+            </>
+          ) : (
+            <TextField label={'Question'} placeholder={''} />
+          )}
+          {img ? (
+            <>
+              {!isPack && <Typography variant={'subtitle2'}>Answer:</Typography>}
+              {addPicture}
+            </>
+          ) : (
+            <TextField label={'Answer'} placeholder={''} />
+          )}
         </>
       )}
       {isPack && (
@@ -68,7 +100,10 @@ export const PacksList: FC<PackType> = ({
           <CloseIcon className={classNames.buttonClose} />
         </button>
       </div>
-      <div className={classNames.containerEdit}>{content}</div>
+      <div className={classNames.containerEdit}>
+        {isPack && img && addPicture}
+        {content}
+      </div>
       <div className={classNames.containerButton}>
         <Button variant={'secondary'}>{nameButton}</Button>
         <Button variant={'primary'}>{nameButton}k</Button>
