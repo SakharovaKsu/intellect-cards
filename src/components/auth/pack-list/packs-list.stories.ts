@@ -24,6 +24,15 @@ export const AddPack: Story = {
   },
 }
 
+export const AddPackWithPicture: Story = {
+  args: {
+    img: true,
+    isPack: true,
+    nameButton: 'Add New Pack',
+    title: 'Add New Pack',
+  },
+}
+
 export const EditPack: Story = {
   args: {
     isPack: true,
@@ -43,6 +52,16 @@ export const DeletePack: Story = {
 
 export const AddCard: Story = {
   args: {
+    img: false,
+    items: items,
+    nameButton: 'Add New Card',
+    title: 'Add New Card',
+  },
+}
+
+export const AddCardWithPicture: Story = {
+  args: {
+    img: true,
     items: items,
     nameButton: 'Add New Card',
     title: 'Add New Card',
