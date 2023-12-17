@@ -1,3 +1,4 @@
+import picture from '@/assets/picture.png'
 import { PacksList } from '@/components/auth/pack-list/packs-list'
 import { Meta, StoryObj } from '@storybook/react'
 
@@ -26,7 +27,7 @@ export const AddPack: Story = {
 
 export const AddPackWithPicture: Story = {
   args: {
-    img: true,
+    img: picture,
     isPack: true,
     nameButton: 'Add New Pack',
     title: 'Add New Pack',
@@ -52,7 +53,6 @@ export const DeletePack: Story = {
 
 export const AddNewCard: Story = {
   args: {
-    img: false,
     items: items,
     nameButton: 'Add New Card',
     title: 'Add New Card',
@@ -61,7 +61,7 @@ export const AddNewCard: Story = {
 
 export const AddCardWithPicture: Story = {
   args: {
-    img: true,
+    img: picture,
     items: items,
     nameButton: 'Add New Card',
     title: 'Add New Card',

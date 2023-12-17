@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-import picture from '@/assets/picture.png'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -15,7 +14,7 @@ import s from './packs-list.module.scss'
 
 type PackType = {
   deletePack?: boolean
-  img?: boolean
+  img?: string
   isPack?: boolean
   items?: ItemsType[] | undefined
   nameButton: string
@@ -44,7 +43,7 @@ export const PacksList: FC<PackType> = ({
 
   const addPicture = (
     <div>
-      <img alt={'Картинка заглошка'} className={classNames.picture} src={picture} />
+      <img alt={'Картинка заглошка'} className={classNames.picture} src={img} />
       <Button fullWidth variant={'secondary'}>
         <span className={classNames.containerButtonPct}>
           <PictureIcon />
