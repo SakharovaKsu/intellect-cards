@@ -21,3 +21,14 @@
 .content {
   padding-bottom: 12px;
 }
+
+.contentWithPicture {
+  padding-top: 30px;
+  padding-bottom: 13px;
+}
+
+.picture {
+  width: 350px;
+  height: 120px;
+  object-fit: cover;
+}

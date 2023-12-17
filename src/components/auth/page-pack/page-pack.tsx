@@ -13,6 +13,7 @@ type PagePackProps = {
   evaluationOptions?: string[]
   numberOfAttempts?: number
   openAnswer?: boolean
+  picture?: string
   text?: string
 }
 
@@ -24,14 +25,25 @@ const evaluationOptions = [
   { id: 5, label: 'Knew the answer', value: 'knew_the_answer' },
 ]
 
-export const PagePack: FC<PagePackProps> = ({ numberOfAttempts = 0, openAnswer = false, text }) => {
+export const PagePack: FC<PagePackProps> = ({
+  numberOfAttempts = 0,
+  openAnswer = false,
+  picture,
+  text,
+}) => {
   const classNames = {
     container: clsx(s.container),
     containerAnswer: clsx(s.containerAnswer),
     content: clsx(s.content),
+    contentWithPicture: clsx(s.contentWithPicture),
+    img: clsx(s.picture),
     text: clsx(s.text),
     title: clsx(s.title),
   }
+
+  const addPicture = picture && (
+    <img alt={'Картинка для вопроса.'} className={classNames.img} src={picture} />
+  )
 
   return (
     <Card className={classNames.container}>
@@ -40,8 +52,9 @@ export const PagePack: FC<PagePackProps> = ({ numberOfAttempts = 0, openAnswer =
       </Typography>
       <Typography variant={'body1'}>
         <b>Question: </b>
-        {text}
+        {!picture && text}
       </Typography>
+      {addPicture}
       <Typography className={classNames.text} variant={'body2'}>
         Количество попыток ответов на вопрос: <b>{numberOfAttempts}</b>
       </Typography>
@@ -49,9 +62,13 @@ export const PagePack: FC<PagePackProps> = ({ numberOfAttempts = 0, openAnswer =
         <div className={classNames.containerAnswer}>
           <Typography className={classNames.content} variant={'body1'}>
             <b>Answer: </b>
-            {text}
+            {!picture && text}
           </Typography>
-          <Typography className={classNames.content} variant={'body1'}>
+          {addPicture}
+          <Typography
+            className={picture ? classNames.contentWithPicture : classNames.content}
+            variant={'body1'}
+          >
             <b>Rate yourself:</b>
           </Typography>
           <RadioGroup items={evaluationOptions as unknown as RadioItemProps[]} />
