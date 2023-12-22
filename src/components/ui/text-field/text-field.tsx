@@ -64,7 +64,7 @@ export const TextField = forwardRef<ElementRef<'input'>, TextFieldProps>(
             className={classNames.field}
             disabled={disabled}
             onChange={onChangeHandler}
-            placeholder={errorMessage ? errorMessage : placeholder}
+            placeholder={placeholder}
             ref={ref}
             type={showPassword ? 'text' : type}
             {...props}
