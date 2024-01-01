@@ -43,7 +43,8 @@ export const SignUpForm = () => {
   })
 
   const onSubmit = (data: FormValues) => {
-    console.log('submit', data)
+    // eslint-disable-next-line no-console
+    return console.log('submit', data)
   }
 
   return (
