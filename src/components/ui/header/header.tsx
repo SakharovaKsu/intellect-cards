@@ -12,7 +12,7 @@ export const Header: FC<HeaderProps> = props => {
   const { isAuth } = props
 
   return (
-    <div className={s.root}>
+    <header className={s.root}>
       <div className={s.headerContainer}>
         <Logo />
         {isAuth ? (
@@ -24,6 +24,6 @@ export const Header: FC<HeaderProps> = props => {
           <Button variant={'primary'}>Sign In</Button>
         )}
       </div>
-    </div>
+    </header>
   )
 }

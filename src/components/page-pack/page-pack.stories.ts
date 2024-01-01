@@ -1,11 +1,11 @@
 import img from '@/assets/picture.png'
-import { PagePack } from '@/components/auth/page-pack/page-pack'
+import { PagePack } from '@/components/page-pack/page-pack'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   component: PagePack,
   tags: ['autodocs'],
-  title: 'Auth/Page-Pack',
+  title: 'Сomponents/Page-Pack',
 } satisfies Meta<typeof PagePack>
 
 export default meta

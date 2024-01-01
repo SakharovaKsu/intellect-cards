@@ -1,11 +1,11 @@
 import picture from '@/assets/picture.png'
-import { PacksList } from '@/components/auth/pack-list/packs-list'
+import { PacksList } from '@/components/pack-list/packs-list'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   component: PacksList,
   tags: ['autodocs'],
-  title: 'Auth/Pack-List',
+  title: 'Сomponents/Pack-List',
 } satisfies Meta<typeof PacksList>
 
 export default meta

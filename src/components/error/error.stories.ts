@@ -1,10 +1,10 @@
-import { Error } from '@/components/auth/error/error'
+import { Error } from '@/components/error/error'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   component: Error,
   tags: ['autodocs'],
-  title: 'Auth/Error',
+  title: 'Сomponents/Error',
 } satisfies Meta<typeof Error>
 
 export default meta
