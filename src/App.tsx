@@ -1,10 +1,10 @@
 import { Layout } from '@/components/ui/layout/layout'
-import Login from '@/pages/auth/login/login'
+import { Router } from '@/routings'
 
 export const App = () => {
   return (
     <Layout>
-      <Login />
+      <Router />
     </Layout>
   )
 }
