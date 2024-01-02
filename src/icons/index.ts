@@ -1,6 +1,7 @@
 export { ArrowMiniDownIcon } from './icon-components/arrow-mini-down-icon'
 export { ArrowMiniLeftIcon } from './icon-components/arrow-mini-left-icon'
 export { ArrowMiniRightIcon } from './icon-components/arrow-mini-right-icon'
+export { ArrowMiniUpIcon } from './icon-components/arrow-mini-up-icon'
 export { DeleteIcon } from './icon-components/delete-icon'
 export { EditIcon } from './icon-components/edit-icon'
 export { EmailIcon } from './icon-components/email-icon'
