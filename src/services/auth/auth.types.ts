@@ -13,3 +13,18 @@ export type Login = {
   password: string
   rememberMe: boolean
 }
+
+export type SingUp = {
+  email: string
+  html: string
+  name: string
+  password: string
+  sendConfirmationEmail: boolean
+  subject: string
+}
+
+export type ResendVerificationEmail = {
+  html: string
+  subject: string
+  userId: string
+}
