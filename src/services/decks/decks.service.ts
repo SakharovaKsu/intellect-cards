@@ -1,18 +1,11 @@
 import { baseApi } from '@/services/base-api'
-import {
-  CreateCardsArgs,
-  CreateDeckArgs,
-  Deck,
-  Gard,
-  GetCardsArgs,
-  GetDecksArgs,
-  GetDesksResponse,
-} from '@/services/decks/decks.types'
+import { Card, CreateCardsArgs, GetCardsArgs } from '@/services/cards/cards.type'
+import { CreateDeckArgs, Deck, GetDecksArgs, GetDesksResponse } from '@/services/decks/decks.types'
 
 export const decksService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      createCards: builder.mutation<Gard, CreateCardsArgs & { id: string }>({
+      createCards: builder.mutation<Card, CreateCardsArgs & { id: string }>({
         invalidatesTags: ['Decks'],
         query: args => {
           return {
@@ -66,7 +59,7 @@ export const decksService = baseApi.injectEndpoints({
           }
         },
       }),
-      getLearnCards: builder.query<Gard, { id: string; previousCardId: string }>({
+      getLearnCards: builder.query<Card, { id: string; previousCardId: string }>({
         query: args => {
           return {
             body: args,
