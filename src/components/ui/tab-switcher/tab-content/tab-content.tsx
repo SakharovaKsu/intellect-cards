@@ -10,5 +10,5 @@ type TabContentProps = {
 export const TabContent = (props: TabContentProps) => {
   const { children, value } = props
 
-  return <Content value={value}>{children}</Content>
+  return <Content style={{whiteSpace: 'nowrap'}} value={value}>{children}</Content>
 }
