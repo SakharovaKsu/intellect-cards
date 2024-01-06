@@ -1,4 +1,4 @@
-import { Login, ResendVerificationEmail, SingUp, UserData } from '@/services/auth/auth.types'
+import { LoginArgs, ResendVerificationEmail, SingUp, UserData } from '@/services/auth/auth.types'
 import { baseApi } from '@/services/base-api'
 
 export const authService = baseApi.injectEndpoints({
@@ -7,12 +7,12 @@ export const authService = baseApi.injectEndpoints({
       getMe: builder.query<UserData, void>({
         query: () => `v1/auth/me`,
       }),
-      login: builder.mutation<{ accessToken: string }, Login>({
-        query: args => {
+      login: builder.mutation<void, LoginArgs>({
+        query: body => {
           return {
-            body: args,
+            body,
             method: 'POST',
-            url: `v1/auth/login`,
+            url: `/v1/auth/login`,
           }
         },
       }),
@@ -43,11 +43,11 @@ export const authService = baseApi.injectEndpoints({
         },
       }),
       singUp: builder.mutation<UserData, SingUp>({
-        query: args => {
+        query: body => {
           return {
-            body: args,
+            body,
             method: 'POST',
-            url: `v1/auth/sing-up`,
+            url: `/v1/auth/sign-up`,
           }
         },
       }),

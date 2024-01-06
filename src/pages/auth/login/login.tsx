@@ -1,12 +1,13 @@
 import { SignInForm } from '@/components/auth/login/sign-in-form'
 import { Page } from '@/components/ui/page/page'
+import { useLoginMutation } from '@/services/auth/auth.service'
 
 const Login = () => {
-  const handleSubmit = () => {}
+  const [singIn] = useLoginMutation()
 
   return (
-    <Page marginTop={'36px'}>
-      <SignInForm onSubmit={handleSubmit} />
+    <Page>
+      <SignInForm onSubmit={singIn} />
     </Page>
   )
 }

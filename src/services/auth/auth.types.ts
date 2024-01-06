@@ -13,7 +13,7 @@ export type UserData = {
   updated: string
 }
 
-export type Login = {
+export type LoginArgs = {
   email: string
   password: string
   rememberMe: boolean
@@ -21,11 +21,11 @@ export type Login = {
 
 export type SingUp = {
   email: string
-  html: string
-  name: string
+  html?: string
+  name?: string
   password: string
-  sendConfirmationEmail: boolean
-  subject: string
+  sendConfirmationEmail?: boolean
+  subject?: string
 }
 
 export type ResendVerificationEmail = {

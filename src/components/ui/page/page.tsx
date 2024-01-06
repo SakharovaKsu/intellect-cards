@@ -8,7 +8,7 @@ type Props = ComponentPropsWithRef<'div'> & {
   marginTop?: CSSProperties['marginTop']
 }
 
-export const Page = ({ children, className, marginTop, style, ...rest }: Props) => {
+export const Page = ({ children, className, marginTop = '36px', style, ...rest }: Props) => {
   const classes = clsx(className, s.page)
   const styles = { marginTop, ...style }
 
