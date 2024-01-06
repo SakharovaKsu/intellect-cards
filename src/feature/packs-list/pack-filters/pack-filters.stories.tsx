@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react'
-import {PackFilters} from "@/feature/packs-list/packs-list/pack-filters/pack-filters";
+import {PackFilters} from "@/feature/packs-list/pack-filters/pack-filters";
 
 const meta = {
   component: PackFilters,

@@ -1,11 +1,11 @@
 import {Meta, StoryObj} from '@storybook/react'
-import {PacksList} from "@/feature/packs-list/packs-list/packs-list";
+import {PackTable} from "@/feature/packs-list/pack-table/pack-table";
 
 const meta = {
-  component: PacksList,
+  component: PackTable,
   tags: ['autodocs'],
-  title: 'Feature/PacksList',
-} satisfies Meta<typeof PacksList>
+  title: 'Feature/PackTable',
+} satisfies Meta<typeof PackTable>
 
 export default meta
 type Story = StoryObj<typeof meta>

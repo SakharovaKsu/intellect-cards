@@ -1,0 +1,21 @@
+.columnHeaderContainer {
+  background-color: var(--color-dark-500);
+  min-width: 200px;
+  height: 36px;
+  padding-left: 24px;
+  text-align: start;
+  user-select: none;
+
+  .titleArrowContainer {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .arrowCenteredBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}

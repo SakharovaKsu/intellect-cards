@@ -1,13 +1,20 @@
 .container {
   padding: 0 137px;
 
-  .filtersHead{
+  .filtersHead {
     display: flex;
     justify-content: space-between;
     margin-bottom: 36px;
   }
-  .filtersBody{
+
+  .filtersBody {
     display: flex;
     align-items: end;
+  }
+
+  .centeredIcons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 }

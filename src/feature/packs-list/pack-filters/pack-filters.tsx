@@ -46,7 +46,7 @@ export function PackFilters(props: PropsType) {
           <Slider maxValues={10}/>
         </div>
         <Button style={{marginLeft:'35px'}} variant={'secondary'}>
-          <div style={{display:'flex',alignItems:'center',gap:'5px' }}>
+          <div className={s.centeredIcons}>
             <DeleteIcon size={15}/>
             <div>Clear Filters</div>
           </div>
