@@ -4,7 +4,7 @@ export type Author = {
 }
 
 export type UserData = {
-  avatar: string
+  avatar: null | string
   created: string
   email: string
   id: string
@@ -19,7 +19,7 @@ export type LoginArgs = {
   rememberMe: boolean
 }
 
-export type SingUp = {
+export type SingUpArgs = {
   email: string
   html?: string
   name?: string
@@ -28,8 +28,8 @@ export type SingUp = {
   subject?: string
 }
 
-export type ResendVerificationEmail = {
-  html: string
-  subject: string
+export type ResendVerificationEmailArgs = {
+  html?: string
+  subject?: string
   userId: string
 }

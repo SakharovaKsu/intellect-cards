@@ -1,13 +1,20 @@
-import { LoginArgs, ResendVerificationEmail, SingUp, UserData } from '@/services/auth/auth.types'
+import {
+  LoginArgs,
+  ResendVerificationEmailArgs,
+  SingUpArgs,
+  UserData,
+} from '@/services/auth/auth.types'
 import { baseApi } from '@/services/base-api'
 
 export const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       getMe: builder.query<UserData, void>({
+        providesTags: ['Me'],
         query: () => `v1/auth/me`,
       }),
       login: builder.mutation<void, LoginArgs>({
+        invalidatesTags: ['Me'],
         query: body => {
           return {
             body,
@@ -24,25 +31,25 @@ export const authService = baseApi.injectEndpoints({
           }
         },
       }),
-      recoverPassword: builder.mutation<void, { email: string; html: string; subject: string }>({
-        query: args => {
+      recoverPassword: builder.mutation<void, { email: string; html?: string; subject?: string }>({
+        query: body => {
           return {
-            body: args,
+            body,
             method: 'POST',
             url: `v1/auth/recover-password`,
           }
         },
       }),
-      resendVerificationEmail: builder.mutation<ResendVerificationEmail, void>({
-        query: args => {
+      resendVerificationEmail: builder.mutation<void, ResendVerificationEmailArgs>({
+        query: body => {
           return {
-            body: args,
+            body,
             method: 'POST',
             url: `v1/auth/resend-verification-email`,
           }
         },
       }),
-      singUp: builder.mutation<UserData, SingUp>({
+      singUp: builder.mutation<UserData, SingUpArgs>({
         query: body => {
           return {
             body,
@@ -51,19 +58,19 @@ export const authService = baseApi.injectEndpoints({
           }
         },
       }),
-      updateMe: builder.mutation<UserData, { avatar?: string; name: string }>({
-        query: args => {
+      updateMe: builder.mutation<UserData, { avatar?: string; name?: string }>({
+        query: body => {
           return {
-            body: args,
+            body,
             method: 'PATCH',
             url: `v1/auth/me`,
           }
         },
       }),
       verifyEmail: builder.mutation<void, { code: string }>({
-        query: args => {
+        query: body => {
           return {
-            body: args,
+            body,
             method: 'POST',
             url: `v1/auth/verify-email`,
           }

@@ -1,10 +1,17 @@
 import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import { SignUp } from '@/components/auth/login/sign-up-form'
 import Login from '@/pages/auth/login/login'
+import { SignUpPage } from '@/pages/auth/sing-up-page/sign-up-page'
+import { useGetMeQuery } from '@/services/auth/auth.service'
 
 const PrivateRoutes = () => {
-  const isAuthenticated = false
+  const { isError, isLoading } = useGetMeQuery()
+
+  if (isLoading) {
+    return <div>loading</div>
+  }
+
+  const isAuthenticated = !isError
 
   return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
 }
@@ -15,7 +22,7 @@ const publicRoutes = [
     path: '/login',
   },
   {
-    element: <SignUp />,
+    element: <SignUpPage />,
     path: '/register',
   },
 ]
@@ -36,5 +43,11 @@ const router = createBrowserRouter([
 ])
 
 export const Router = () => {
+  const { isLoading } = useGetMeQuery()
+
+  if (isLoading) {
+    return <div>loading</div>
+  }
+
   return <RouterProvider router={router} />
 }
