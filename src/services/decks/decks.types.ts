@@ -1,7 +1,7 @@
 import { Author } from '@/services/auth/auth.types'
 
 export type GetDesksResponse = {
-  items: Deck
+  items: Deck[]
   maxCardsCount: number
   pagination: Pagination
 }

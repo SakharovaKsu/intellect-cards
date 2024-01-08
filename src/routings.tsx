@@ -2,6 +2,7 @@ import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-rou
 
 import Login from '@/pages/auth/login/login'
 import { SignUpPage } from '@/pages/auth/sing-up-page/sign-up-page'
+import { PacksListPage } from '@/pages/decks/packs-list-page'
 import { useGetMeQuery } from '@/services/auth/auth.service'
 
 const PrivateRoutes = () => {
@@ -29,7 +30,7 @@ const publicRoutes = [
 
 const privateRoutes = [
   {
-    element: <div>Decks</div>,
+    element: <PacksListPage />,
     path: '/',
   },
 ]
