@@ -1,4 +1,4 @@
-import { PackTable } from '@/feature/packs-list/pack-table/pack-table'
+import { PackTable } from '@/components/packs/pack-table/pack-table'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {

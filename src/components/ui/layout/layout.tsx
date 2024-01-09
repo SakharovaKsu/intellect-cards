@@ -18,7 +18,7 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
 
     return (
       <div ref={ref} {...rest}>
-        <Header isAuth={false} />
+        <Header />
         <main className={classes.main}>{children}</main>
       </div>
     )

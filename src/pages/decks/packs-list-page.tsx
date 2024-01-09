@@ -1,6 +1,6 @@
+import { PackFilters } from '@/components/packs/pack-filters'
+import { PackTable } from '@/components/packs/pack-table'
 import { Page } from '@/components/ui/page/page'
-import { PackFilters } from '@/feature/packs-list/pack-filters'
-import { PackTable } from '@/feature/packs-list/pack-table'
 import { useGetDecksQuery } from '@/services/decks/decks.service'
 
 export const PacksListPage = () => {

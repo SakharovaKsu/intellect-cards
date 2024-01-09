@@ -2,14 +2,14 @@ import {
   LoginArgs,
   ResendVerificationEmailArgs,
   SingUpArgs,
-  UserData,
+  User,
 } from '@/services/auth/auth.types'
 import { baseApi } from '@/services/base-api'
 
 export const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      getMe: builder.query<UserData, void>({
+      getMe: builder.query<User, void>({
         providesTags: ['Me'],
         query: () => `v1/auth/me`,
       }),
@@ -49,7 +49,7 @@ export const authService = baseApi.injectEndpoints({
           }
         },
       }),
-      singUp: builder.mutation<UserData, SingUpArgs>({
+      singUp: builder.mutation<User, SingUpArgs>({
         query: body => {
           return {
             body,
@@ -58,7 +58,7 @@ export const authService = baseApi.injectEndpoints({
           }
         },
       }),
-      updateMe: builder.mutation<UserData, { avatar?: string; name?: string }>({
+      updateMe: builder.mutation<User, { avatar?: string; name?: string }>({
         query: body => {
           return {
             body,

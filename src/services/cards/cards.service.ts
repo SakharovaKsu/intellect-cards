@@ -23,11 +23,11 @@ export const cardsService = baseApi.injectEndpoints({
         },
       }),
       updateCard: builder.mutation<Deck, CreateCardsArgs & { id: string }>({
-        query: args => {
+        query: ({ id, ...body }) => {
           return {
-            body: args,
+            body,
             method: 'PATCH',
-            url: `v1/cards/${args.id}`,
+            url: `v1/cards/${id}`,
           }
         },
       }),

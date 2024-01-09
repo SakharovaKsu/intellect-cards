@@ -7,11 +7,11 @@ export const decksService = baseApi.injectEndpoints({
     return {
       createCards: builder.mutation<Card, CreateCardsArgs & { id: string }>({
         invalidatesTags: ['Decks'],
-        query: args => {
+        query: ({ id, ...body }) => {
           return {
-            body: args,
+            body,
             method: 'POST',
-            url: `v1/decks/${args.id}/cards`,
+            url: `v1/decks/${id}/cards`,
           }
         },
       }),
@@ -26,10 +26,10 @@ export const decksService = baseApi.injectEndpoints({
         },
       }),
       deleteDecks: builder.mutation<Omit<Deck, 'author'>, { id: string }>({
-        query: args => {
+        query: id => {
           return {
             method: 'DELETE',
-            url: `v1/decks/${args.id}`,
+            url: `v1/decks/${id}`,
           }
         },
       }),
@@ -66,20 +66,20 @@ export const decksService = baseApi.injectEndpoints({
         },
       }),
       submitGrade: builder.mutation<void, { cardId: string; grade: number; id: string }>({
-        query: args => {
+        query: ({ id, ...body }) => {
           return {
-            body: args,
+            body,
             method: 'POST',
-            url: `v1/decks/${args.id}/learn`,
+            url: `v1/decks/${id}/learn`,
           }
         },
       }),
       updateDecksById: builder.mutation<Deck, CreateDeckArgs & { id: string }>({
-        query: args => {
+        query: ({ id, ...body }) => {
           return {
-            body: args,
+            body,
             method: 'PATCH',
-            url: `v1/decks/${args.id}`,
+            url: `v1/decks/${id}`,
           }
         },
       }),

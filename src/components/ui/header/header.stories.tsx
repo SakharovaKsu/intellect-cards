@@ -1,8 +1,12 @@
+import { Provider } from 'react-redux'
+
 import { Header } from '@/components/ui/header/header'
+import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   component: Header,
+  decorators: [story => <Provider store={store}>{story()}</Provider>],
   tags: ['autodocs'],
   title: 'Components/Header',
 } satisfies Meta<typeof Header>
@@ -10,14 +14,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const DesktopWithButton: Story = {
-  args: {
-    isAuth: false,
-  },
-}
-
-export const DesktopWithAvatar: Story = {
-  args: {
-    isAuth: true,
-  },
+export const DesktopHeader: Story = {
+  args: {},
 }

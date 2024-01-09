@@ -50,8 +50,8 @@ export const elementsMap: Record<TypographyVariant, string> = {
   link1: 'a',
   link2: 'a',
   overline: 'p',
-  subtitle1: 'h5',
-  subtitle2: 'h6',
+  subtitle1: 'h4',
+  subtitle2: 'h5',
 }
 
 export type TypographyVariant =

@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 
-import { HeaderTable } from '@/feature/packs-list/pack-table/header-table'
+import { HeaderTable } from '@/components/packs/pack-table/header-table'
 import { GetDesksResponse } from '@/services/decks/decks.types'
 
 import s from './pack-table.module.scss'

@@ -3,7 +3,7 @@ export type Author = {
   name: string
 }
 
-export type UserData = {
+export type User = {
   avatar: null | string
   created: string
   email: string
