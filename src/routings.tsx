@@ -1,6 +1,9 @@
 import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import Login from '@/pages/auth/login/login'
+import { CheckEmail } from '@/components/auth/check-email'
+import { CreatePasswordPage } from '@/pages/auth/create-password-page/create-password-page'
+import { ForgotPasswordPage } from '@/pages/auth/forgot-password-page/forgot-password-page'
+import LoginPage from '@/pages/auth/login-page/login-page'
 import { SignUpPage } from '@/pages/auth/sing-up-page/sign-up-page'
 import { PacksListPage } from '@/pages/decks/packs-list-page'
 import { useGetMeQuery } from '@/services/auth/auth.service'
@@ -19,12 +22,24 @@ const PrivateRoutes = () => {
 
 const publicRoutes = [
   {
-    element: <Login />,
+    element: <LoginPage />,
     path: '/login',
   },
   {
     element: <SignUpPage />,
     path: '/register',
+  },
+  {
+    element: <ForgotPasswordPage />,
+    path: '/reset-password',
+  },
+  {
+    element: <CheckEmail />,
+    path: 'check-email',
+  },
+  {
+    element: <CreatePasswordPage />,
+    path: 'new-password',
   },
 ]
 

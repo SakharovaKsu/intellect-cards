@@ -33,3 +33,13 @@ export type ResendVerificationEmailArgs = {
   subject?: string
   userId: string
 }
+
+export type RecoverPasswordArgs = {
+  email: string
+  subject?: string
+}
+
+export type ResetPasswordArgs = {
+  password: string
+  token: string
+}

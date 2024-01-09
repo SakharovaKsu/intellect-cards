@@ -1,6 +1,8 @@
 import {
   LoginArgs,
+  RecoverPasswordArgs,
   ResendVerificationEmailArgs,
+  ResetPasswordArgs,
   SingUpArgs,
   User,
 } from '@/services/auth/auth.types'
@@ -31,7 +33,7 @@ export const authService = baseApi.injectEndpoints({
           }
         },
       }),
-      recoverPassword: builder.mutation<void, { email: string; html?: string; subject?: string }>({
+      recoverPassword: builder.mutation<void, RecoverPasswordArgs>({
         query: body => {
           return {
             body,
@@ -46,6 +48,15 @@ export const authService = baseApi.injectEndpoints({
             body,
             method: 'POST',
             url: `v1/auth/resend-verification-email`,
+          }
+        },
+      }),
+      resetPassword: builder.mutation<void, ResetPasswordArgs>({
+        query: ({ password, token }) => {
+          return {
+            body: password,
+            method: 'POST',
+            url: `/v1/auth/reset-password/${token}`,
           }
         },
       }),
@@ -86,6 +97,7 @@ export const {
   useLogoutMutation,
   useRecoverPasswordMutation,
   useResendVerificationEmailMutation,
+  useResetPasswordMutation,
   useSingUpMutation,
   useUpdateMeMutation,
   useVerifyEmailMutation,

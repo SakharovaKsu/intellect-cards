@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -19,12 +20,15 @@ const ForgotPasswordSchema = z.object({
 })
 
 export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
+  const navigate = useNavigate()
   const {
     control,
     formState: { errors },
     handleSubmit,
     register,
   } = useForm<ForgotPasswordFormSchema>({ resolver: zodResolver(ForgotPasswordSchema) })
+
+  const handleLoginIn = () => navigate('/login')
 
   return (
     <Card className={s.forgotContainer}>
@@ -46,7 +50,7 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
         <Typography as={'p'} className={s.rememberPassword} variant={'body2'}>
           Did you remember your password?
         </Typography>
-        <Typography className={s.trySignIn} variant={'link1'}>
+        <Typography as={'a'} className={s.trySignIn} onClick={handleLoginIn} variant={'link1'}>
           Try logging in
         </Typography>
       </form>

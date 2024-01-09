@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { ControlledCheckbox } from '@/components/controlled/controlled-checkbox'
 import { Button } from '@/components/ui/button'
@@ -36,6 +37,16 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
     resolver: zodResolver(signInSchema),
   })
 
+  const navigate = useNavigate()
+
+  const handleSignUpButton = () => {
+    navigate('/register')
+  }
+
+  const handleResetPasswordButton = () => {
+    navigate('/reset-password')
+  }
+
   return (
     <Card className={s.container}>
       <Typography className={s.header} variant={'large'}>
@@ -51,7 +62,12 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
           type={'password'}
         />
         <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
-        <Typography className={s.forgotPassword} variant={'body2'}>
+        <Typography
+          as={'a'}
+          className={s.forgotPassword}
+          onClick={handleResetPasswordButton}
+          variant={'body2'}
+        >
           Forgot Password?
         </Typography>
         <Button disabled={disabled} type={'submit'}>
@@ -60,7 +76,7 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
         <Typography as={'h4'} className={s.haveAccount} variant={'body2'}>
           Don&apos;t have an account?
         </Typography>
-        <Typography className={s.signUp} variant={'link1'}>
+        <Typography className={s.signUp} onClick={handleSignUpButton} variant={'link1'}>
           Sign Up
         </Typography>
       </form>

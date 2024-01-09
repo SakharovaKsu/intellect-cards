@@ -5,7 +5,7 @@ import { Page } from '@/components/ui/page/page'
 import { useLoginMutation } from '@/services/auth/auth.service'
 import { LoginArgs } from '@/services/auth/auth.types'
 
-const Login = () => {
+const LoginPage = () => {
   const [singIn] = useLoginMutation()
   const navigate = useNavigate()
 
@@ -25,4 +25,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default LoginPage

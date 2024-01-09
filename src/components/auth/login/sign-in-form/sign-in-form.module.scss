@@ -19,6 +19,15 @@
   align-self: flex-end;
   margin-bottom: 48px;
   color: var(--color-light-100);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-accent-100);
+  }
+
+  &:active {
+    color: var(--color-accent-500);
+  }
 }
 
 .haveAccount {
@@ -36,4 +45,13 @@
   font-weight: 700;
   line-height: 24px;
   color: var(--color-accent-500);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-accent-100);
+  }
+
+  &:active {
+    color: var(--color-accent-500);
+  }
 }

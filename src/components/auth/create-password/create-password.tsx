@@ -9,8 +9,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
 
 import s from './create-password.module.scss'
+
 type CreatePasswordProps = {
-  onSubmit: (data: CreatePasswordFormSchema) => void
+  onSubmit: (data: CreatePasswordFormSchema) => Promise<void>
 }
 
 export type CreatePasswordFormSchema = z.infer<typeof CreatePasswordSchema>
