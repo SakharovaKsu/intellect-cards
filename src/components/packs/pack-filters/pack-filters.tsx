@@ -1,18 +1,19 @@
-import {Typography} from "@/components/ui/typography";
-import {Button} from "@/components/ui/button";
-import {TextField} from "@/components/ui/text-field";
-import {TabSwitcher} from "@/components/ui/tab-switcher";
-import {Slider} from "@/components/ui/slider";
-import {DeleteIcon} from "@/icons";
+import { Button } from '@/components/ui/button'
+import { Slider } from '@/components/ui/slider'
+import { TabSwitcher } from '@/components/ui/tab-switcher'
+import { TextField } from '@/components/ui/text-field'
+import { Typography } from '@/components/ui/typography'
+import { DeleteIcon } from '@/icons'
+
 import s from './pack-filters.module.scss'
 
 type PropsType = {
-  switcherLabel: string
   sliderLabel: string
+  switcherLabel: string
 }
 
 export function PackFilters(props: PropsType) {
-  const {switcherLabel, sliderLabel} = props
+  const { sliderLabel, switcherLabel } = props
 
   const tabs = [
     {
@@ -29,29 +30,28 @@ export function PackFilters(props: PropsType) {
 
   return (
     <div className={s.container}>
-
       <div className={s.filtersHead}>
-        <Typography variant='h1' children={'Packs list'}/>
-        <Button variant={'primary'} children={'Add New Pack'}/>
+        <Typography children={'Packs list'} variant={'h1'} />
+        <Button children={'Add New Pack'} variant={'primary'} />
       </div>
 
       <div className={s.filtersBody}>
-        <TextField type={'search'} placeholder={'input search'} isModal={false}/>
-        <div  style={{padding:'0 25px'}}>
+        <TextField isModal={false} placeholder={'input search'} type={'search'} />
+        <div style={{ padding: '0 25px' }}>
           <Typography variant={'body2'}>{switcherLabel}</Typography>
-          <TabSwitcher tabs={tabs}/>
+          <TabSwitcher tabs={tabs} />
         </div>
         <div>
           <Typography variant={'body2'}>{sliderLabel}</Typography>
-          <Slider maxValues={10}/>
+          <Slider maxValues={10} />
         </div>
-        <Button style={{marginLeft:'35px'}} variant={'secondary'}>
+        <Button style={{ marginLeft: '35px' }} variant={'secondary'}>
           <div className={s.centeredIcons}>
-            <DeleteIcon size={15}/>
+            <DeleteIcon size={15} />
             <div>Clear Filters</div>
           </div>
         </Button>
       </div>
     </div>
-  );
+  )
 }

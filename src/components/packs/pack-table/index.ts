@@ -1,1 +1,1 @@
-export * from "./pack-table"
+export * from './pack-table'
