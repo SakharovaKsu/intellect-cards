@@ -1,6 +1,7 @@
 import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import { CheckEmail } from '@/components/auth/check-email'
+import Loader from '@/components/ui/loader/loader'
+import { CheckEmailPage } from '@/pages/auth/check-email-page/check-email-page'
 import { CreatePasswordPage } from '@/pages/auth/create-password-page/create-password-page'
 import { ForgotPasswordPage } from '@/pages/auth/forgot-password-page/forgot-password-page'
 import LoginPage from '@/pages/auth/login-page/login-page'
@@ -12,7 +13,7 @@ const PrivateRoutes = () => {
   const { isError, isLoading } = useGetMeQuery()
 
   if (isLoading) {
-    return <div>loading</div>
+    return <Loader />
   }
 
   const isAuthenticated = !isError
@@ -31,15 +32,15 @@ const publicRoutes = [
   },
   {
     element: <ForgotPasswordPage />,
-    path: '/reset-password',
+    path: '/forgot-password',
   },
   {
-    element: <CheckEmail />,
-    path: 'check-email',
+    element: <CheckEmailPage />,
+    path: '/check-email',
   },
   {
     element: <CreatePasswordPage />,
-    path: 'new-password',
+    path: '/confirm-email/:token',
   },
 ]
 

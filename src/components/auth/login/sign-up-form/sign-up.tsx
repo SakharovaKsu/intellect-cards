@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -49,12 +49,6 @@ export const SignUp: FC<Props> = ({ isSubmitting, onSubmit }) => {
     resolver: zodResolver(signUpSchema),
   })
 
-  const navigate = useNavigate()
-
-  const nahdlerSignInButton = () => {
-    navigate('/login')
-  }
-
   return (
     <Card className={s.container}>
       <Typography className={s.header} variant={'large'}>
@@ -91,7 +85,7 @@ export const SignUp: FC<Props> = ({ isSubmitting, onSubmit }) => {
         <Typography as={'h4'} className={s.haveAccount} variant={'body2'}>
           Already have an account?
         </Typography>
-        <Typography className={s.signUp} onClick={nahdlerSignInButton} variant={'link1'}>
+        <Typography as={Link} className={s.signUp} to={'/login'} variant={'link1'}>
           Sign In
         </Typography>
       </form>

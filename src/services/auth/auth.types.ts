@@ -36,10 +36,11 @@ export type ResendVerificationEmailArgs = {
 
 export type RecoverPasswordArgs = {
   email: string
+  html?: string
   subject?: string
 }
 
 export type ResetPasswordArgs = {
   password: string
-  token: string
+  token?: string
 }
