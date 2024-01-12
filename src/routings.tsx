@@ -63,7 +63,7 @@ export const Router = () => {
   const { isLoading } = useGetMeQuery()
 
   if (isLoading) {
-    return <div>loading</div>
+    return <Loader />
   }
 
   return <RouterProvider router={router} />

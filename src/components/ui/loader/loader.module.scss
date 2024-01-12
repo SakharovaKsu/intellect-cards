@@ -1,11 +1,13 @@
 .loader {
   width: 48px;
   height: 48px;
+  top: 200px;
+  left: 50%;
   border-radius: 50%;
-  position: relative;
+  position: absolute;
   animation: rotate 1s linear infinite
 }
-.loader::before , .loader::after {
+.loader::before, .loader::after {
   content: "";
   box-sizing: border-box;
   position: absolute;

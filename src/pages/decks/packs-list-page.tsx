@@ -1,5 +1,6 @@
 import { PackFilters } from '@/components/packs/pack-filters'
 import { PackTable } from '@/components/packs/pack-table'
+import Loader from '@/components/ui/loader/loader'
 import { Page } from '@/components/ui/page/page'
 import { useGetDecksQuery } from '@/services/decks/decks.service'
 
@@ -7,7 +8,7 @@ export const PacksListPage = () => {
   const { data, error, isLoading } = useGetDecksQuery()
 
   if (isLoading) {
-    return <div>Loading</div>
+    return <Loader />
   }
 
   if (error) {
