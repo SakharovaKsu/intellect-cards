@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, FC } from 'react'
 
-import { Column, Sort } from '@/components/packs/pack-table'
+import { Column, Sort, TableHeader, TableHeaderCell, TableRow } from '@/components/packs/pack-table'
 import { ArrowMiniDownIcon, ArrowMiniUpIcon } from '@/icons'
 
 import s from './header-table.module.scss'
@@ -36,11 +36,11 @@ export const HeaderTable: FC<
   }
 
   return (
-    <thead {...restProps}>
-      <tr>
+    <TableHeader {...restProps}>
+      <TableRow>
         {columns.map(({ key, title }) => {
           return (
-            <th
+            <TableHeaderCell
               className={s.columnHeaderContainer}
               key={key}
               onClick={key !== '' ? handleSort(key) : undefined}
@@ -57,10 +57,10 @@ export const HeaderTable: FC<
                   </div>
                 )}
               </div>
-            </th>
+            </TableHeaderCell>
           )
         })}
-      </tr>
-    </thead>
+      </TableRow>
+    </TableHeader>
   )
 }

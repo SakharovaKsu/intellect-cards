@@ -52,7 +52,12 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
           type={'password'}
         />
         <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
-        <Typography as={Link} className={s.forgotPassword} to={'/reset-password'} variant={'body2'}>
+        <Typography
+          as={Link}
+          className={s.forgotPassword}
+          to={'/forgot-password'}
+          variant={'body2'}
+        >
           Forgot Password?
         </Typography>
         <Button disabled={disabled} type={'submit'}>
