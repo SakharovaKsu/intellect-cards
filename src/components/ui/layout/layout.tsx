@@ -1,4 +1,5 @@
 import { CSSProperties, ComponentPropsWithRef, ElementRef, forwardRef } from 'react'
+import { Outlet } from 'react-router-dom'
 
 import { Header } from '@/components/ui/header'
 import { clsx } from 'clsx'
@@ -6,11 +7,11 @@ import { clsx } from 'clsx'
 import s from './layout.module.scss'
 
 type Props = ComponentPropsWithRef<'div'> & {
-  contantMarginTop?: CSSProperties['marginTop']
+  contentMarginTop?: CSSProperties['marginTop']
 }
 
 export const Layout = forwardRef<ElementRef<'div'>, Props>(
-  ({ children, className, contantMarginTop = '36px', ...rest }, ref) => {
+  ({ children, className, contentMarginTop = '36px', ...rest }, ref) => {
     const classes = {
       className: clsx(className),
       main: clsx(s.main),
@@ -19,7 +20,9 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
     return (
       <div ref={ref} {...rest}>
         <Header />
-        <main className={classes.main}>{children}</main>
+        <div className={classes.main}>
+          <Outlet />
+        </div>
       </div>
     )
   }

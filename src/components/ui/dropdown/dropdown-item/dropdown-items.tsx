@@ -32,14 +32,14 @@ export type DropdownItemWithIconProps = Omit<DropdownItemProps, 'children'> & {
 } & ComponentPropsWithoutRef<typeof Item>
 
 export const DropdownItemWithIcon = forwardRef<ElementRef<typeof Item>, DropdownItemWithIconProps>(
-  ({ icon, label }, ref) => {
+  ({ icon, label, ...rest }, ref) => {
     const classNames = {
       item: clsx(s.item),
       itemIcon: clsx(s.itemIcon),
     }
 
     return (
-      <Item asChild className={classNames.item} ref={ref}>
+      <Item asChild className={classNames.item} ref={ref} {...rest}>
         <div>
           <div className={classNames.itemIcon}>{icon}</div>
           <Typography as={'label'} variant={'caption'}>

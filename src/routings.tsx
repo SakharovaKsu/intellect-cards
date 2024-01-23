@@ -1,6 +1,12 @@
-import { useDispatch } from 'react-redux'
-import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import {
+  Navigate,
+  Outlet,
+  RouteObject,
+  RouterProvider,
+  createBrowserRouter,
+} from 'react-router-dom'
 
+import { Layout } from '@/components/ui/layout/layout'
 import Loader from '@/components/ui/loader/loader'
 import { CheckEmailPage } from '@/pages/auth/check-email-page/check-email-page'
 import { CreatePasswordPage } from '@/pages/auth/create-password-page/create-password-page'
@@ -9,26 +15,8 @@ import LoginPage from '@/pages/auth/login-page/login-page'
 import { SignUpPage } from '@/pages/auth/sing-up-page/sign-up-page'
 import { PacksListPage } from '@/pages/decks/packs-list-page'
 import { useGetMeQuery } from '@/services/auth/auth.service'
-import { setAuthorId } from '@/services/decks/decks.slice'
 
-const PrivateRoutes = () => {
-  const dispatch = useDispatch()
-  const { data, isError, isLoading } = useGetMeQuery()
-
-  if (data) {
-    dispatch(setAuthorId({ authorId: data.id }))
-  }
-
-  if (isLoading) {
-    return <Loader />
-  }
-
-  const isAuthenticated = !isError
-
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
-}
-
-const publicRoutes = [
+const publicRoutes: RouteObject[] = [
   {
     element: <LoginPage />,
     path: '/login',
@@ -51,7 +39,7 @@ const publicRoutes = [
   },
 ]
 
-const privateRoutes = [
+const privateRoutes: RouteObject[] = [
   {
     element: <PacksListPage />,
     path: '/',
@@ -59,18 +47,35 @@ const privateRoutes = [
 ]
 
 const router = createBrowserRouter([
-  ...publicRoutes,
   {
-    children: privateRoutes,
-    element: <PrivateRoutes />,
+    children: [
+      ...publicRoutes,
+      { children: privateRoutes, element: <PrivateRoutes /> },
+      {
+        element: <div style={{ fontSize: '100px' }}>error</div>,
+        path: '*',
+      },
+    ],
+    element: <Layout />,
   },
 ])
+
+function PrivateRoutes() {
+  const { data, isLoading } = useGetMeQuery()
+
+  if (isLoading) {
+    return <Loader />
+  }
+  const isLoggedIn = !!data
+
+  return isLoggedIn ? <Outlet /> : <Navigate to={'/login'} />
+}
 
 export const Router = () => {
   const { isLoading } = useGetMeQuery()
 
   if (isLoading) {
-    return <Loader />
+    return <div>loading</div>
   }
 
   return <RouterProvider router={router} />

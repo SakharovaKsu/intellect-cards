@@ -4,9 +4,8 @@ button {
 }
 
 .list {
-  white-space: nowrap;
   display: flex;
-
+  white-space: nowrap;
 
   [data-state='active'] {
     background-color: var(--color-accent-500);

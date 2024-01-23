@@ -38,7 +38,6 @@ export const Pagination = ({
   }
 
   const totalPageCount = Math.ceil(totalCount / pageSize)
-
   const pageNumbers = usePagination({ currentPage, siblingsCount, totalPageCount })
 
   const setNextPage = () => {

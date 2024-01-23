@@ -1,32 +1,15 @@
 .container {
-  padding: 36px 137px 0 137px;
+  padding: 36px 137px 0;
 
   .table {
     border-collapse: collapse;
-    border: 1px solid var(--color-dark-500);
     width: 100%;
+    border: 1px solid var(--color-dark-500);
   }
-  .tdc{
-    border-bottom: 1px solid var(--color-dark-500);
+
+  .tdc {
     height: 36px;
     padding-left: 24px;
-  }
-
-  .tdsIcon {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    padding-right: 24px;
-  }
-
-  .link {
-    &:hover,
-    :focus-visible {
-      opacity: 0.3;
-    }
-
-    &:active {
-      opacity: 0.6;
-    }
+    border-bottom: 1px solid var(--color-dark-500);
   }
 }
