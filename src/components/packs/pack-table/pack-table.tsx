@@ -1,4 +1,4 @@
-import {ComponentPropsWithoutRef, ElementRef, FC, forwardRef, useState} from 'react'
+import { ComponentPropsWithoutRef, ElementRef, FC, forwardRef, useState } from 'react'
 
 import { HeaderTable } from '@/components/packs/pack-table/header-table'
 import { GetDesksResponse } from '@/services/decks/decks.types'
@@ -77,6 +77,14 @@ export const TableHeaderCell = forwardRef<ElementRef<'th'>, ComponentPropsWithou
 export const PackTable: FC<Props> = ({ decks }) => {
   const [sort, setSort] = useState<Sort>(null)
 
+  const checkCorrectLength = (value: string) => {
+    if (value.length >= 16) {
+      return value.slice(0, 16) + '...'
+    } else {
+      return value
+    }
+  }
+
   return (
     <div className={s.container}>
       <Table className={s.table}>
@@ -84,10 +92,16 @@ export const PackTable: FC<Props> = ({ decks }) => {
         <TableBody>
           {decks?.items?.map(item => (
             <TableRow key={item.id}>
-              <TableDataCell className={`${s.tdc} ${s.unselectable}`}>{item.name}</TableDataCell>
+              <TableDataCell className={`${s.tdc} ${s.unselectable}`}>
+                {checkCorrectLength(item.name)}
+              </TableDataCell>
               <TableDataCell className={s.tdc}>{item.cardsCount}</TableDataCell>
-              <TableDataCell className={s.tdc}>{new Date(item.updated).toLocaleDateString()}</TableDataCell>
-              <TableDataCell className={s.tdc}>{item.author.name}</TableDataCell>
+              <TableDataCell className={s.tdc}>
+                {new Date(item.updated).toLocaleDateString()}
+              </TableDataCell>
+              <TableDataCell className={s.tdc}>
+                {checkCorrectLength(item.author.name)}
+              </TableDataCell>
               <TableDataCell className={s.tdc}>some icons</TableDataCell>
             </TableRow>
           ))}

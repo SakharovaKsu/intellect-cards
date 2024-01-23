@@ -1,5 +1,12 @@
-import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import {
+  Navigate,
+  Outlet,
+  RouteObject,
+  RouterProvider,
+  createBrowserRouter,
+} from 'react-router-dom'
 
+import { Layout } from '@/components/ui/layout/layout'
 import Loader from '@/components/ui/loader/loader'
 import { CheckEmailPage } from '@/pages/auth/check-email-page/check-email-page'
 import { CreatePasswordPage } from '@/pages/auth/create-password-page/create-password-page'
@@ -9,19 +16,7 @@ import { SignUpPage } from '@/pages/auth/sing-up-page/sign-up-page'
 import { PacksListPage } from '@/pages/decks/packs-list-page'
 import { useGetMeQuery } from '@/services/auth/auth.service'
 
-const PrivateRoutes = () => {
-  const { isError, isLoading } = useGetMeQuery()
-
-  if (isLoading) {
-    return <Loader />
-  }
-
-  const isAuthenticated = !isError
-
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
-}
-
-const publicRoutes = [
+const publicRoutes: RouteObject[] = [
   {
     element: <LoginPage />,
     path: '/login',
@@ -44,7 +39,7 @@ const publicRoutes = [
   },
 ]
 
-const privateRoutes = [
+const privateRoutes: RouteObject[] = [
   {
     element: <PacksListPage />,
     path: '/',
@@ -52,19 +47,30 @@ const privateRoutes = [
 ]
 
 const router = createBrowserRouter([
-  ...publicRoutes,
   {
-    children: privateRoutes,
-    element: <PrivateRoutes />,
+    children: [
+      ...publicRoutes,
+      { children: privateRoutes, element: <PrivateRoutes /> },
+      {
+        element: <div style={{ fontSize: '100px' }}>error</div>,
+        path: '*',
+      },
+    ],
+    element: <Layout />,
   },
 ])
 
-export const Router = () => {
-  const { isLoading } = useGetMeQuery()
+function PrivateRoutes() {
+  const { data, isLoading } = useGetMeQuery()
 
   if (isLoading) {
-    return <div>loading</div>
+    return <Loader />
   }
+  const isLoggedIn = !!data
 
+  return isLoggedIn ? <Outlet /> : <Navigate to={'/login'} />
+}
+
+export const Router = () => {
   return <RouterProvider router={router} />
 }

@@ -17,7 +17,13 @@ export const Slider = (props: SliderProps) => {
 
   return (
     <div className={s.container} style={{ display: 'flex' }}>
-      <input className={s.sliderIndicator} placeholder={''} tabIndex={-1} value={values[0]} readOnly/>
+      <input
+        className={s.sliderIndicator}
+        placeholder={''}
+        readOnly
+        tabIndex={-1}
+        value={values[0]}
+      />
       <form>
         <Root
           className={s.SliderRoot}
@@ -36,7 +42,13 @@ export const Slider = (props: SliderProps) => {
           <Thumb aria-label={'Volume'} className={s.SliderThumb} tabIndex={1} />
         </Root>
       </form>
-      <input className={s.sliderIndicator} placeholder={''} tabIndex={-1} value={values[1]} readOnly/>
+      <input
+        className={s.sliderIndicator}
+        placeholder={''}
+        readOnly
+        tabIndex={-1}
+        value={values[1]}
+      />
     </div>
   )
 }

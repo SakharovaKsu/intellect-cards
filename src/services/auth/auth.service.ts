@@ -1,19 +1,24 @@
 import {
+  AuthResponse,
   LoginArgs,
   RecoverPasswordArgs,
   ResendVerificationEmailArgs,
   ResetPasswordArgs,
   SingUpArgs,
-  User,
 } from '@/services/auth/auth.types'
 import { baseApi } from '@/services/base-api'
 
 export const authService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      getMe: builder.query<User, void>({
+      getMe: builder.query<AuthResponse, void>({
+        extraOptions: {
+          maxRetries: 0,
+        },
         providesTags: ['Me'],
-        query: () => `v1/auth/me`,
+        query: () => {
+          return { method: 'GET', url: `v1/auth/me` }
+        },
       }),
       login: builder.mutation<void, LoginArgs>({
         invalidatesTags: ['Me'],
@@ -26,11 +31,24 @@ export const authService = baseApi.injectEndpoints({
         },
       }),
       logout: builder.mutation<void, void>({
-        query: () => {
-          return {
-            method: 'POST',
-            url: `v1/auth/logout`,
+        invalidatesTags: ['Me'],
+        //go hard or gone
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          const patchResult = dispatch(
+            authService.util.updateQueryData('getMe', undefined, () => {
+              return null
+            })
+          )
+
+          try {
+            await queryFulfilled
+          } catch {
+            // cancels getMe request data update
+            patchResult.undo()
           }
+        },
+        query: () => {
+          return { method: 'POST', url: `v1/auth/logout` }
         },
       }),
       recoverPassword: builder.mutation<void, RecoverPasswordArgs>({
@@ -62,7 +80,7 @@ export const authService = baseApi.injectEndpoints({
           }
         },
       }),
-      singUp: builder.mutation<User, SingUpArgs>({
+      singUp: builder.mutation<AuthResponse, SingUpArgs>({
         query: body => {
           return {
             body,
@@ -71,7 +89,7 @@ export const authService = baseApi.injectEndpoints({
           }
         },
       }),
-      updateMe: builder.mutation<User, { avatar?: string; name?: string }>({
+      updateMe: builder.mutation<AuthResponse, { avatar?: string; name?: string }>({
         query: body => {
           return {
             body,

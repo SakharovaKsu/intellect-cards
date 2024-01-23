@@ -7,18 +7,18 @@ import { useGetMeQuery } from '@/services/auth/auth.service'
 import s from './header.module.scss'
 
 export const Header = () => {
-  const { data: userData } = useGetMeQuery()
+  const { data } = useGetMeQuery()
 
   return (
     <header className={s.root}>
       <div className={s.headerContainer}>
         <Logo />
-        {userData?.name ? (
+        {data ? (
           <div className={s.user}>
             <Typography as={'button'} variant={'subtitle1'}>
-              {userData?.name}
+              {data?.name}
             </Typography>
-            <Dropdown align={'end'} userData={userData} />
+            <Dropdown align={'end'} userData={data} />
           </div>
         ) : (
           <Button variant={'primary'}>Sign In</Button>
