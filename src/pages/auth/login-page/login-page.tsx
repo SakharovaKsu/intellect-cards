@@ -13,9 +13,7 @@ const LoginPage = () => {
     try {
       await singIn(data).unwrap()
       navigate('/')
-    } catch (e: any) {
-      // console.error(e?.data.message)
-    }
+    } catch (e: any) {}
   }
 
   return (

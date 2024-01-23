@@ -47,14 +47,7 @@ export const decksService = baseApi.injectEndpoints({
         query: params => {
           return {
             params: params ?? {},
-            url: `v1/decks`,
-          }
-        },
-      }),
-      getDecksById: builder.query<Deck, { id: string }>({
-        query: params => {
-          return {
-            url: `v1/decks/${params.id}`,
+            url: `v1/decks/`,
           }
         },
       }),
@@ -89,7 +82,6 @@ export const decksService = baseApi.injectEndpoints({
 
 export const {
   useCreateDeckMutation,
-  useGetDecksByIdQuery,
   useGetDecksQuery,
   useGetLearnCardsQuery,
   useSubmitGradeMutation,

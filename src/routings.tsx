@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux'
 import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import Loader from '@/components/ui/loader/loader'
@@ -8,9 +9,15 @@ import LoginPage from '@/pages/auth/login-page/login-page'
 import { SignUpPage } from '@/pages/auth/sing-up-page/sign-up-page'
 import { PacksListPage } from '@/pages/decks/packs-list-page'
 import { useGetMeQuery } from '@/services/auth/auth.service'
+import { setAuthorId } from '@/services/decks/decks.slice'
 
 const PrivateRoutes = () => {
-  const { isError, isLoading } = useGetMeQuery()
+  const dispatch = useDispatch()
+  const { data, isError, isLoading } = useGetMeQuery()
+
+  if (data) {
+    dispatch(setAuthorId({ authorId: data.id }))
+  }
 
   if (isLoading) {
     return <Loader />

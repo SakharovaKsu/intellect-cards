@@ -23,7 +23,7 @@
 }
 
 .h1 {
-  @include typography($size: xl, $weight: bold, $line-height: xl);
+  @include typography($size: xxl, $weight: bold, $line-height: xl);
 }
 
 .h2 {

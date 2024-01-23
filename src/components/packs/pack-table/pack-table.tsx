@@ -1,6 +1,8 @@
-import {ComponentPropsWithoutRef, ElementRef, FC, forwardRef, useState} from 'react'
+import { ComponentPropsWithoutRef, ElementRef, FC, forwardRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { HeaderTable } from '@/components/packs/pack-table/header-table'
+import { DeleteIcon, EditIcon, PlayIcon } from '@/icons'
 import { GetDesksResponse } from '@/services/decks/decks.types'
 
 import s from './pack-table.module.scss'
@@ -86,9 +88,21 @@ export const PackTable: FC<Props> = ({ decks }) => {
             <TableRow key={item.id}>
               <TableDataCell className={`${s.tdc} ${s.unselectable}`}>{item.name}</TableDataCell>
               <TableDataCell className={s.tdc}>{item.cardsCount}</TableDataCell>
-              <TableDataCell className={s.tdc}>{new Date(item.updated).toLocaleDateString()}</TableDataCell>
+              <TableDataCell className={s.tdc}>
+                {new Date(item.updated).toLocaleDateString()}
+              </TableDataCell>
               <TableDataCell className={s.tdc}>{item.author.name}</TableDataCell>
-              <TableDataCell className={s.tdc}>some icons</TableDataCell>
+              <TableDataCell className={s.tdc + ' ' + s.tdsIcon}>
+                <Link className={s.link} to={''}>
+                  <PlayIcon />
+                </Link>
+                <Link to={''}>
+                  <EditIcon />
+                </Link>
+                <Link to={''}>
+                  <DeleteIcon />
+                </Link>
+              </TableDataCell>
             </TableRow>
           ))}
         </TableBody>
