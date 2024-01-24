@@ -1,12 +1,14 @@
-import {ChangeEvent, ComponentPropsWithoutRef, ElementRef, forwardRef, useState} from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
-import {EyeIcon} from '@/icons/icon-components/eye-icon'
-import {EyeOffIcon} from '@/icons/icon-components/eye-off-icon'
-import {SearchIcon} from '@/icons/icon-components/search-icon'
+import { CloseIcon } from '@/icons'
+import { EyeIcon } from '@/icons/icon-components/eye-icon'
+import { EyeOffIcon } from '@/icons/icon-components/eye-off-icon'
+import { SearchIcon } from '@/icons/icon-components/search-icon'
+import { setSearchQuery } from '@/services/decks/decks.slice'
 import clsx from 'clsx'
 
 import s from './text-field.module.scss'
-import {CloseIcon} from "@/icons";
 
 type OwnProps = {
   disabled?: boolean
@@ -15,8 +17,8 @@ type OwnProps = {
   label?: string
   onValueChange?: (value: string) => void
   placeholder?: string
-  type?: string
   textValue?: string
+  type?: string
 }
 type TextFieldProps = OwnProps & Omit<ComponentPropsWithoutRef<'input'>, keyof OwnProps>
 
@@ -30,12 +32,13 @@ export const TextField = forwardRef<ElementRef<'input'>, TextFieldProps>(
       onChange,
       onValueChange,
       placeholder,
-      type,
       textValue,
+      type,
       ...props
     },
     ref
   ) => {
+    const dispatch = useDispatch()
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const [currentValue, setCurrentValue] = useState<string | undefined>(textValue)
     const isPasswordButtonShow = type === 'password'
@@ -64,6 +67,7 @@ export const TextField = forwardRef<ElementRef<'input'>, TextFieldProps>(
     }
 
     const onCloseClickHandler = () => {
+      dispatch(setSearchQuery({ value: '' }))
       setCurrentValue('')
     }
 
@@ -86,17 +90,17 @@ export const TextField = forwardRef<ElementRef<'input'>, TextFieldProps>(
               className={classNames.showPassword}
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? <EyeIcon/> : <EyeOffIcon/>}
+              {showPassword ? <EyeIcon /> : <EyeOffIcon />}
             </button>
           )}
           {isSearchButtonShow && (
             <>
-                <SearchIcon className={s.showSearch} fill={activeColor}/>
+              <SearchIcon className={s.showSearch} fill={activeColor} />
               {currentValue && (
                 <CloseIcon
-                  style={{display:"flex", justifyContent:'center', alignItems:'center'}}
                   className={s.closeIcon}
                   onClick={onCloseClickHandler}
+                  style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}
                 />
               )}
             </>

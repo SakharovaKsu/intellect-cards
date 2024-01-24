@@ -8,8 +8,8 @@ const initialState = {
   currentPage: 1,
   editDeckName: '',
   itemsPerPage: 10,
-  maxCardsCount: '100',
-  minCardsCount: '0',
+  maxCardsCount: 10,
+  minCardsCount: 0,
   myCardsPage: {
     currentPage: '1',
     itemsPerPage: '10',
@@ -29,7 +29,14 @@ export const decksSlice = createSlice({
     setCardsByAuthor: (state, action: PayloadAction<{ tabValue: TabValue }>) => {
       state.tabValue = action.payload.tabValue
     },
+    setCardsCount: (state, action: PayloadAction<number[]>) => {
+      state.minCardsCount = action.payload[0]
+      state.maxCardsCount = action.payload[1]
+    },
+    setSearchQuery: (state, action: PayloadAction<{ value: string }>) => {
+      state.searchByName = action.payload.value
+    },
   },
 })
 
-export const { setAuthorId, setCardsByAuthor } = decksSlice.actions
+export const { setAuthorId, setCardsByAuthor, setCardsCount, setSearchQuery } = decksSlice.actions
