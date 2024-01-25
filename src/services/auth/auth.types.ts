@@ -3,7 +3,7 @@ export type Author = {
   name: string
 }
 
-export type User = {
+export type AuthResponse = {
   avatar: null | string
   created: string
   email: string
@@ -11,7 +11,7 @@ export type User = {
   isEmailVerified: boolean
   name: string
   updated: string
-}
+} | null
 
 export type LoginArgs = {
   email: string

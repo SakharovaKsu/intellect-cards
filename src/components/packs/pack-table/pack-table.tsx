@@ -90,6 +90,14 @@ export const PackTable: FC<Props> = ({ decks, maxCardsCount, minCardsCount, sear
     )
     .filter(item => item.cardsCount >= minCardsCount || item.cardsCount >= maxCardsCount)
 
+  const checkCorrectLength = (value: string) => {
+    if (value.length >= 16) {
+      return value.slice(0, 16) + '...'
+    } else {
+      return value
+    }
+  }
+
   return (
     <div className={s.container}>
       <Table className={s.table}>
@@ -102,8 +110,10 @@ export const PackTable: FC<Props> = ({ decks, maxCardsCount, minCardsCount, sear
               <TableDataCell className={s.tdc}>
                 {new Date(item.updated).toLocaleDateString()}
               </TableDataCell>
-              <TableDataCell className={s.tdc}>{item.author.name}</TableDataCell>
-              <TableDataCell className={s.tdc + ' ' + s.tdsIcon}>
+              <TableDataCell className={s.tdc}>
+                {checkCorrectLength(item.author.name)}
+              </TableDataCell>
+              <TableDataCell className={s.tdc}>
                 <Link className={s.link} to={''}>
                   <PlayIcon />
                 </Link>
@@ -116,6 +126,32 @@ export const PackTable: FC<Props> = ({ decks, maxCardsCount, minCardsCount, sear
               </TableDataCell>
             </TableRow>
           ))}
+          {/*{filteredDecks?.map(item => (*/}
+          {/*  <TableRow key={item.id}>*/}
+          {/*<TableDataCell className={`${s.tdc} ${s.unselectable}`}>{item.name}</TableDataCell>*/}
+          {/*<TableDataCell className={s.tdc}>{item.cardsCount}</TableDataCell>*/}
+          {/*<TableDataCell className={s.tdc}>*/}
+          {/*  {new Date(item.updated).toLocaleDateString()}*/}
+          {/*</TableDataCell>*/}
+
+          {/*<TableDataCell className={s.tdc}>{item.author.name}</TableDataCell>*/}
+          {/*<TableDataCell className={s.tdc + ' ' + s.tdsIcon}>*/}
+          {/*<Link className={s.link} to={''}>*/}
+          {/*  <PlayIcon />*/}
+          {/*</Link>*/}
+          {/*<Link className={s.link} to={''}>*/}
+          {/*  <EditIcon />*/}
+          {/*</Link>*/}
+          {/*<Link className={s.link} to={''}>*/}
+          {/*  <DeleteIcon />*/}
+          {/*</Link>*/}
+
+          {/*    <TableDataCell className={s.tdc}>*/}
+          {/*      {checkCorrectLength(item.author.name)}*/}
+          {/*    </TableDataCell>*/}
+          {/*    <TableDataCell className={s.tdc}>some icons</TableDataCell>*/}
+          {/*  </TableRow>*/}
+          {/*))}*/}
         </TableBody>
       </Table>
     </div>
