@@ -34,6 +34,7 @@ export const Slider = (props: Props) => {
           minStepsBetweenThumbs={0}
           onValueChange={onValueChangeHandler}
           step={1}
+          value={values}
         >
           <Track className={s.SliderTrack}>
             <Range className={s.SliderRange} />

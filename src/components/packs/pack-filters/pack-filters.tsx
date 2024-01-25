@@ -57,6 +57,7 @@ export function PackFilters(props: PropsType) {
   }
 
   const handlerClearFilters = () => {
+    dispatch(setCardsByAuthor({ tabValue: 'allCards' }))
     dispatch(setSearchQuery({ value: '' }))
     dispatch(setCardsCount([0, 10]))
   }
