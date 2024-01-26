@@ -8,9 +8,8 @@ export const EditIcon = (fullProps: IconProps) => {
       icon={
         <svg
           fill={'none'}
-          height={'100%'}
           viewBox={'0 0 16 16'}
-          width={'100%'}
+          width={'16px'}
           xmlns={'http://www.w3.org/2000/svg'}
           {...props}
         >

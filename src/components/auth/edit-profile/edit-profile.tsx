@@ -1,35 +1,56 @@
-import { FC } from 'react'
+import { useState } from 'react'
+import { Navigate } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 import { EditIcon, LogOutIcon } from '@/icons'
+import { useGetMeQuery, useLogoutMutation } from '@/services/auth/auth.service'
 
 import s from './edit-profile.module.scss'
 
-type EditProfileType = {
-  edit: boolean
-  emailUser: string
-  imgAvatar: string
-  nameUser: string
-}
+// type EditProfileType = {
+//   edit: boolean
+//   emailUser: string
+//   imgAvatar: string
+//   nameUser: string
+// }
 
-export const EditProfile: FC<EditProfileType> = ({ edit, emailUser, imgAvatar, nameUser }) => {
+export const EditProfile = () => {
+  const { data: userData } = useGetMeQuery()
+  const [edit, setEdit] = useState(false)
+  const [navigateToLogin, setNavigateToLogin] = useState(false)
+  const [logout] = useLogoutMutation()
+
+  const onClickLogOut = async () => {
+    try {
+      await logout().unwrap()
+      setNavigateToLogin(true)
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error)
+    }
+  }
+
+  if (navigateToLogin) {
+    return <Navigate to={'/login'} />
+  }
+
   const informationPersonal = (
     <>
       <div className={s.containerName}>
         <Typography className={s.subTitle} variant={'large'}>
-          {nameUser}
+          {userData?.name}
         </Typography>
         <button className={s.buttonEditName}>
           <EditIcon className={s.iconEdit} />
         </button>
       </div>
       <Typography className={s.text} variant={'overline'}>
-        {emailUser}
+        {userData?.email}
       </Typography>
-      <Button as={'button'} variant={'secondary'}>
+      <Button as={'button'} onClick={onClickLogOut} variant={'secondary'}>
         <span className={s.buttonLogout}>
           <LogOutIcon />
           Logout
@@ -52,7 +73,11 @@ export const EditProfile: FC<EditProfileType> = ({ edit, emailUser, imgAvatar, n
       <Typography variant={'large'}>Personal Information</Typography>
       <div className={s.containerEdit}>
         <div className={s.photoAvatar}>
-          <img alt={'Фото аватарки.'} src={imgAvatar} />
+          <img
+            alt={'Фото аватарки.'}
+            className={s.sss}
+            src={userData?.avatar || 'https://ionicframework.com/docs/img/demos/avatar.svg'}
+          />
           {!edit && (
             <button className={s.buttonEditPhoto}>
               <EditIcon className={s.iconEdit} />

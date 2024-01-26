@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 import { Avatar } from '@/components/ui/avatar'
 import { DropdownWithAvatar } from '@/components/ui/dropdown/dropdown-avatar'
@@ -30,7 +30,7 @@ export const Dropdown = forwardRef<ElementRef<typeof Content>, DropdownProps>(
     const [open, setOpen] = useState(false)
     const [logout] = useLogoutMutation()
     const [navigateToLogin, setNavigateToLogin] = useState(false)
-
+    const navigate = useNavigate()
     const userAvatar = userData?.avatar
       ? userData.avatar
       : 'https://ionicframework.com/docs/img/demos/avatar.svg'
@@ -72,12 +72,21 @@ export const Dropdown = forwardRef<ElementRef<typeof Content>, DropdownProps>(
                       avatar={'https://ionicframework.com/docs/img/demos/avatar.svg'}
                       mail={userData.email}
                       name={userData.name}
+                      onClick={() => {
+                        navigate('/')
+                      }}
                     />
                   </DropdownItem>
-                  <DropdownItemWithIcon icon={<ProfileAvatarIcon />} label={'My Profile'} />
+                  <DropdownItemWithIcon
+                    icon={<ProfileAvatarIcon />}
+                    label={'My Profile'}
+                    onClick={() => {
+                      navigate('/user-profile')
+                    }}
+                  />
                   <DropdownItemWithIcon
                     icon={<LogOutIcon />}
-                    label={'Sign O111ut'}
+                    label={'Sign Out'}
                     onClick={onClickLogOut}
                   />
                 </>
