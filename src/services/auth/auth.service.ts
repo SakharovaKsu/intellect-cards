@@ -5,6 +5,7 @@ import {
   ResendVerificationEmailArgs,
   ResetPasswordArgs,
   SingUpArgs,
+  UpdateUser,
 } from '@/services/auth/auth.types'
 import { baseApi } from '@/services/base-api'
 
@@ -20,6 +21,7 @@ export const authService = baseApi.injectEndpoints({
           return { method: 'GET', url: `v1/auth/me` }
         },
       }),
+
       login: builder.mutation<void, LoginArgs>({
         invalidatesTags: ['Me'],
         query: body => {
@@ -30,6 +32,7 @@ export const authService = baseApi.injectEndpoints({
           }
         },
       }),
+
       logout: builder.mutation<void, void>({
         invalidatesTags: ['Me'],
         //go hard or gone
@@ -89,7 +92,7 @@ export const authService = baseApi.injectEndpoints({
           }
         },
       }),
-      updateMe: builder.mutation<AuthResponse, { avatar?: string; name?: string }>({
+      updateMe: builder.mutation<AuthResponse, UpdateUser>({
         query: body => {
           return {
             body,
@@ -98,7 +101,12 @@ export const authService = baseApi.injectEndpoints({
           }
         },
       }),
-      verifyEmail: builder.mutation<void, { code: string }>({
+      verifyEmail: builder.mutation<
+        void,
+        {
+          code: string
+        }
+      >({
         query: body => {
           return {
             body,

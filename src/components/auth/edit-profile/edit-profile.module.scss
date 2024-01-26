@@ -5,6 +5,7 @@
   align-items: center;
 
   max-width: 420px;
+  margin-top: 36px;
   padding: 30px 30px 40px;
 }
 
@@ -19,6 +20,18 @@
   position: relative;
   max-width: 96px;
   max-height: 96px;
+
+  img {
+    max-width: 96px;
+    max-height: 96px;
+    border-radius: 50%;
+  }
+}
+
+.iconEdit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .buttonEditPhoto {
@@ -28,7 +41,8 @@
   right: 0;
   bottom: 0;
 
-  padding: 4px 4px 0;
+  width: 24px;
+  height: 24px;
 
   background: var(--color-dark-300);
   border: none;
@@ -66,7 +80,6 @@
 
 .buttonEditName {
   cursor: pointer;
-  padding: 0;
   background-color: transparent;
   border: none;
 

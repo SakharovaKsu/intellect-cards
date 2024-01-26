@@ -7,6 +7,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { EditProfile } from '@/components/auth/edit-profile'
 import { Layout } from '@/components/ui/layout/layout'
 import Loader from '@/components/ui/loader/loader'
 import { CheckEmailPage } from '@/pages/auth/check-email-page/check-email-page'
@@ -45,6 +46,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <PacksListPage />,
     path: '/',
+  },
+  {
+    element: <EditProfile />,
+    path: '/user-profile',
   },
 ]
 
