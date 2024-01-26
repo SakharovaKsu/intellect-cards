@@ -7,9 +7,26 @@
     border: 1px solid var(--color-dark-500);
   }
 
-  .tdc {
-    height: 36px;
-    padding-left: 24px;
+  .tdc{
     border-bottom: 1px solid var(--color-dark-500);
+    padding: 6px 6px 6px 24px;
+  }
+
+  .tdsIcon {
+    overflow: auto;
+    text-align: right;
+    padding-right: 24px;
+  }
+
+  .link {
+    padding-right: 10px;
+    &:hover,
+    :focus-visible {
+      opacity: 0.3;
+    }
+
+    &:active {
+      opacity: 0.6;
+    }
   }
 }

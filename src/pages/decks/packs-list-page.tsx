@@ -5,11 +5,30 @@ import { PackTable } from '@/components/packs/pack-table'
 import { Page } from '@/components/ui/page/page'
 import { Pagination } from '@/components/ui/pagination'
 import { ItemsType } from '@/components/ui/select'
+import {
+  authorIdSelect,
+  maxCardsCountSelector,
+  minCardsCountSelector,
+  searchQuerySelector,
+  tabValueSelector,
+} from '@/services/decks/decks.select'
 import { useGetDecksQuery } from '@/services/decks/decks.service'
+import { useAppSelector } from '@/services/store'
 
 export const PacksListPage = () => {
+  const authorId = useAppSelector(authorIdSelect)
+  const tabValue = useAppSelector(tabValueSelector)
+  const searchQuery = useAppSelector(searchQuerySelector)
+  const maxCardsCount = useAppSelector(maxCardsCountSelector)
+  const minCardsCount = useAppSelector(minCardsCountSelector)
+
+  const meId = tabValue === 'myCards' ? authorId : ''
+
   const [currentPageUse, setCurrentPageUse] = useState(1)
-  const { data, error, isLoading } = useGetDecksQuery({ currentPage: currentPageUse })
+  const { data, error, isLoading } = useGetDecksQuery({
+    authorId: meId,
+    currentPage: currentPageUse,
+  })
 
   if (isLoading) {
     return <div>Loading</div>
@@ -31,8 +50,17 @@ export const PacksListPage = () => {
 
   return (
     <Page>
-      <PackFilters sliderLabel={'Number of cards'} switcherLabel={'Show packs cards'} />
-      <PackTable decks={data} />
+      <PackFilters
+        searchQuery={searchQuery}
+        sliderLabel={'Number of cards'}
+        switcherLabel={'Show packs cards'}
+      />
+      <PackTable
+        decks={data}
+        maxCardsCount={maxCardsCount}
+        minCardsCount={minCardsCount}
+        searchQuery={searchQuery}
+      />
       <Pagination
         currentPage={data?.pagination.currentPage ?? 1}
         items={items}

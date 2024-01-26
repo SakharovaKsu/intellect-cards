@@ -1,18 +1,19 @@
-import { useState } from 'react'
-
 import { Range, Root, Thumb, Track } from '@radix-ui/react-slider'
 
 import s from './slider.module.scss'
 
-type SliderProps = {
-  maxValues: number
+type Props = {
+  handleCardsCountChange: (value: number[]) => void
+  max: number
+  min: number
+  values: number[]
 }
 
-export const Slider = (props: SliderProps) => {
-  const { maxValues } = props
-  const [values, setValues] = useState([1, maxValues])
+export const Slider = (props: Props) => {
+  const { handleCardsCountChange, max, min, values } = props
+
   const onValueChangeHandler = (e: number[]) => {
-    setValues(e)
+    handleCardsCountChange(e)
   }
 
   return (
@@ -27,15 +28,15 @@ export const Slider = (props: SliderProps) => {
       <form>
         <Root
           className={s.SliderRoot}
-          defaultValue={[values[0], values[1]]}
-          max={maxValues}
-          min={1}
-          minStepsBetweenThumbs={1}
+          defaultValue={values}
+          max={max}
+          min={min}
+          minStepsBetweenThumbs={0}
           onValueChange={onValueChangeHandler}
           step={1}
+          value={values}
         >
           <Track className={s.SliderTrack}>
-            <Range className={s.SliderRange} />
             <Range className={s.SliderRange} />
           </Track>
           <Thumb aria-label={'Volume'} className={s.SliderThumb} tabIndex={1} />

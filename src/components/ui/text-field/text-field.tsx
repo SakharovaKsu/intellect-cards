@@ -1,9 +1,11 @@
 import { ChangeEvent, ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { CloseIcon } from '@/icons'
 import { EyeIcon } from '@/icons/icon-components/eye-icon'
 import { EyeOffIcon } from '@/icons/icon-components/eye-off-icon'
 import { SearchIcon } from '@/icons/icon-components/search-icon'
+import { setSearchQuery } from '@/services/decks/decks.slice'
 import clsx from 'clsx'
 
 import s from './text-field.module.scss'
@@ -36,6 +38,7 @@ export const TextField = forwardRef<ElementRef<'input'>, TextFieldProps>(
     },
     ref
   ) => {
+    const dispatch = useDispatch()
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const [currentValue, setCurrentValue] = useState<string | undefined>(textValue)
     const isPasswordButtonShow = type === 'password'
@@ -64,6 +67,7 @@ export const TextField = forwardRef<ElementRef<'input'>, TextFieldProps>(
     }
 
     const onCloseClickHandler = () => {
+      dispatch(setSearchQuery({ value: '' }))
       setCurrentValue('')
     }
 
