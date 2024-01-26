@@ -43,7 +43,7 @@ export const Select = forwardRef<ElementRef<typeof Root>, SelectProps>(
       label,
       onValueChange,
       open,
-      placeholder = 'Select',
+      placeholder = '100',
       value,
       variant = 'default',
       ...rest

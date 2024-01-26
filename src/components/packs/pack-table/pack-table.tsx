@@ -22,10 +22,12 @@ export const columns: Column[] = [
   },
   {
     key: 'createdBy',
+    sortable: false,
     title: 'Created by',
   },
   {
     key: '',
+    sortable: true,
     title: '',
   },
 ]
@@ -37,6 +39,7 @@ export type Sort = {
 
 export type Column = {
   key: string
+  sortable?: boolean
   title: string
 }
 
@@ -45,6 +48,7 @@ type Props = {
   maxCardsCount: number
   minCardsCount: number
   searchQuery: string
+  tabValue: string
 }
 
 export const Table = forwardRef<HTMLTableElement, ComponentPropsWithoutRef<'table'>>(
@@ -79,7 +83,13 @@ export const TableHeaderCell = forwardRef<ElementRef<'th'>, ComponentPropsWithou
   }
 )
 
-export const PackTable: FC<Props> = ({ decks, maxCardsCount, minCardsCount, searchQuery }) => {
+export const PackTable: FC<Props> = ({
+  decks,
+  maxCardsCount,
+  minCardsCount,
+  searchQuery,
+  tabValue,
+}) => {
   const [sort, setSort] = useState<Sort>(null)
 
   const filteredDecks = decks?.items
@@ -98,12 +108,35 @@ export const PackTable: FC<Props> = ({ decks, maxCardsCount, minCardsCount, sear
     }
   }
 
+  const sortedDecks = filteredDecks?.sort((a, b) => {
+    const aValue = a[sort?.key as keyof typeof a]
+    const bValue = b[sort?.key as keyof typeof b]
+
+    if (typeof aValue === 'string' && typeof bValue === 'string') {
+      return sort?.direction === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue)
+    }
+    if (typeof aValue === 'number' && typeof bValue === 'number') {
+      return sort?.direction === 'asc' ? aValue - bValue : bValue - aValue
+    }
+
+    if (sort?.key === 'createdBy') {
+      const aAuthorName = a.author.name.toLowerCase()
+      const bAuthorName = b.author.name.toLowerCase()
+
+      return sort?.direction === 'asc'
+        ? aAuthorName.localeCompare(bAuthorName)
+        : bAuthorName.localeCompare(aAuthorName)
+    }
+
+    return 0
+  })
+
   return (
     <div className={s.container}>
       <Table className={s.table}>
         <HeaderTable columns={columns} onSort={setSort} sort={sort} />
         <TableBody>
-          {filteredDecks?.map(item => (
+          {sortedDecks?.map(item => (
             <TableRow key={item.id}>
               <TableDataCell className={`${s.tdc} ${s.unselectable}`}>{item.name}</TableDataCell>
               <TableDataCell className={s.tdc}>{item.cardsCount}</TableDataCell>
@@ -117,41 +150,19 @@ export const PackTable: FC<Props> = ({ decks, maxCardsCount, minCardsCount, sear
                 <Link className={s.link} to={''}>
                   <PlayIcon />
                 </Link>
-                <Link className={s.link} to={''}>
-                  <EditIcon />
-                </Link>
-                <Link className={s.link} to={''}>
-                  <DeleteIcon />
-                </Link>
+                {tabValue === 'myCards' && (
+                  <Link className={s.link} to={''}>
+                    <EditIcon />
+                  </Link>
+                )}
+                {tabValue === 'myCards' && (
+                  <Link className={s.link} to={''}>
+                    <DeleteIcon />
+                  </Link>
+                )}
               </TableDataCell>
             </TableRow>
           ))}
-          {/*{filteredDecks?.map(item => (*/}
-          {/*  <TableRow key={item.id}>*/}
-          {/*<TableDataCell className={`${s.tdc} ${s.unselectable}`}>{item.name}</TableDataCell>*/}
-          {/*<TableDataCell className={s.tdc}>{item.cardsCount}</TableDataCell>*/}
-          {/*<TableDataCell className={s.tdc}>*/}
-          {/*  {new Date(item.updated).toLocaleDateString()}*/}
-          {/*</TableDataCell>*/}
-
-          {/*<TableDataCell className={s.tdc}>{item.author.name}</TableDataCell>*/}
-          {/*<TableDataCell className={s.tdc + ' ' + s.tdsIcon}>*/}
-          {/*<Link className={s.link} to={''}>*/}
-          {/*  <PlayIcon />*/}
-          {/*</Link>*/}
-          {/*<Link className={s.link} to={''}>*/}
-          {/*  <EditIcon />*/}
-          {/*</Link>*/}
-          {/*<Link className={s.link} to={''}>*/}
-          {/*  <DeleteIcon />*/}
-          {/*</Link>*/}
-
-          {/*    <TableDataCell className={s.tdc}>*/}
-          {/*      {checkCorrectLength(item.author.name)}*/}
-          {/*    </TableDataCell>*/}
-          {/*    <TableDataCell className={s.tdc}>some icons</TableDataCell>*/}
-          {/*  </TableRow>*/}
-          {/*))}*/}
         </TableBody>
       </Table>
     </div>

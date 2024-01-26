@@ -28,6 +28,9 @@ export const PacksListPage = () => {
   const { data, error, isLoading } = useGetDecksQuery({
     authorId: meId,
     currentPage: currentPageUse,
+    maxCardsCount: maxCardsCount,
+    minCardsCount: minCardsCount,
+    name: searchQuery,
   })
 
   if (isLoading) {
@@ -60,6 +63,7 @@ export const PacksListPage = () => {
         maxCardsCount={maxCardsCount}
         minCardsCount={minCardsCount}
         searchQuery={searchQuery}
+        tabValue={tabValue}
       />
       <Pagination
         currentPage={data?.pagination.currentPage ?? 1}

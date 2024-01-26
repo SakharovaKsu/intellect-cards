@@ -15,24 +15,20 @@ export const HeaderTable: FC<
     'children'
   >
 > = ({ columns, onSort, sort, ...restProps }) => {
-  const handleSort = (key: string, sortable?: boolean) => () => {
-    console.log(`${key} - this is key; ${sortable} - this is sortable`)
-
+  const handleSort = (key: string) => () => {
     if (sort?.key !== key) {
       return onSort && onSort({ direction: 'asc', key })
     }
 
-    if (sort.direction === 'desc') {
-      return onSort && onSort(null)
+    if (sort?.direction === 'asc') {
+      return onSort && onSort({ direction: 'desc', key })
     }
 
-    return (
-      onSort &&
-      onSort({
-        direction: sort?.direction === 'asc' ? 'desc' : 'asc',
-        key,
-      })
-    )
+    if (sort?.direction === 'desc' || !sort?.direction) {
+      return onSort && onSort({ direction: 'asc', key })
+    }
+
+    return onSort && onSort({ direction: 'asc', key })
   }
 
   return (
