@@ -2,20 +2,13 @@ import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { CardPage } from '@/components/ui/card'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 import { EditIcon, LogOutIcon } from '@/icons'
 import { useGetMeQuery, useLogoutMutation } from '@/services/auth/auth.service'
 
 import s from './edit-profile.module.scss'
-
-// type EditProfileType = {
-//   edit: boolean
-//   emailUser: string
-//   imgAvatar: string
-//   nameUser: string
-// }
 
 export const EditProfile = () => {
   const { data: userData } = useGetMeQuery()
@@ -69,7 +62,7 @@ export const EditProfile = () => {
   )
 
   return (
-    <Card className={s.container}>
+    <CardPage className={s.container}>
       <Typography variant={'large'}>Personal Information</Typography>
       <div className={s.containerEdit}>
         <div className={s.photoAvatar}>
@@ -87,6 +80,6 @@ export const EditProfile = () => {
         {!edit && informationPersonal}
         {edit && informationEdit}
       </div>
-    </Card>
+    </CardPage>
   )
 }

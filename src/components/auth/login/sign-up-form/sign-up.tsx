@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { CardPage } from '@/components/ui/card'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 import { DevTool } from '@hookform/devtools'
@@ -50,7 +50,7 @@ export const SignUp: FC<Props> = ({ isSubmitting, onSubmit }) => {
   })
 
   return (
-    <Card className={s.container}>
+    <CardPage className={s.container}>
       <Typography className={s.header} variant={'large'}>
         Sign Up
       </Typography>
@@ -89,6 +89,6 @@ export const SignUp: FC<Props> = ({ isSubmitting, onSubmit }) => {
           Sign In
         </Typography>
       </form>
-    </Card>
+    </CardPage>
   )
 }

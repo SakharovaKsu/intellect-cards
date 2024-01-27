@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { ControlledCheckbox } from '@/components/controlled/controlled-checkbox'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { CardPage } from '@/components/ui/card'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 import { DevTool } from '@hookform/devtools'
@@ -11,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import s from './sign-in-form.module.scss'
+
 type SignInFormProps = {
   disabled?: boolean
   onSubmit: (data: SignInFormSchema) => void
@@ -38,7 +39,7 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
   })
 
   return (
-    <Card className={s.container}>
+    <CardPage className={s.container}>
       <Typography className={s.header} variant={'large'}>
         Sign In
       </Typography>
@@ -70,6 +71,6 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
           Sign Up
         </Typography>
       </form>
-    </Card>
+    </CardPage>
   )
 }

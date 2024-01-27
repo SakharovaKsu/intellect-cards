@@ -1,4 +1,5 @@
 export { IconWrapper } from './icon-components/IconWrapper'
+export { ArrowBackOutlineIcon } from './icon-components/arrow-back-outline-icon'
 export { ArrowMiniDownIcon } from './icon-components/arrow-mini-down-icon'
 export { ArrowMiniLeftIcon } from './icon-components/arrow-mini-left-icon'
 export { ArrowMiniRightIcon } from './icon-components/arrow-mini-right-icon'

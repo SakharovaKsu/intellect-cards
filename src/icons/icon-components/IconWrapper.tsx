@@ -22,6 +22,7 @@ export const IconWrapper = ({
       aria-hidden
       role={'img'}
       style={{
+        alignItems: 'center',
         color: color,
         display: 'inline-flex',
         fontSize: 'inherit',

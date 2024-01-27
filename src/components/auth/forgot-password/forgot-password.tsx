@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { CardPage } from '@/components/ui/card'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 import { DevTool } from '@hookform/devtools'
@@ -29,7 +29,7 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
   } = useForm<ForgotPasswordFormSchema>({ resolver: zodResolver(ForgotPasswordSchema) })
 
   return (
-    <Card className={s.forgotContainer}>
+    <CardPage className={s.forgotContainer}>
       <Typography className={s.header} variant={'large'}>
         Forgot your password
       </Typography>
@@ -52,6 +52,6 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
           Try logging in
         </Typography>
       </form>
-    </Card>
+    </CardPage>
   )
 }

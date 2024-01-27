@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { CardPage } from '@/components/ui/card'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 import { DevTool } from '@hookform/devtools'
@@ -29,7 +29,7 @@ export const CreatePassword = ({ onSubmit }: CreatePasswordProps) => {
   } = useForm<CreatePasswordFormSchema>({ resolver: zodResolver(CreatePasswordSchema) })
 
   return (
-    <Card className={s.container}>
+    <CardPage className={s.container}>
       <Typography className={s.header} variant={'large'}>
         Create new password
       </Typography>
@@ -46,6 +46,6 @@ export const CreatePassword = ({ onSubmit }: CreatePasswordProps) => {
         </Typography>
         <Button type={'submit'}>Create New Password</Button>
       </form>
-    </Card>
+    </CardPage>
   )
 }

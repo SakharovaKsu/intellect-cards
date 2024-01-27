@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { PackFilters } from '@/components/packs/pack-filters'
 import { PackTable } from '@/components/packs/pack-table'
+import Loader from '@/components/ui/loader/loader'
 import { Page } from '@/components/ui/page/page'
 import { Pagination } from '@/components/ui/pagination'
 import { ItemsType } from '@/components/ui/select'
@@ -34,7 +35,7 @@ export const PacksListPage = () => {
   })
 
   if (isLoading) {
-    return <div>Loading</div>
+    return <Loader />
   }
 
   if (error) {
