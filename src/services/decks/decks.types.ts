@@ -14,6 +14,7 @@ export type Deck = {
   id: string
   isPrivate: boolean
   name: string
+  rating?: number
   shots: number
   updated: string
   userId: string
@@ -39,4 +40,11 @@ export type GetDecksArgs = {
 export type CreateDeckArgs = {
   isPrivate: boolean
   name: string
+}
+
+export type GetDeckByIdArgs = {
+  cover?: string
+  id?: string
+  isPrivate?: boolean
+  name?: string
 }

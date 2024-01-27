@@ -147,7 +147,7 @@ export const PackTable: FC<Props> = ({
                 {checkCorrectLength(item.author.name)}
               </TableDataCell>
               <TableDataCell className={s.tdc}>
-                <Link className={s.link} to={''}>
+                <Link className={s.link} to={`/card/${item.id}`}>
                   <PlayIcon />
                 </Link>
                 {tabValue === 'myCards' && (
