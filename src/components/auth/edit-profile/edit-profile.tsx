@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { CardPage } from '@/components/ui/card'
+import { Page } from '@/components/ui/page/page'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 import { EditIcon, LogOutIcon } from '@/icons'
@@ -62,24 +63,26 @@ export const EditProfile = () => {
   )
 
   return (
-    <CardPage className={s.container}>
-      <Typography variant={'large'}>Personal Information</Typography>
-      <div className={s.containerEdit}>
-        <div className={s.photoAvatar}>
-          <img
-            alt={'Фото аватарки.'}
-            className={s.sss}
-            src={userData?.avatar || 'https://ionicframework.com/docs/img/demos/avatar.svg'}
-          />
-          {!edit && (
-            <button className={s.buttonEditPhoto}>
-              <EditIcon className={s.iconEdit} />
-            </button>
-          )}
+    <Page>
+      <CardPage className={s.container}>
+        <Typography variant={'large'}>Personal Information</Typography>
+        <div className={s.containerEdit}>
+          <div className={s.photoAvatar}>
+            <img
+              alt={'Фото аватарки.'}
+              className={s.sss}
+              src={userData?.avatar || 'https://ionicframework.com/docs/img/demos/avatar.svg'}
+            />
+            {!edit && (
+              <button className={s.buttonEditPhoto}>
+                <EditIcon className={s.iconEdit} />
+              </button>
+            )}
+          </div>
+          {!edit && informationPersonal}
+          {edit && informationEdit}
         </div>
-        {!edit && informationPersonal}
-        {edit && informationEdit}
-      </div>
-    </CardPage>
+      </CardPage>
+    </Page>
   )
 }

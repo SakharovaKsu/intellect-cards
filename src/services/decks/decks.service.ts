@@ -62,7 +62,7 @@ export const decksService = baseApi.injectEndpoints({
           }
         },
       }),
-      getLearnCards: builder.query<Card, { id: string; previousCardId: string }>({
+      getLearnCards: builder.query<Card, { id: string; previousCardId?: string }>({
         query: params => {
           return {
             url: `v1/decks/${params.id}/learn`,
