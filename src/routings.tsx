@@ -7,13 +7,13 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { EditProfile } from '@/components/auth/edit-profile'
 import { Layout } from '@/components/ui/layout/layout'
 import Loader from '@/components/ui/loader/loader'
 import { CheckEmailPage } from '@/pages/auth/check-email-page/check-email-page'
 import { CreatePasswordPage } from '@/pages/auth/create-password-page/create-password-page'
 import { ForgotPasswordPage } from '@/pages/auth/forgot-password-page/forgot-password-page'
 import LoginPage from '@/pages/auth/login-page/login-page'
+import { Profile } from '@/pages/auth/profile/profile'
 import { SignUpPage } from '@/pages/auth/sing-up-page/sign-up-page'
 import { PackPage } from '@/pages/decks/pack-page/pack-page'
 import { PacksListPage } from '@/pages/decks/packs-list-page'
@@ -49,7 +49,7 @@ const privateRoutes: RouteObject[] = [
     path: '/',
   },
   {
-    element: <EditProfile />,
+    element: <Profile />,
     path: '/user-profile',
   },
   {
