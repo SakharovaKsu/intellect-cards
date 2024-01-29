@@ -15,6 +15,7 @@ import { CreatePasswordPage } from '@/pages/auth/create-password-page/create-pas
 import { ForgotPasswordPage } from '@/pages/auth/forgot-password-page/forgot-password-page'
 import LoginPage from '@/pages/auth/login-page/login-page'
 import { SignUpPage } from '@/pages/auth/sing-up-page/sign-up-page'
+import { PackPage } from '@/pages/decks/pack-page/pack-page'
 import { PacksListPage } from '@/pages/decks/packs-list-page'
 import { useGetMeQuery } from '@/services/auth/auth.service'
 import { setAuthorId } from '@/services/decks/decks.slice'
@@ -50,6 +51,10 @@ const privateRoutes: RouteObject[] = [
   {
     element: <EditProfile />,
     path: '/user-profile',
+  },
+  {
+    element: <PackPage />,
+    path: '/card/:id',
   },
 ]
 

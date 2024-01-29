@@ -1,20 +1,20 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { RadioGroup } from '@/components/ui/radio-group'
 import { RadioItemProps } from '@/components/ui/radio-group/radio-item'
 import { Typography } from '@/components/ui/typography'
+import { useGetDeckByIdQuery, useGetLearnCardsQuery } from '@/services/decks/decks.service'
 import { clsx } from 'clsx'
 
 import s from './page-pack.module.scss'
 
-type PagePackProps = {
+type Props = {
   evaluationOptions?: string[]
   numberOfAttempts?: number
   openAnswer?: boolean
-  picture?: string
-  text?: string
 }
 
 const evaluationOptions = [
@@ -25,12 +25,12 @@ const evaluationOptions = [
   { id: 5, label: 'Knew the answer', value: 'knew_the_answer' },
 ]
 
-export const PagePack: FC<PagePackProps> = ({
-  numberOfAttempts = 0,
-  openAnswer = false,
-  picture,
-  text,
-}) => {
+export const PagePack: FC<Props> = ({ numberOfAttempts = 0 }) => {
+  const [showAnswer, setShowAnswer] = useState(false)
+  const { id } = useParams()
+  const { data: dataDeck } = useGetDeckByIdQuery({ id })
+  const { data: randomCards } = useGetLearnCardsQuery({ id: id ?? 'defaultId' })
+
   const classNames = {
     container: clsx(s.container),
     containerAnswer: clsx(s.containerAnswer),
@@ -41,32 +41,41 @@ export const PagePack: FC<PagePackProps> = ({
     title: clsx(s.title),
   }
 
-  const addPicture = picture && (
-    <img alt={'Картинка для вопроса.'} className={classNames.img} src={picture} />
+  const questionPicture = randomCards?.questionImg && (
+    <img alt={'question imag'} className={classNames.img} src={randomCards?.questionImg} />
   )
+
+  const answerPicture = randomCards?.answerImg && (
+    <img alt={'answer imag'} className={classNames.img} src={randomCards?.answerImg} />
+  )
+
+  const handleShowAnswer = () => {
+    setShowAnswer(true)
+  }
 
   return (
     <Card className={classNames.container}>
       <Typography className={classNames.title} variant={'h1'}>
-        Learn “Pack Name”
+        Learn “{dataDeck?.name}”
       </Typography>
       <Typography variant={'body1'}>
         <b>Question: </b>
-        {!picture && text}
+        {randomCards?.question}
       </Typography>
-      {addPicture}
+      {questionPicture}
       <Typography className={classNames.text} variant={'body2'}>
-        Количество попыток ответов на вопрос: <b>{numberOfAttempts}</b>
+        Number of attempts to answer the question:{' '}
+        <b>{randomCards?.shots ? randomCards?.shots : numberOfAttempts}</b>
       </Typography>
-      {openAnswer && (
+      {showAnswer && (
         <div className={classNames.containerAnswer}>
           <Typography className={classNames.content} variant={'body1'}>
             <b>Answer: </b>
-            {!picture && text}
+            {randomCards?.answer}
           </Typography>
-          {addPicture}
+          {answerPicture}
           <Typography
-            className={picture ? classNames.contentWithPicture : classNames.content}
+            className={answerPicture ? classNames.contentWithPicture : classNames.content}
             variant={'body1'}
           >
             <b>Rate yourself:</b>
@@ -74,10 +83,12 @@ export const PagePack: FC<PagePackProps> = ({
           <RadioGroup items={evaluationOptions as unknown as RadioItemProps[]} />
         </div>
       )}
-      {openAnswer ? (
+      {showAnswer ? (
         <Button fullWidth>Next Question</Button>
       ) : (
-        <Button fullWidth>Show Answer</Button>
+        <Button fullWidth onClick={handleShowAnswer}>
+          Show Answer
+        </Button>
       )}
     </Card>
   )

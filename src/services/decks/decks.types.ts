@@ -40,3 +40,10 @@ export type CreateDeckArgs = {
   isPrivate: boolean
   name: string
 }
+
+export type GetDeckByIdArgs = {
+  cover?: string
+  id?: string
+  isPrivate?: boolean
+  name?: string
+}
