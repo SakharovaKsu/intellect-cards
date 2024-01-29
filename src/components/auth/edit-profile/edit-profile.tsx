@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { CardPage } from '@/components/ui/card'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 import { EditIcon, LogOutIcon } from '@/icons'
@@ -133,7 +133,7 @@ export const EditProfile = ({
   )
 
   return (
-    <Card className={s.container}>
+    <CardPage className={s.container}>
       <Typography variant={'large'}>Personal Information</Typography>
       <form className={s.containerEdit} onSubmit={handleSubmit(onSubmitHandler)}>
         <div className={s.photoAvatar}>
@@ -160,6 +160,6 @@ export const EditProfile = ({
         {!edit && informationPersonal}
         {edit && informationEdit}
       </form>
-    </Card>
+    </CardPage>
   )
 }
