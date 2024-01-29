@@ -63,9 +63,9 @@ export const PagePack: FC<Props> = ({ numberOfAttempts = 0 }) => {
   )
 
   const handleNextQuestion = () => {
-    if (dataDeck) {
+    if (randomCards) {
       saveRating({
-        cardId: dataDeck?.id,
+        cardId: randomCards?.id,
         grade: rating,
         id: id ?? '',
       })
