@@ -9,6 +9,7 @@ export type DropdownWithAvatarProps = {
   avatar?: string
   mail?: string
   name?: string
+  onClick: () => void
 }
 
 export const DropdownWithAvatar = forwardRef<HTMLDivElement, DropdownWithAvatarProps>(

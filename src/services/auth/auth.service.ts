@@ -5,7 +5,6 @@ import {
   ResendVerificationEmailArgs,
   ResetPasswordArgs,
   SingUpArgs,
-  UpdateUser,
 } from '@/services/auth/auth.types'
 import { baseApi } from '@/services/base-api'
 
@@ -92,7 +91,8 @@ export const authService = baseApi.injectEndpoints({
           }
         },
       }),
-      updateMe: builder.mutation<AuthResponse, UpdateUser>({
+      updateMe: builder.mutation<AuthResponse, FormData>({
+        invalidatesTags: ['Me'],
         query: body => {
           return {
             body,

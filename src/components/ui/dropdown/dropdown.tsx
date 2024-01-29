@@ -69,7 +69,7 @@ export const Dropdown = forwardRef<ElementRef<typeof Content>, DropdownProps>(
                 <>
                   <DropdownItem>
                     <DropdownWithAvatar
-                      avatar={'https://ionicframework.com/docs/img/demos/avatar.svg'}
+                      avatar={userAvatar ?? `https://ionicframework.com/docs/img/demos/avatar.svg`}
                       mail={userData.email}
                       name={userData.name}
                       onClick={() => {
