@@ -24,11 +24,13 @@ export const PacksListPage = () => {
   const minCardsCount = useAppSelector(minCardsCountSelector)
 
   const meId = tabValue === 'myCards' ? authorId : ''
-
+  const [itemPerPage, setItemPerPage] = useState(10)
   const [currentPageUse, setCurrentPageUse] = useState(1)
+
   const { data, error, isLoading } = useGetDecksQuery({
     authorId: meId,
     currentPage: currentPageUse,
+    itemsPerPage: itemPerPage,
     maxCardsCount: maxCardsCount,
     minCardsCount: minCardsCount,
     name: searchQuery,
@@ -47,10 +49,12 @@ export const PacksListPage = () => {
   const items: ItemsType[] = [
     { title: '5', value: '5' },
     { title: '10', value: '10' },
+    { title: '15', value: '15' },
+    { title: '20', value: '20' },
     { title: '25', value: '25' },
-    { title: '50', value: '50' },
-    { title: '100', value: '100' },
   ]
+
+  const itemsPerPage = (selectValue: string) => setItemPerPage(Number(selectValue))
 
   return (
     <Page>
@@ -69,6 +73,7 @@ export const PacksListPage = () => {
       <Pagination
         currentPage={data?.pagination.currentPage ?? 1}
         items={items}
+        itemsPerPage={itemsPerPage}
         onPageChange={setCurrentPageUse}
         pageSize={data?.pagination.itemsPerPage ?? 10}
         totalCount={data?.pagination.totalPages ?? 10}
