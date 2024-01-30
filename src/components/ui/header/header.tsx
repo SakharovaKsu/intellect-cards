@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { Button } from '@/components/ui/button'
 import { Dropdown } from '@/components/ui/dropdown'
 import { Typography } from '@/components/ui/typography'
@@ -12,7 +14,9 @@ export const Header = () => {
   return (
     <header className={s.root}>
       <div className={s.headerContainer}>
-        <Logo />
+        <Link to={'/'}>
+          <Logo />
+        </Link>
         {data ? (
           <div className={s.user}>
             <Typography as={'button'} variant={'subtitle1'}>

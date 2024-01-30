@@ -101,12 +101,7 @@ export const authService = baseApi.injectEndpoints({
           }
         },
       }),
-      verifyEmail: builder.mutation<
-        void,
-        {
-          code: string
-        }
-      >({
+      verifyEmail: builder.mutation<void, { code: string }>({
         query: body => {
           return {
             body,

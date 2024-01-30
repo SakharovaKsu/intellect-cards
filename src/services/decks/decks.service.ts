@@ -63,6 +63,7 @@ export const decksService = baseApi.injectEndpoints({
         },
       }),
       getLearnCards: builder.query<Card, { id: string; previousCardId?: string }>({
+        providesTags: ['Learn'],
         query: params => {
           return {
             url: `v1/decks/${params.id}/learn`,
@@ -70,6 +71,7 @@ export const decksService = baseApi.injectEndpoints({
         },
       }),
       submitGrade: builder.mutation<void, { cardId: string; grade: number; id: string }>({
+        invalidatesTags: ['Learn'],
         query: ({ id, ...body }) => {
           return {
             body,

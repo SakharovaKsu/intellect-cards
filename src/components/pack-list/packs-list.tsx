@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { CardPage } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { ItemsType, Select } from '@/components/ui/select'
 import { TextField } from '@/components/ui/text-field'
@@ -92,7 +92,7 @@ export const PacksList: FC<PackType> = ({
   )
 
   return (
-    <Card className={classNames.container}>
+    <CardPage className={classNames.container}>
       <div className={classNames.containerTitle}>
         <Typography variant={'h2'}>{title}</Typography>
         <button>
@@ -107,6 +107,6 @@ export const PacksList: FC<PackType> = ({
         <Button variant={'secondary'}>{nameButton}</Button>
         <Button variant={'primary'}>{nameButton}k</Button>
       </div>
-    </Card>
+    </CardPage>
   )
 }
