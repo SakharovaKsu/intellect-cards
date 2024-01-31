@@ -1,15 +1,28 @@
 .container {
-  padding: 36px 137px 0;
+  padding: 36px 0 0;
 
   .table {
     border-collapse: collapse;
-    width: 100%;
     border: 1px solid var(--color-dark-500);
+    overflow-x: auto;
+    width: auto;
   }
 
   .tdc {
     padding: 6px 6px 6px 24px;
     border-bottom: 1px solid var(--color-dark-500);
+  }
+
+  .tdcImg {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .tbcIconContainer {
+    display: flex;
+    justify-content: center;
   }
 
   .tdsIcon {
@@ -33,4 +46,10 @@
       opacity: 0.6;
     }
   }
+}
+
+.packImage {
+  width: 118px;
+  height: 48px;
+  object-fit: cover;
 }

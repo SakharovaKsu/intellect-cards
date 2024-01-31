@@ -2,6 +2,7 @@ import { ChangeEvent } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { Button } from '@/components/ui/button'
+import { HeadPack } from '@/components/ui/head-pack/head-pack'
 import { Slider } from '@/components/ui/slider'
 import { TabSwitcher } from '@/components/ui/tab-switcher'
 import { TextField } from '@/components/ui/text-field'
@@ -33,8 +34,8 @@ const tabs = [
 
 type PropsType = {
   searchQuery: string
-  sliderLabel: string
-  switcherLabel: string
+  sliderLabel?: string
+  switcherLabel?: string
 }
 
 export function PackFilters(props: PropsType) {
@@ -64,10 +65,7 @@ export function PackFilters(props: PropsType) {
 
   return (
     <div className={s.container}>
-      <div className={s.filtersHead}>
-        <Typography variant={'h1'}>Decks list</Typography>
-        <Button variant={'primary'}>Add New Pack</Button>
-      </div>
+      <HeadPack buttonName={'Add New Pack'} title={'Decks list'} />
 
       <div className={s.filtersBody}>
         <TextField

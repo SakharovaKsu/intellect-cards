@@ -138,7 +138,14 @@ export const PackTable: FC<Props> = ({
         <TableBody>
           {sortedDecks?.map(item => (
             <TableRow key={item.id}>
-              <TableDataCell className={`${s.tdc} ${s.unselectable}`}>{item.name}</TableDataCell>
+              <TableDataCell className={`${s.tdc} ${s.unselectable} `}>
+                <div className={s.tdcImg}>
+                  {item.cover && (
+                    <img alt={'pack image.'} className={s.packImage} src={item.cover} />
+                  )}
+                  {item.name}
+                </div>
+              </TableDataCell>
               <TableDataCell className={s.tdc}>{item.cardsCount}</TableDataCell>
               <TableDataCell className={s.tdc}>
                 {new Date(item.updated).toLocaleDateString()}
@@ -147,19 +154,21 @@ export const PackTable: FC<Props> = ({
                 {checkCorrectLength(item.author.name)}
               </TableDataCell>
               <TableDataCell className={s.tdc}>
-                <Link className={s.link} to={`/card/${item.id}`}>
-                  <PlayIcon />
-                </Link>
-                {tabValue === 'myCards' && (
-                  <Link className={s.link} to={''}>
-                    <EditIcon />
+                <div className={s.tbcIconContainer}>
+                  <Link className={s.link} to={`/card/${item.id}`}>
+                    <PlayIcon />
                   </Link>
-                )}
-                {tabValue === 'myCards' && (
-                  <Link className={s.link} to={''}>
-                    <DeleteIcon />
-                  </Link>
-                )}
+                  {tabValue === 'myCards' && (
+                    <Link className={s.link} to={''}>
+                      <EditIcon />
+                    </Link>
+                  )}
+                  {tabValue === 'myCards' && (
+                    <Link className={s.link} to={''}>
+                      <DeleteIcon />
+                    </Link>
+                  )}
+                </div>
               </TableDataCell>
             </TableRow>
           ))}
