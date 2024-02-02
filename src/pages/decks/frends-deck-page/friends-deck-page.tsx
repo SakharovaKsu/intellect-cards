@@ -32,6 +32,7 @@ export const FriendsDeckPage = () => {
     id: id ?? 'defaultId',
     itemsPerPage: itemPerPage,
     orderBy: orderBy,
+    question: searchQuery,
   })
 
   if (dataDeckLoading || dataCardsLoading) {
@@ -60,7 +61,7 @@ export const FriendsDeckPage = () => {
         type={'search'}
         value={searchQuery}
       />
-      <PackTableFriends cards={dataCards?.items} />
+      <PackTableFriends cards={dataCards?.items} searchQuery={searchQuery} />
       <Pagination
         currentPage={dataCards?.pagination.currentPage ?? 1}
         items={listPage}

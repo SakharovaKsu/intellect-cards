@@ -1,4 +1,6 @@
-import { Column } from '@/components/packs/pack-table'
+import { useState } from 'react'
+
+import { Column, Sort } from '@/components/packs/pack-table'
 import { HeaderTable } from '@/components/packs/pack-table/header-table'
 import { Table } from '@/components/ui/table/tabl'
 import { TableBody } from '@/components/ui/table/table-body/table-body'
@@ -31,9 +33,30 @@ const columns: Column[] = [
 
 type Props = {
   cards?: Card[]
+  searchQuery: string
 }
 
-export const PackTableFriends = ({ cards }: Props) => {
+export const PackTableFriends = ({ cards, searchQuery }: Props) => {
+  const [sort, setSort] = useState<Sort>(null)
+
+  const filteredCards = cards?.filter(card =>
+    card.question.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+
+  const sortedCards = filteredCards?.sort((a, b) => {
+    const aValue = a[sort?.key as keyof typeof a]
+    const bValue = b[sort?.key as keyof typeof b]
+
+    if (typeof aValue === 'string' && typeof bValue === 'string') {
+      return sort?.direction === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue)
+    }
+    if (typeof aValue === 'number' && typeof bValue === 'number') {
+      return sort?.direction === 'asc' ? aValue - bValue : bValue - aValue
+    }
+
+    return 0
+  })
+
   const renderStars = (grade: number) => {
     const stars = []
 
@@ -46,9 +69,9 @@ export const PackTableFriends = ({ cards }: Props) => {
 
   return (
     <Table className={s.table}>
-      <HeaderTable columns={columns} />
+      <HeaderTable columns={columns} onSort={setSort} sort={sort} />
       <TableBody>
-        {cards?.map(card => {
+        {sortedCards?.map(card => {
           return (
             <TableRow key={card.userId}>
               <TableDataCell className={s.tdcImg}>
