@@ -1,0 +1,20 @@
+.table {
+  margin-top: 24px;
+  border-collapse: collapse;
+}
+
+.tdcImg {
+  //display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cardImg {
+  background-color: var(--color-light-100);
+  display: inline-block;
+  min-width: 100px;
+  min-height: 30px;
+  max-width: 118px;
+  max-height: 47px;
+  object-fit: cover;
+}

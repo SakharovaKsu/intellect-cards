@@ -1,5 +1,5 @@
 import { baseApi } from '@/services/base-api'
-import { Card, CreateCardsArgs, GetCardsArgs } from '@/services/cards/cards.type'
+import { Card, CreateCardsArgs, GetCardsArgs, GetCardsResponse } from '@/services/cards/cards.type'
 import {
   CreateDeckArgs,
   Deck,
@@ -39,18 +39,18 @@ export const decksService = baseApi.injectEndpoints({
           }
         },
       }),
-      getCards: builder.query<Omit<GetDesksResponse, 'maxCardsCount'>, GetCardsArgs>({
+      getDeckById: builder.query<Deck, GetDeckByIdArgs>({
+        providesTags: ['Decks'],
+        query: ({ id, ...args }) => {
+          return { method: 'GET', params: { ...args }, url: `v1/decks/${id}` }
+        },
+      }),
+      getDeckCards: builder.query<GetCardsResponse, GetCardsArgs>({
         providesTags: ['Decks', 'Cards'],
         query: params => {
           return {
             url: `v1/decks/${params.id}/cards`,
           }
-        },
-      }),
-      getDeckById: builder.query<Deck, GetDeckByIdArgs>({
-        providesTags: ['Decks'],
-        query: ({ id, ...args }) => {
-          return { method: 'GET', params: { ...args }, url: `v1/decks/${id}` }
         },
       }),
       getDecks: builder.query<GetDesksResponse, GetDecksArgs | void>({
@@ -95,8 +95,8 @@ export const decksService = baseApi.injectEndpoints({
 
 export const {
   useCreateDeckMutation,
-  useGetCardsQuery,
   useGetDeckByIdQuery,
+  useGetDeckCardsQuery,
   useGetDecksQuery,
   useGetLearnCardsQuery,
   useSubmitGradeMutation,
