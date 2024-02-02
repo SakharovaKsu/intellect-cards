@@ -5,3 +5,4 @@ export const tabValueSelector = (state: RootState) => state.decks.tabValue
 export const searchQuerySelector = (state: RootState) => state.decks.searchByName
 export const maxCardsCountSelector = (state: RootState) => state.decks.maxCardsCount
 export const minCardsCountSelector = (state: RootState) => state.decks.minCardsCount
+export const orderBySelector = (state: RootState) => state.decks.orderBy

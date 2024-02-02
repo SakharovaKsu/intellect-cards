@@ -24,3 +24,15 @@
   height: 107px;
   object-fit: cover;
 }
+
+.link {
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid var(--color-accent-300);
+  background: var(--color-accent-300);
+  text-decoration: none;
+  padding: 6px 1.75em;
+  text-align: center;
+  color: var(--color-light-100);
+  font-weight: var(--font-weight-bold);
+}

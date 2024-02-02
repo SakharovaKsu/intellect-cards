@@ -9,7 +9,7 @@ import Loader from '@/components/ui/loader/loader'
 import { Pagination } from '@/components/ui/pagination'
 import { TextField } from '@/components/ui/text-field'
 import { listPage } from '@/pages/decks'
-import { searchQuerySelector } from '@/services/decks/decks.select'
+import { orderBySelector, searchQuerySelector } from '@/services/decks/decks.select'
 import { useGetDeckByIdQuery, useGetDeckCardsQuery } from '@/services/decks/decks.service'
 import { setSearchQuery } from '@/services/decks/decks.slice'
 import { useAppSelector } from '@/services/store'
@@ -19,25 +19,22 @@ import s from './friends-deck-page.module.scss'
 export const FriendsDeckPage = () => {
   const [itemPerPage, setItemPerPage] = useState(10)
   const [currentPageUse, setCurrentPageUse] = useState(1)
+
+  const orderBy = useAppSelector(orderBySelector)
+
   const { id } = useParams()
   const dispatch = useDispatch()
   const searchQuery = useAppSelector(searchQuerySelector)
 
   const { data: dataDeck, isLoading: dataDeckLoading } = useGetDeckByIdQuery({ id })
-  const { data: dataCards } = useGetDeckCardsQuery({
+  const { data: dataCards, isLoading: dataCardsLoading } = useGetDeckCardsQuery({
     currentPage: currentPageUse,
     id: id ?? 'defaultId',
     itemsPerPage: itemPerPage,
+    orderBy: orderBy,
   })
 
-  // answer?: string
-  // currentPage?: number
-  // id: string
-  // itemsPerPage?: number
-  // orderBy?: string
-  // question?: string
-
-  if (dataDeckLoading) {
+  if (dataDeckLoading || dataCardsLoading) {
     return <Loader />
   }
 
@@ -50,7 +47,12 @@ export const FriendsDeckPage = () => {
   return (
     <div className={s.container}>
       <BreadCrumbs title={'Back to Decks List'} />
-      <HeadPack buttonName={'Friend’s Deck'} cover={dataDeck?.cover || ''} title={dataDeck?.name} />
+      <HeadPack
+        buttonName={'Friend’s Deck'}
+        cover={dataDeck?.cover || ''}
+        idCard={dataDeck?.id}
+        title={dataDeck?.name}
+      />
       <TextField
         isModal={false}
         onChange={handleSearch}

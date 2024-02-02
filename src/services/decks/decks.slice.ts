@@ -14,7 +14,7 @@ const initialState = {
     currentPage: '1',
     itemsPerPage: '10',
   },
-  orderBy: 'updated-desc',
+  orderBy: '0',
   searchByName: '',
   tabValue: 'allCards',
 }
@@ -33,10 +33,14 @@ export const decksSlice = createSlice({
       state.minCardsCount = action.payload[0]
       state.maxCardsCount = action.payload[1]
     },
+    setOrderBy: (state, action: PayloadAction<{ order: number }>) => {
+      state.orderBy = action.payload.order.toString()
+    },
     setSearchQuery: (state, action: PayloadAction<{ value: string }>) => {
       state.searchByName = action.payload.value
     },
   },
 })
 
-export const { setAuthorId, setCardsByAuthor, setCardsCount, setSearchQuery } = decksSlice.actions
+export const { setAuthorId, setCardsByAuthor, setCardsCount, setOrderBy, setSearchQuery } =
+  decksSlice.actions

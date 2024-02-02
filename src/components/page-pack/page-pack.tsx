@@ -1,4 +1,5 @@
 import { FC, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
@@ -12,6 +13,7 @@ import {
   useGetLearnCardsQuery,
   useSubmitGradeMutation,
 } from '@/services/decks/decks.service'
+import { setOrderBy } from '@/services/decks/decks.slice'
 import { clsx } from 'clsx'
 
 import s from './page-pack.module.scss'
@@ -31,8 +33,10 @@ const evaluationOptions = [
 ]
 
 export const PagePack: FC<Props> = ({ numberOfAttempts = 0 }) => {
+  const dispatch = useDispatch()
   const [showAnswer, setShowAnswer] = useState(false)
   const [rating, setRating] = useState(1)
+
   const { id } = useParams()
   const { data: dataDeck, isLoading: dataDeckLoading } = useGetDeckByIdQuery({ id })
   const { data: randomCards, isLoading: randomCardsLoading } = useGetLearnCardsQuery({
@@ -77,6 +81,11 @@ export const PagePack: FC<Props> = ({ numberOfAttempts = 0 }) => {
     setShowAnswer(true)
   }
 
+  const handleChangeOption = (order: number) => {
+    setRating(order)
+    dispatch(setOrderBy({ order }))
+  }
+
   return (
     <CardPage className={classNames.container}>
       <Typography className={classNames.title} variant={'h1'}>
@@ -106,7 +115,7 @@ export const PagePack: FC<Props> = ({ numberOfAttempts = 0 }) => {
           </Typography>
           <RadioGroup
             items={evaluationOptions as unknown as RadioItemProps[]}
-            onChangeOption={(rating: number) => setRating(rating)}
+            onChangeOption={handleChangeOption}
           />
         </div>
       )}
