@@ -2,6 +2,10 @@ import { ComponentPropsWithoutRef, ElementRef, FC, forwardRef, useState } from '
 import { Link } from 'react-router-dom'
 
 import { HeaderTable } from '@/components/packs/pack-table/header-table'
+import { Table } from '@/components/ui/table/tabl'
+import { TableBody } from '@/components/ui/table/table-body/table-body'
+import { TableDataCell } from '@/components/ui/table/table-body/table-row/table-data-cell/table-data-cell'
+import { TableRow } from '@/components/ui/table/table-body/table-row/table-row'
 import { DeleteIcon, EditIcon, PlayIcon } from '@/icons'
 import { GetDesksResponse } from '@/services/decks/decks.types'
 

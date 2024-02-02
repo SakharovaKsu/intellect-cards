@@ -95,7 +95,7 @@ export const TextField = forwardRef<ElementRef<'input'>, TextFieldProps>(
           )}
           {isSearchButtonShow && (
             <>
-              <SearchIcon className={s.showSearch} fill={activeColor} />
+              <SearchIcon className={classNames.showSearch} fill={activeColor} />
               {currentValue && (
                 <CloseIcon
                   className={s.closeIcon}

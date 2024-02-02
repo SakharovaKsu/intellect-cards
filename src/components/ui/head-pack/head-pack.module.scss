@@ -1,6 +1,26 @@
 .container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+
   margin-bottom: 36px;
+  width: 100%;
+}
+
+.containerImg {
+  align-items: flex-start;
+}
+
+.containerNotImg {
+  align-items: center;
+}
+
+.containerTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.img {
+  width: 170px;
+  height: 107px;
+  object-fit: cover;
 }

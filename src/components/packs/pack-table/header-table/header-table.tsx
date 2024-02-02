@@ -1,6 +1,9 @@
 import { ComponentPropsWithoutRef, FC } from 'react'
 
-import { Column, Sort, TableHeader, TableHeaderCell, TableRow } from '@/components/packs/pack-table'
+import { Column, Sort } from '@/components/packs/pack-table'
+import { TableRow } from '@/components/ui/table/table-body/table-row/table-row'
+import { TableHeader } from '@/components/ui/table-header/table-header'
+import { TableHeaderCell } from '@/components/ui/table-header/table-header-cell/table-header-cell'
 import { ArrowMiniDownIcon, ArrowMiniUpIcon } from '@/icons'
 
 import s from './header-table.module.scss'
@@ -10,7 +13,7 @@ export const HeaderTable: FC<
     ComponentPropsWithoutRef<'thead'> & {
       columns: Column[]
       onSort?: (sort: Sort) => void
-      sort: Sort
+      sort?: Sort
     },
     'children'
   >
