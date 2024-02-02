@@ -32,13 +32,13 @@ const tabs = [
   },
 ]
 
-type PropsType = {
+export type PackFiltersPropsType = {
   searchQuery: string
   sliderLabel?: string
   switcherLabel?: string
 }
 
-export function PackFilters(props: PropsType) {
+export function PackFilters(props: PackFiltersPropsType) {
   const { searchQuery, sliderLabel, switcherLabel } = props
 
   const dispatch = useDispatch()

@@ -43,7 +43,7 @@ export type Column = {
   title: string
 }
 
-type Props = {
+export type PackTableProps = {
   decks?: GetDesksResponse
   maxCardsCount: number
   minCardsCount: number
@@ -83,7 +83,7 @@ export const TableHeaderCell = forwardRef<ElementRef<'th'>, ComponentPropsWithou
   }
 )
 
-export const PackTable: FC<Props> = ({
+export const PackTable: FC<PackTableProps> = ({
   decks,
   maxCardsCount,
   minCardsCount,

@@ -4,33 +4,32 @@ import { MemoryRouter } from 'react-router-dom'
 import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { FormValues, SignUp } from './sign-up'
+import { SignInForm } from './sign-in-form'
 
 const meta = {
-  component: SignUp,
+  component: SignInForm,
   tags: ['autodocs'],
-  title: 'Auth/Sign-Up',
-} satisfies Meta<typeof SignUp>
+  title: 'Auth/Sign-In',
+} satisfies Meta<typeof SignInForm>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const SignUpStory: Story = (args: any) => {
+export const SignInStory: Story = (args: any) => {
   return (
     <Provider store={store}>
       <MemoryRouter>
-        <SignUp {...args} />
+        <SignInForm {...args} />
       </MemoryRouter>
     </Provider>
   )
 }
-SignUpStory.args = {
-  isSubmitting: false,
-  onSubmit: async (data: FormValues) => {
+SignInStory.args = {
+  onSubmit: async (data: any) => {
     alert(`
     email: ${data.email},
     password: ${data.password},
-    confirmPassword: ${data.confirmPassword}
+    rememberMe: ${data.rememberMe}
     `)
   },
 }

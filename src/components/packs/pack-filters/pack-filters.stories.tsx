@@ -1,4 +1,7 @@
-import { PackFilters } from '@/components/packs/pack-filters/pack-filters'
+import { Provider } from 'react-redux'
+
+import { PackFilters, PackFiltersPropsType } from '@/components/packs/pack-filters/pack-filters'
+import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
@@ -10,9 +13,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    sliderLabel: 'Number of cards',
-    switcherLabel: 'Show packs cards',
-  },
+export const PackFiltersStory: Story = (args: PackFiltersPropsType) => {
+  return (
+    <Provider store={store}>
+      <PackFilters {...args} />
+    </Provider>
+  )
+}
+
+PackFiltersStory.args = {
+  searchQuery: 'search . . .',
+  sliderLabel: 'Slider Label',
+  switcherLabel: 'Switcher Label',
 }
