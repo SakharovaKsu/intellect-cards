@@ -19,6 +19,16 @@
   flex-direction: column;
 }
 
+.containerName {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.containerDropdown {
+  padding-top: 8px;
+}
+
 .img {
   width: 170px;
   height: 107px;

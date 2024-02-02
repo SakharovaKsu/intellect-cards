@@ -15,7 +15,7 @@ import { ForgotPasswordPage } from '@/pages/auth/forgot-password-page/forgot-pas
 import LoginPage from '@/pages/auth/login-page/login-page'
 import { Profile } from '@/pages/auth/profile/profile'
 import { SignUpPage } from '@/pages/auth/sing-up-page/sign-up-page'
-import { FriendsDeckPage } from '@/pages/decks/frends-deck-page/friends-deck-page'
+import { MyDecksOrFriendsPage } from '@/pages/decks/frends-deck-page/my-decks-or-friends-page'
 import { PackPage } from '@/pages/decks/pack-page/pack-page'
 import { PacksListPage } from '@/pages/decks/packs-list-page'
 import { useGetMeQuery } from '@/services/auth/auth.service'
@@ -58,8 +58,12 @@ const privateRoutes: RouteObject[] = [
     path: '/card/:id',
   },
   {
-    element: <FriendsDeckPage />,
+    element: <MyDecksOrFriendsPage />,
     path: '/friends-pack/:id',
+  },
+  {
+    element: <MyDecksOrFriendsPage />,
+    path: '/my-pack/:id',
   },
 ]
 

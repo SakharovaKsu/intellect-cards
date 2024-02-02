@@ -1,26 +1,27 @@
 import { ChangeEvent, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-import { PackTableFriends } from '@/components/packs/pack-table-friends/pack-table-friends'
+import { MyDeckOrFriendsTable } from '@/components/packs/pack-table-friends/my-deck-or-friends-table'
 import { BreadCrumbs } from '@/components/ui/bread-crumbs'
 import { HeadPack } from '@/components/ui/head-pack/head-pack'
 import Loader from '@/components/ui/loader/loader'
 import { Pagination } from '@/components/ui/pagination'
 import { TextField } from '@/components/ui/text-field'
 import { listPage } from '@/pages/decks'
-import { orderBySelector, searchQuerySelector } from '@/services/decks/decks.select'
+import { authorIdSelect, orderBySelector, searchQuerySelector } from '@/services/decks/decks.select'
 import { useGetDeckByIdQuery, useGetDeckCardsQuery } from '@/services/decks/decks.service'
 import { setSearchQuery } from '@/services/decks/decks.slice'
 import { useAppSelector } from '@/services/store'
 
 import s from './friends-deck-page.module.scss'
 
-export const FriendsDeckPage = () => {
+export const MyDecksOrFriendsPage = () => {
   const [itemPerPage, setItemPerPage] = useState(10)
   const [currentPageUse, setCurrentPageUse] = useState(1)
 
   const orderBy = useAppSelector(orderBySelector)
+  const authorId = useSelector(authorIdSelect)
 
   const { id } = useParams()
   const dispatch = useDispatch()
@@ -39,6 +40,8 @@ export const FriendsDeckPage = () => {
     return <Loader />
   }
 
+  const titleButton = authorId === id ? 'Add New Card' : 'Learn to Deck'
+
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchQuery({ value: event.target.value }))
   }
@@ -49,7 +52,9 @@ export const FriendsDeckPage = () => {
     <div className={s.container}>
       <BreadCrumbs title={'Back to Decks List'} />
       <HeadPack
-        buttonName={'Friend’s Deck'}
+        authorId={authorId}
+        buttonName={titleButton}
+        cards={dataCards?.items}
         cover={dataDeck?.cover || ''}
         idCard={dataDeck?.id}
         title={dataDeck?.name}
@@ -61,7 +66,11 @@ export const FriendsDeckPage = () => {
         type={'search'}
         value={searchQuery}
       />
-      <PackTableFriends cards={dataCards?.items} searchQuery={searchQuery} />
+      <MyDeckOrFriendsTable
+        authorId={authorId}
+        cards={dataCards?.items}
+        searchQuery={searchQuery}
+      />
       <Pagination
         currentPage={dataCards?.pagination.currentPage ?? 1}
         items={listPage}

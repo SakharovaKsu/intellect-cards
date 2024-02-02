@@ -15,11 +15,12 @@ import s from './dropdown.module.scss'
 
 export type DropdownProps = {
   align?: 'center' | 'end' | 'start'
+  styles?: string
   userData?: AuthResponse
 } & ComponentPropsWithoutRef<typeof Root>
 
 export const Dropdown = forwardRef<ElementRef<typeof Content>, DropdownProps>(
-  ({ userData }, ref) => {
+  ({ styles, userData }, ref) => {
     const classNames = {
       arrow: clsx(s.arrow),
       content: clsx(s.content),
@@ -50,58 +51,62 @@ export const Dropdown = forwardRef<ElementRef<typeof Content>, DropdownProps>(
     }
 
     return (
-      <Root defaultOpen onOpenChange={setOpen} open={open}>
-        <Trigger asChild>
-          {userData ? (
-            <span>
-              <Avatar image={userAvatar} />
-            </span>
-          ) : (
-            <span>
-              <MoreOptionsIcon />
-            </span>
-          )}
-        </Trigger>
-        {open && (
-          <Content className={classNames.content} ref={ref}>
-            <>
-              {userData?.name ? (
-                <>
-                  <DropdownItem>
-                    <DropdownWithAvatar
-                      avatar={userAvatar ?? `https://ionicframework.com/docs/img/demos/avatar.svg`}
-                      mail={userData.email}
-                      name={userData.name}
+      <div className={styles}>
+        <Root defaultOpen onOpenChange={setOpen} open={open}>
+          <Trigger asChild>
+            {userData ? (
+              <span>
+                <Avatar image={userAvatar} />
+              </span>
+            ) : (
+              <span>
+                <MoreOptionsIcon />
+              </span>
+            )}
+          </Trigger>
+          {open && (
+            <Content className={classNames.content} ref={ref}>
+              <>
+                {userData?.name ? (
+                  <>
+                    <DropdownItem>
+                      <DropdownWithAvatar
+                        avatar={
+                          userAvatar ?? `https://ionicframework.com/docs/img/demos/avatar.svg`
+                        }
+                        mail={userData.email}
+                        name={userData.name}
+                        onClick={() => {
+                          navigate('/')
+                        }}
+                      />
+                    </DropdownItem>
+                    <DropdownItemWithIcon
+                      icon={<ProfileAvatarIcon />}
+                      label={'My Profile'}
                       onClick={() => {
-                        navigate('/')
+                        navigate('/user-profile')
                       }}
                     />
-                  </DropdownItem>
-                  <DropdownItemWithIcon
-                    icon={<ProfileAvatarIcon />}
-                    label={'My Profile'}
-                    onClick={() => {
-                      navigate('/user-profile')
-                    }}
-                  />
-                  <DropdownItemWithIcon
-                    icon={<LogOutIcon />}
-                    label={'Sign Out'}
-                    onClick={onClickLogOut}
-                  />
-                </>
-              ) : (
-                <>
-                  <DropdownItemWithIcon icon={<PlayIcon />} label={'Learn'} />
-                  <DropdownItemWithIcon icon={<EditIcon />} label={'Edit'} />
-                  <DropdownItemWithIcon icon={<ThrashIcon />} label={'Delete'} />
-                </>
-              )}
-              <Arrow className={classNames.arrow} />
-            </>
-          </Content>
-        )}
-      </Root>
+                    <DropdownItemWithIcon
+                      icon={<LogOutIcon />}
+                      label={'Sign Out'}
+                      onClick={onClickLogOut}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <DropdownItemWithIcon icon={<PlayIcon />} label={'Learn'} />
+                    <DropdownItemWithIcon icon={<EditIcon />} label={'Edit'} />
+                    <DropdownItemWithIcon icon={<ThrashIcon />} label={'Delete'} />
+                  </>
+                )}
+                <Arrow className={classNames.arrow} />
+              </>
+            </Content>
+          )}
+        </Root>
+      </div>
     )
   }
 )

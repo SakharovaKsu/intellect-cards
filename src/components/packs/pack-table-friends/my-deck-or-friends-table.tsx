@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { Column, Sort } from '@/components/packs/pack-table'
 import { HeaderTable } from '@/components/packs/pack-table/header-table'
@@ -6,7 +7,7 @@ import { Table } from '@/components/ui/table/tabl'
 import { TableBody } from '@/components/ui/table/table-body/table-body'
 import { TableDataCell } from '@/components/ui/table/table-body/table-row/table-data-cell/table-data-cell'
 import { TableRow } from '@/components/ui/table/table-body/table-row/table-row'
-import { StarOutlineIcon } from '@/icons'
+import { DeleteIcon, EditIcon, PlayIcon, StarOutlineIcon } from '@/icons'
 import { StarIcon } from '@/icons/icon-components/star-icon'
 import { Card } from '@/services/cards/cards.type'
 
@@ -32,11 +33,12 @@ const columns: Column[] = [
 ]
 
 type Props = {
+  authorId?: string
   cards?: Card[]
   searchQuery: string
 }
 
-export const PackTableFriends = ({ cards, searchQuery }: Props) => {
+export const MyDeckOrFriendsTable = ({ authorId, cards, searchQuery }: Props) => {
   const [sort, setSort] = useState<Sort>(null)
 
   const filteredCards = cards?.filter(card =>
@@ -88,6 +90,23 @@ export const PackTableFriends = ({ cards, searchQuery }: Props) => {
               </TableDataCell>
               <TableDataCell>{new Date(card.updated).toLocaleDateString()}</TableDataCell>
               <TableDataCell>{renderStars(card.grade)}</TableDataCell>
+              {authorId === card.userId ? (
+                <TableDataCell>
+                  <div className={s.tbcIconContainer}>
+                    <Link className={s.link} to={`/card/${card.id}`}>
+                      <PlayIcon />
+                    </Link>
+                    <Link className={s.link} to={''}>
+                      <EditIcon />
+                    </Link>
+                    <Link className={s.link} to={''}>
+                      <DeleteIcon />
+                    </Link>
+                  </div>
+                </TableDataCell>
+              ) : (
+                ''
+              )}
             </TableRow>
           )
         })}
