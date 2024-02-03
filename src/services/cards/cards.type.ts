@@ -1,9 +1,12 @@
+import { Pagination } from '@/services/decks/decks.types'
+
 export type Card = {
   answer: string
   answerImg: string
   answerVideo: string
   created: string
   deckId: string
+  grade: number
   id: string
   question: string
   questionImg: string
@@ -29,4 +32,9 @@ export type GetCardsArgs = {
   itemsPerPage?: number
   orderBy?: string
   question?: string
+}
+
+export type GetCardsResponse = {
+  items: Card[]
+  pagination: Pagination
 }

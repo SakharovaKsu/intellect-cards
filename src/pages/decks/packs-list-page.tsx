@@ -16,6 +16,14 @@ import {
 import { useGetDecksQuery } from '@/services/decks/decks.service'
 import { useAppSelector } from '@/services/store'
 
+export const listPage: ItemsType[] = [
+  { title: '5', value: '5' },
+  { title: '10', value: '10' },
+  { title: '15', value: '15' },
+  { title: '20', value: '20' },
+  { title: '25', value: '25' },
+]
+
 export const PacksListPage = () => {
   const authorId = useAppSelector(authorIdSelect)
   const tabValue = useAppSelector(tabValueSelector)
@@ -46,14 +54,6 @@ export const PacksListPage = () => {
     return <div>Error</div>
   }
 
-  const items: ItemsType[] = [
-    { title: '5', value: '5' },
-    { title: '10', value: '10' },
-    { title: '15', value: '15' },
-    { title: '20', value: '20' },
-    { title: '25', value: '25' },
-  ]
-
   const itemsPerPage = (selectValue: string) => setItemPerPage(Number(selectValue))
 
   return (
@@ -64,6 +64,7 @@ export const PacksListPage = () => {
         switcherLabel={'Show packs cards'}
       />
       <PackTable
+        authorId={authorId}
         decks={data}
         maxCardsCount={maxCardsCount}
         minCardsCount={minCardsCount}
@@ -72,7 +73,7 @@ export const PacksListPage = () => {
       />
       <Pagination
         currentPage={data?.pagination.currentPage ?? 1}
-        items={items}
+        items={listPage}
         itemsPerPage={itemsPerPage}
         onPageChange={setCurrentPageUse}
         pageSize={data?.pagination.itemsPerPage ?? 10}

@@ -1,6 +1,48 @@
 .container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+
   margin-bottom: 36px;
+  width: 100%;
+}
+
+.containerImg {
+  align-items: flex-start;
+}
+
+.containerNotImg {
+  align-items: center;
+}
+
+.containerTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.containerName {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.containerDropdown {
+  padding-top: 8px;
+}
+
+.img {
+  width: 170px;
+  height: 107px;
+  object-fit: cover;
+}
+
+.link {
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid var(--color-accent-300);
+  background: var(--color-accent-300);
+  text-decoration: none;
+  padding: 6px 1.75em;
+  text-align: center;
+  color: var(--color-light-100);
+  font-weight: var(--font-weight-bold);
 }

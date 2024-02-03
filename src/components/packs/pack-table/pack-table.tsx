@@ -1,7 +1,11 @@
-import { ComponentPropsWithoutRef, ElementRef, FC, forwardRef, useState } from 'react'
+import { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { HeaderTable } from '@/components/packs/pack-table/header-table'
+import { Table } from '@/components/ui/table/tabl'
+import { TableBody } from '@/components/ui/table/table-body/table-body'
+import { TableDataCell } from '@/components/ui/table/table-body/table-row/table-data-cell/table-data-cell'
+import { TableRow } from '@/components/ui/table/table-body/table-row/table-row'
 import { DeleteIcon, EditIcon, PlayIcon } from '@/icons'
 import { GetDesksResponse } from '@/services/decks/decks.types'
 
@@ -43,7 +47,8 @@ export type Column = {
   title: string
 }
 
-export type PackTableProps = {
+type Props = {
+  authorId: string
   decks?: GetDesksResponse
   maxCardsCount: number
   minCardsCount: number
@@ -51,39 +56,8 @@ export type PackTableProps = {
   tabValue: string
 }
 
-export const Table = forwardRef<HTMLTableElement, ComponentPropsWithoutRef<'table'>>(
-  ({ className, ...rest }, ref) => {
-    return <table className={className} {...rest} ref={ref} />
-  }
-)
-export const TableBody = forwardRef<ElementRef<'tbody'>, ComponentPropsWithoutRef<'tbody'>>(
-  ({ className, ...rest }, ref) => {
-    return <tbody className={className} {...rest} ref={ref} />
-  }
-)
-export const TableRow = forwardRef<ElementRef<'tr'>, ComponentPropsWithoutRef<'tr'>>(
-  ({ className, ...rest }, ref) => {
-    return <tr className={className} {...rest} ref={ref} />
-  }
-)
-export const TableDataCell = forwardRef<ElementRef<'td'>, ComponentPropsWithoutRef<'td'>>(
-  ({ className, ...rest }, ref) => {
-    return <td className={className} {...rest} ref={ref} />
-  }
-)
-
-export const TableHeader = forwardRef<ElementRef<'thead'>, ComponentPropsWithoutRef<'thead'>>(
-  ({ ...rest }, ref) => {
-    return <thead {...rest} ref={ref} />
-  }
-)
-export const TableHeaderCell = forwardRef<ElementRef<'th'>, ComponentPropsWithoutRef<'th'>>(
-  ({ className, ...rest }, ref) => {
-    return <th className={className} {...rest} ref={ref} />
-  }
-)
-
-export const PackTable: FC<PackTableProps> = ({
+export const PackTable: FC<Props> = ({
+  authorId,
   decks,
   maxCardsCount,
   minCardsCount,
@@ -133,45 +107,46 @@ export const PackTable: FC<PackTableProps> = ({
 
   return (
     <div className={s.container}>
-      <Table className={s.table}>
+      <Table>
         <HeaderTable columns={columns} onSort={setSort} sort={sort} />
         <TableBody>
-          {sortedDecks?.map(item => (
-            <TableRow key={item.id}>
-              <TableDataCell className={`${s.tdc} ${s.unselectable} `}>
-                <div className={s.tdcImg}>
-                  {item.cover && (
-                    <img alt={'pack image.'} className={s.packImage} src={item.cover} />
-                  )}
-                  {item.name}
-                </div>
-              </TableDataCell>
-              <TableDataCell className={s.tdc}>{item.cardsCount}</TableDataCell>
-              <TableDataCell className={s.tdc}>
-                {new Date(item.updated).toLocaleDateString()}
-              </TableDataCell>
-              <TableDataCell className={s.tdc}>
-                {checkCorrectLength(item.author.name)}
-              </TableDataCell>
-              <TableDataCell className={s.tdc}>
-                <div className={s.tbcIconContainer}>
-                  <Link className={s.link} to={`/card/${item.id}`}>
-                    <PlayIcon />
+          {sortedDecks?.map(item => {
+            const packPath =
+              item.author.id !== authorId ? `/friends-pack/${item.id}` : `/my-pack/${item.id}`
+
+            return (
+              <TableRow key={item.id}>
+                <TableDataCell>
+                  <Link className={s.tdcImg} to={packPath}>
+                    {item.cover && (
+                      <img alt={'pack image.'} className={s.packImage} src={item.cover} />
+                    )}
+                    {item.name}
                   </Link>
-                  {tabValue === 'myCards' && (
-                    <Link className={s.link} to={''}>
-                      <EditIcon />
+                </TableDataCell>
+                <TableDataCell>{item.cardsCount}</TableDataCell>
+                <TableDataCell>{new Date(item.updated).toLocaleDateString()}</TableDataCell>
+                <TableDataCell>{checkCorrectLength(item.author.name)}</TableDataCell>
+                <TableDataCell>
+                  <div className={s.tbcIconContainer}>
+                    <Link className={s.link} to={`/card/${item.id}`}>
+                      <PlayIcon />
                     </Link>
-                  )}
-                  {tabValue === 'myCards' && (
-                    <Link className={s.link} to={''}>
-                      <DeleteIcon />
-                    </Link>
-                  )}
-                </div>
-              </TableDataCell>
-            </TableRow>
-          ))}
+                    {tabValue === 'myCards' && (
+                      <Link className={s.link} to={''}>
+                        <EditIcon />
+                      </Link>
+                    )}
+                    {tabValue === 'myCards' && (
+                      <Link className={s.link} to={''}>
+                        <DeleteIcon />
+                      </Link>
+                    )}
+                  </div>
+                </TableDataCell>
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
     </div>
