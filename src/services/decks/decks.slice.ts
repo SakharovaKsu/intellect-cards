@@ -8,7 +8,7 @@ const initialState = {
   currentPage: 1,
   editDeckName: '',
   itemsPerPage: 10,
-  maxCardsCount: 10,
+  maxCardsCount: 100,
   minCardsCount: 0,
   myCardsPage: {
     currentPage: '1',

@@ -14,7 +14,7 @@ import { useGetDeckByIdQuery, useGetDeckCardsQuery } from '@/services/decks/deck
 import { setSearchQuery } from '@/services/decks/decks.slice'
 import { useAppSelector } from '@/services/store'
 
-import s from './friends-deck-page.module.scss'
+import s from './my-decks-or-friends-page.module.scss'
 
 export const MyDecksOrFriendsPage = () => {
   const [itemPerPage, setItemPerPage] = useState(10)
