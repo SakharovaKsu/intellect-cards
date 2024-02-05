@@ -1,3 +1,5 @@
+@import '../../../styles/viewports';
+
 .container {
   width: 100%;
   padding: 0 137px;
@@ -5,11 +7,33 @@
   .filtersBody {
     display: flex;
     align-items: end;
+    gap: 26px;
   }
 
   .centeredIcons {
     display: flex;
     gap: 5px;
     align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: $table) {
+  .container {
+    padding: 0 16px;
+  }
+  .filtersBody {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
+
+@media (max-width: $mobile) {
+  .containerButton {
+    width: 100%;
+  }
+
+  .containerSlider {
+    width: 100%;
   }
 }

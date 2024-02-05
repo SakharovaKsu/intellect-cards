@@ -1,3 +1,5 @@
+@import '../../../styles/viewports';
+
 .root {
   z-index: 10;
   top: 0;
@@ -24,8 +26,18 @@
   padding: 12px 136px;
 }
 
+.containerLogo {
+  display: flex;
+}
+
 .user {
   display: flex;
   gap: 14px;
   align-items: center;
+}
+
+@media (max-width: $table) {
+  .headerContainer {
+    padding: 12px 16px;
+  }
 }

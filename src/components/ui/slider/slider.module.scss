@@ -1,3 +1,5 @@
+@import '../../../styles/viewports';
+
 .container {
   display: flex;
   gap: 12px;
@@ -62,3 +64,11 @@
   border-radius: 2px;
   outline: none;
 }
+
+@media (max-width: $mobile) {
+  .SliderRoot,
+  .form {
+    width: 100%;
+  }
+}
+
