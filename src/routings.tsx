@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import {
   Navigate,
@@ -85,9 +86,11 @@ function PrivateRoutes() {
   const dispatch = useDispatch()
   const { data, isLoading } = useGetMeQuery()
 
-  if (data) {
-    dispatch(setAuthorId({ authorId: data.id }))
-  }
+  useEffect(() => {
+    if (data) {
+      dispatch(setAuthorId({ authorId: data.id }))
+    }
+  }, [data, dispatch])
 
   if (isLoading) {
     return <Loader />
