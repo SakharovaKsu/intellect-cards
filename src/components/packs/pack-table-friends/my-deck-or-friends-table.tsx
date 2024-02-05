@@ -35,10 +35,11 @@ const columns: Column[] = [
 type Props = {
   authorId?: string
   cards?: Card[]
+  pageType: 'friends' | 'my'
   searchQuery: string
 }
 
-export const MyDeckOrFriendsTable = ({ authorId, cards, searchQuery }: Props) => {
+export const MyDeckOrFriendsTable = ({ authorId, cards, pageType, searchQuery }: Props) => {
   const [sort, setSort] = useState<Sort>(null)
 
   const filteredCards = cards?.filter(card =>
@@ -71,25 +72,33 @@ export const MyDeckOrFriendsTable = ({ authorId, cards, searchQuery }: Props) =>
 
   return (
     <Table className={s.table}>
-      <HeaderTable columns={columns} onSort={setSort} sort={sort} />
+      <HeaderTable columns={columns} onSort={setSort} pageType={pageType} sort={sort} />
       <TableBody>
         {sortedCards?.map(card => {
           return (
             <TableRow key={card.userId}>
-              <TableDataCell className={s.tdcImg}>
-                {card.questionImg && (
-                  <img alt={'Question image.'} className={s.cardImg} src={card.questionImg} />
-                )}
-                <span>{card.question}</span>
+              <TableDataCell>
+                <div className={s.tdcImg}>
+                  {card.questionImg && (
+                    <span className={s.cardImg}>
+                      <img alt={'Question image.'} className={s.img} src={card.questionImg} />
+                    </span>
+                  )}
+                  <span>{card.question}</span>
+                </div>
               </TableDataCell>
-              <TableDataCell className={s.tdcImg}>
-                {card.answerImg && (
-                  <img alt={'Answer image.'} className={s.cardImg} src={card.answerImg} />
-                )}
-                <span>{card.answer}</span>
+              <TableDataCell>
+                <div className={s.tdcImg}>
+                  {card.answerImg && (
+                    <img alt={'Answer image.'} className={s.cardImg} src={card.answerImg} />
+                  )}
+                  <span>{card.answer}</span>
+                </div>
               </TableDataCell>
               <TableDataCell>{new Date(card.updated).toLocaleDateString()}</TableDataCell>
-              <TableDataCell>{renderStars(card.grade)}</TableDataCell>
+              <TableDataCell>
+                <div className={s.grade}>{renderStars(card.grade)}</div>
+              </TableDataCell>
               {authorId === card.userId ? (
                 <TableDataCell>
                   <div className={s.tbcIconContainer}>

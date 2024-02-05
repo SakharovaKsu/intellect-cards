@@ -16,7 +16,11 @@ import { useAppSelector } from '@/services/store'
 
 import s from './my-decks-or-friends-page.module.scss'
 
-export const MyDecksOrFriendsPage = () => {
+type Props = {
+  pageType: 'friends' | 'my'
+}
+
+export const MyDecksOrFriendsPage = ({ pageType }: Props) => {
   const [itemPerPage, setItemPerPage] = useState(10)
   const [currentPageUse, setCurrentPageUse] = useState(1)
 
@@ -69,6 +73,7 @@ export const MyDecksOrFriendsPage = () => {
       <MyDeckOrFriendsTable
         authorId={authorId}
         cards={dataCards?.items}
+        pageType={pageType}
         searchQuery={searchQuery}
       />
       <Pagination

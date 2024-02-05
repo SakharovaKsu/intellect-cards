@@ -58,11 +58,11 @@ const privateRoutes: RouteObject[] = [
     path: '/card/:id',
   },
   {
-    element: <MyDecksOrFriendsPage />,
+    element: <MyDecksOrFriendsPage pageType={'friends'} />,
     path: '/friends-pack/:id',
   },
   {
-    element: <MyDecksOrFriendsPage />,
+    element: <MyDecksOrFriendsPage pageType={'my'} />,
     path: '/my-pack/:id',
   },
 ]
