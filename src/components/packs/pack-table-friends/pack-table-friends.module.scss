@@ -4,19 +4,29 @@
 }
 
 .tdcImg {
-  //display: flex;
+  display: flex;
   align-items: center;
   gap: 10px;
 }
 
 .cardImg {
+  min-width: 100px;
+  min-height: auto;
+  max-width: 118px;
+  max-height: 50px;
   background-color: var(--color-light-100);
   display: inline-block;
-  min-width: 100px;
-  min-height: 30px;
-  max-width: 118px;
-  max-height: 47px;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: auto;
   object-fit: cover;
+}
+
+.grade {
+  display: flex;
 }
 
 .tbcIconContainer {

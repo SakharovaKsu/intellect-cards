@@ -11,13 +11,16 @@ import s from './header-table.module.scss'
 export const HeaderTable: FC<
   Omit<
     ComponentPropsWithoutRef<'thead'> & {
-      columns: Column[]
+      columns?: Column[]
       onSort?: (sort: Sort) => void
+      pageType?: 'friends' | 'my'
       sort?: Sort
     },
     'children'
   >
-> = ({ columns, onSort, sort, ...restProps }) => {
+> = ({ columns, onSort, pageType, sort, ...restProps }) => {
+  const isMyPage = pageType === 'my'
+
   const handleSort = (key: string) => () => {
     if (sort?.key !== key) {
       return onSort && onSort({ direction: 'asc', key })
@@ -37,7 +40,7 @@ export const HeaderTable: FC<
   return (
     <TableHeader {...restProps}>
       <TableRow>
-        {columns.map(({ key, title }) => {
+        {columns?.map(({ key, title }) => {
           return (
             <TableHeaderCell
               className={s.columnHeaderContainer}
@@ -59,6 +62,13 @@ export const HeaderTable: FC<
             </TableHeaderCell>
           )
         })}
+        {isMyPage && (
+          <TableHeaderCell className={s.columnHeaderContainer} key={'action'}>
+            <div className={s.titleArrowContainer}>
+              <span>{''}</span>
+            </div>
+          </TableHeaderCell>
+        )}
       </TableRow>
     </TableHeader>
   )
