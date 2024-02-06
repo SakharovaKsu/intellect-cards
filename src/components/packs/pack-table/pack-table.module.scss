@@ -49,5 +49,6 @@
 @media (max-width: $table) {
   .container {
     padding: 36px 16px 0;
+    min-width: 736px;
   }
 }
