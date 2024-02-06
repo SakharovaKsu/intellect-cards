@@ -52,3 +52,10 @@
     min-width: 736px;
   }
 }
+
+@media (max-width: $mobile) {
+  .container {
+    padding: 36px 16px 0;
+    min-width: 328px;
+  }
+}

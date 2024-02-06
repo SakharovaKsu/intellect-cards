@@ -107,9 +107,6 @@ export const PackTable: FC<Props> = ({
 
   return (
     <div className={s.container}>
-      {/*{*/}
-      {/*  isMobile ? <PackTable/> : <PackMobileView/>*/}
-      {/*}*/}
       <Table>
         <HeaderTable columns={columns} onSort={setSort} sort={sort} />
         <TableBody>
