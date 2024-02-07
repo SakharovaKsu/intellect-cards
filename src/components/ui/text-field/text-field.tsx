@@ -1,4 +1,5 @@
 import {
+  CSSProperties,
   ChangeEvent,
   ComponentPropsWithoutRef,
   ElementRef,
@@ -25,7 +26,7 @@ type OwnProps = {
   label?: string
   onValueChange?: (value: string) => void
   placeholder?: string
-  style?: string
+  style?: CSSProperties
   textValue?: string
   type?: string
 }

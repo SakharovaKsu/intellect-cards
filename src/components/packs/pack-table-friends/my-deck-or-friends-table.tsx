@@ -10,6 +10,7 @@ import { TableRow } from '@/components/ui/table/table-body/table-row/table-row'
 import { DeleteIcon, EditIcon, PlayIcon } from '@/icons'
 import { Card } from '@/services/cards/cards.type'
 import { renderStars } from '@/utilit/render-stars-grade'
+import { sortItems } from '@/utilit/sort-items'
 
 import s from './my-deck-or-friends-table.module.scss'
 
@@ -46,19 +47,7 @@ export const MyDeckOrFriendsTable = memo(({ authorId, cards, pageType, searchQue
     card.question.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
-  const sortedCards = filteredCards?.sort((a, b) => {
-    const aValue = a[sort?.key as keyof typeof a]
-    const bValue = b[sort?.key as keyof typeof b]
-
-    if (typeof aValue === 'string' && typeof bValue === 'string') {
-      return sort?.direction === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue)
-    }
-    if (typeof aValue === 'number' && typeof bValue === 'number') {
-      return sort?.direction === 'asc' ? aValue - bValue : bValue - aValue
-    }
-
-    return 0
-  })
+  const sortedCards = filteredCards?.sort((a, b) => sortItems(a, b, sort))
 
   return (
     <Table className={s.table}>
