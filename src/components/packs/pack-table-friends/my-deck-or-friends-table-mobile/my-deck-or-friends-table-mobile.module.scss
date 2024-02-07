@@ -1,5 +1,5 @@
 .cardContainer {
-  padding: 36px 16px;
+  padding: 36px 0;
   width: 100%;
 }
 
@@ -15,9 +15,6 @@
   display: flex;
   justify-content: space-between;
   padding: 6px 0;
-  text-decoration: none;
-  color: var(--color-light-100);
-  font-size: var(--font-size-s);
 }
 
 .title {
@@ -46,3 +43,6 @@
   padding: 6px;
 }
 
+.grade {
+  display: flex;
+}

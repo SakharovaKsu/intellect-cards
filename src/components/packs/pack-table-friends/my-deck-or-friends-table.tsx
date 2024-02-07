@@ -7,13 +7,13 @@ import { Table } from '@/components/ui/table/tabl'
 import { TableBody } from '@/components/ui/table/table-body/table-body'
 import { TableDataCell } from '@/components/ui/table/table-body/table-row/table-data-cell/table-data-cell'
 import { TableRow } from '@/components/ui/table/table-body/table-row/table-row'
-import { DeleteIcon, EditIcon, PlayIcon, StarOutlineIcon } from '@/icons'
-import { StarIcon } from '@/icons/icon-components/star-icon'
+import { DeleteIcon, EditIcon, PlayIcon } from '@/icons'
 import { Card } from '@/services/cards/cards.type'
+import { renderStars } from '@/utilit/render-stars-grade'
 
-import s from './pack-table-friends.module.scss'
+import s from './my-deck-or-friends-table.module.scss'
 
-const columns: Column[] = [
+export const columnsTableCards: Column[] = [
   {
     key: 'question',
     title: 'Question',
@@ -60,19 +60,9 @@ export const MyDeckOrFriendsTable = ({ authorId, cards, pageType, searchQuery }:
     return 0
   })
 
-  const renderStars = (grade: number) => {
-    const stars = []
-
-    for (let i = 0; i < 5; i++) {
-      stars.push(i < grade ? <StarIcon key={i} /> : <StarOutlineIcon key={i} />)
-    }
-
-    return stars
-  }
-
   return (
     <Table className={s.table}>
-      <HeaderTable columns={columns} onSort={setSort} pageType={pageType} sort={sort} />
+      <HeaderTable columns={columnsTableCards} onSort={setSort} pageType={pageType} sort={sort} />
       <TableBody>
         {sortedCards?.map(card => {
           return (

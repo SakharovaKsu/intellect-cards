@@ -1,48 +1,36 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 
-import { Column } from '@/components/packs/pack-table'
+import { columnsTableDecks } from '@/components/packs/pack-table'
 import { Typography } from '@/components/ui/typography'
 import { DeleteIcon, EditIcon, PlayIcon } from '@/icons'
 import { GetDesksResponse } from '@/services/decks/decks.types'
 
 import s from './pack-table-mobile-view.module.scss'
 
-type HeaderTableProps = {
+type Props = {
   authorId: string
-  columns?: Column[]
   decks?: GetDesksResponse
   tabValue: string
 }
 
-export const PackTableMobileView: FC<HeaderTableProps> = ({
-  authorId,
-  columns,
-  decks,
-  tabValue,
-}) => {
+export const PackTableMobileView: FC<Props> = ({ authorId, decks, tabValue }) => {
   return (
     <div className={s.cardContainer}>
       {decks?.items?.map(item => (
         <div className={s.dataColumn} key={item.id}>
-          {columns?.map(({ key, title }) => (
+          {columnsTableDecks?.map(({ key, title }) => (
             <div key={key}>
               {key === 'name' && (
-                <div className={s.containerText}>
-                  <Typography className={s.title} variant={'subtitle2'}>
-                    {title}
-                  </Typography>
-                  <Link
-                    className={s.linkName}
-                    to={
-                      item.author.id !== authorId
-                        ? `/friends-pack/${item.id}`
-                        : `/my-pack/${item.id}`
-                    }
-                  >
-                    {item.name}
-                  </Link>
-                </div>
+                <Link
+                  className={`${s.containerText} ${s.linkName}`}
+                  to={
+                    item.author.id !== authorId ? `/friends-pack/${item.id}` : `/my-pack/${item.id}`
+                  }
+                >
+                  <Typography variant={'subtitle2'}>{title}</Typography>
+                  <Typography>{item.name}</Typography>
+                </Link>
               )}
               {key === 'cardsCount' && (
                 <div className={s.containerText}>

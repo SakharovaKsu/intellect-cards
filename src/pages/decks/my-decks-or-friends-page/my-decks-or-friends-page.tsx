@@ -1,8 +1,10 @@
 import { ChangeEvent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import MediaQuery from 'react-responsive'
 import { useParams } from 'react-router-dom'
 
 import { MyDeckOrFriendsTable } from '@/components/packs/pack-table-friends/my-deck-or-friends-table'
+import { PackTableMobileView } from '@/components/packs/pack-table-friends/my-deck-or-friends-table-mobile/my-deck-or-friends-table-mobile'
 import { BreadCrumbs } from '@/components/ui/bread-crumbs'
 import { HeadPack } from '@/components/ui/head-pack/head-pack'
 import Loader from '@/components/ui/loader/loader'
@@ -70,20 +72,30 @@ export const MyDecksOrFriendsPage = ({ pageType }: Props) => {
         type={'search'}
         value={searchQuery}
       />
-      <MyDeckOrFriendsTable
-        authorId={authorId}
-        cards={dataCards?.items}
-        pageType={pageType}
-        searchQuery={searchQuery}
-      />
-      <Pagination
-        currentPage={dataCards?.pagination.currentPage ?? 1}
-        items={listPage}
-        itemsPerPage={itemsPerPage}
-        onPageChange={setCurrentPageUse}
-        pageSize={dataCards?.pagination.itemsPerPage ?? 10}
-        totalCount={dataCards?.pagination.totalPages ?? 10}
-      />
+      <MediaQuery maxWidth={768}>
+        <PackTableMobileView
+          authorId={authorId}
+          cards={dataCards?.items}
+          pageType={pageType}
+          searchQuery={searchQuery}
+        />
+      </MediaQuery>
+      <MediaQuery minWidth={769}>
+        <MyDeckOrFriendsTable
+          authorId={authorId}
+          cards={dataCards?.items}
+          pageType={pageType}
+          searchQuery={searchQuery}
+        />
+        <Pagination
+          currentPage={dataCards?.pagination.currentPage ?? 1}
+          items={listPage}
+          itemsPerPage={itemsPerPage}
+          onPageChange={setCurrentPageUse}
+          pageSize={dataCards?.pagination.itemsPerPage ?? 10}
+          totalCount={dataCards?.pagination.totalPages ?? 10}
+        />
+      </MediaQuery>
     </div>
   )
 }

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import MediaQuery from 'react-responsive'
 
 import { PackFilters } from '@/components/packs/pack-filters'
-import { PackTable, columns } from '@/components/packs/pack-table'
+import { PackTable } from '@/components/packs/pack-table'
 import { PackTableMobileView } from '@/components/packs/pack-table-mobile-view/pack-table-mobile-view'
 import Loader from '@/components/ui/loader/loader'
 import { Page } from '@/components/ui/page/page'
@@ -66,12 +66,7 @@ export const PacksListPage = () => {
         switcherLabel={'Show packs cards'}
       />
       <MediaQuery maxWidth={768}>
-        <PackTableMobileView
-          authorId={authorId}
-          columns={columns}
-          decks={data}
-          tabValue={tabValue}
-        />
+        <PackTableMobileView authorId={authorId} decks={data} tabValue={tabValue} />
       </MediaQuery>
       <MediaQuery minWidth={769}>
         <PackTable
