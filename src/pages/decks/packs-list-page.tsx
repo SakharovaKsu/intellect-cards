@@ -1,7 +1,9 @@
 import { memo, useState } from 'react'
+import MediaQuery from 'react-responsive'
 
 import { PackFilters } from '@/components/packs/pack-filters'
 import { PackTable } from '@/components/packs/pack-table'
+import { PackTableMobileView } from '@/components/packs/pack-table-mobile-view/pack-table-mobile-view'
 import Loader from '@/components/ui/loader/loader'
 import { Page } from '@/components/ui/page/page'
 import { Pagination } from '@/components/ui/pagination'
@@ -61,22 +63,27 @@ export const PacksListPage = memo(() => {
         sliderLabel={'Number of cards'}
         switcherLabel={'Show packs cards'}
       />
-      <PackTable
-        authorId={authorId}
-        decks={data}
-        maxCardsCount={maxCardsCount}
-        minCardsCount={minCardsCount}
-        searchQuery={searchQuery}
-        tabValue={tabValue}
-      />
-      <Pagination
-        currentPage={data?.pagination.currentPage ?? 1}
-        items={listPage}
-        itemsPerPage={itemsPerPage}
-        onPageChange={setCurrentPageUse}
-        pageSize={data?.pagination.itemsPerPage ?? 10}
-        totalCount={data?.pagination.totalPages ?? 10}
-      />
+      <MediaQuery maxWidth={768}>
+        <PackTableMobileView authorId={authorId} decks={data} tabValue={tabValue} />
+      </MediaQuery>
+      <MediaQuery minWidth={769}>
+        <PackTable
+          authorId={authorId}
+          decks={data}
+          maxCardsCount={maxCardsCount}
+          minCardsCount={minCardsCount}
+          searchQuery={searchQuery}
+          tabValue={tabValue}
+        />
+        <Pagination
+          currentPage={data?.pagination.currentPage ?? 1}
+          items={listPage}
+          itemsPerPage={itemsPerPage}
+          onPageChange={setCurrentPageUse}
+          pageSize={data?.pagination.itemsPerPage ?? 10}
+          totalCount={data?.pagination.totalPages ?? 10}
+        />
+      </MediaQuery>
     </Page>
   )
 })

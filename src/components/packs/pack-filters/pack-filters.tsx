@@ -1,7 +1,7 @@
 import { ChangeEvent, memo, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { Button } from '@/components/ui/button'
+import ResponsiveButton from '@/components/packs/pack-filters/responsive-button-filter/responsive-button-filter'
 import { HeadPack } from '@/components/ui/head-pack/head-pack'
 import { Slider } from '@/components/ui/slider'
 import { TabSwitcher } from '@/components/ui/tab-switcher'
@@ -79,14 +79,15 @@ export const PackFilters = memo(({ searchQuery, sliderLabel, switcherLabel }: Pr
           isModal={false}
           onChange={handleSearch}
           placeholder={'input search'}
+          style={s.search}
           type={'search'}
           value={searchQuery}
         />
-        <div style={{ padding: '0 25px' }}>
+        <div className={s.containerButton}>
           <Typography variant={'body2'}>{switcherLabel}</Typography>
           <TabSwitcher onValueChange={onSetCardsByAuthor} tabs={tabs} />
         </div>
-        <div>
+        <div className={s.containerSlider}>
           <Typography variant={'body2'}>{sliderLabel}</Typography>
           <Slider
             handleCardsCountChange={handleCardsCountChange}
@@ -95,12 +96,12 @@ export const PackFilters = memo(({ searchQuery, sliderLabel, switcherLabel }: Pr
             values={[minCardsCount, maxCardsCount]}
           />
         </div>
-        <Button onClick={handlerClearFilters} style={{ marginLeft: '35px' }} variant={'secondary'}>
+        <ResponsiveButton isFullWidth onClick={handlerClearFilters} variant={'secondary'}>
           <div className={s.centeredIcons}>
             <DeleteIcon size={15} />
             Clear Filters
           </div>
-        </Button>
+        </ResponsiveButton>
       </div>
     </div>
   )

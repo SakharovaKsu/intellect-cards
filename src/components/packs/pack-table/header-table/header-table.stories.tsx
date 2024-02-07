@@ -1,4 +1,4 @@
-import { columns } from '@/components/packs/pack-table'
+import { columnsTableDecks } from '@/components/packs/pack-table'
 import { HeaderTable } from '@/components/packs/pack-table/header-table/header-table'
 import { Meta, StoryObj } from '@storybook/react'
 
@@ -12,5 +12,5 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: { columns: columns, onSort: () => {}, sort: null },
+  args: { columns: columnsTableDecks, onSort: () => {}, sort: null },
 }

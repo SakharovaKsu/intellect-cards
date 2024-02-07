@@ -1,0 +1,48 @@
+.cardContainer {
+  padding: 36px 16px;
+  width: 100%;
+}
+
+.dataColumn {
+  position: relative;
+  border: 1px solid var(--color-dark-500);
+  border-radius: 4px;
+  padding: 12px 16px 47px;
+  margin-bottom: 24px;
+}
+
+.containerText {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  text-decoration: none;
+  color: var(--color-light-100);
+  font-size: var(--font-size-s);
+}
+
+.title {
+  font-size: var(--font-size-s);
+}
+
+.linkName {
+  text-decoration: none;
+  color: var(--color-light-100);
+  font-size: var(--font-size-s);
+}
+
+.iconContainer {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  display: flex;
+}
+
+.link {
+  display: flex;
+  width: 100%;
+  border: 1px solid var(--color-dark-500);
+  justify-content: center;
+  padding: 6px;
+}
+

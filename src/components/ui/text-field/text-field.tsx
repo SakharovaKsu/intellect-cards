@@ -25,6 +25,7 @@ type OwnProps = {
   label?: string
   onValueChange?: (value: string) => void
   placeholder?: string
+  style?: string
   textValue?: string
   type?: string
 }
