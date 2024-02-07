@@ -1,3 +1,4 @@
+import { memo, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
@@ -10,7 +11,7 @@ import z from 'zod'
 
 import s from './create-password.module.scss'
 
-type CreatePasswordProps = {
+type Props = {
   onSubmit: (data: CreatePasswordFormSchema) => Promise<void>
 }
 
@@ -20,7 +21,7 @@ const CreatePasswordSchema = z.object({
   password: z.string().min(3, { message: 'Password must contain at least 3 character(s)' }),
 })
 
-export const CreatePassword = ({ onSubmit }: CreatePasswordProps) => {
+export const CreatePassword = memo(({ onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -28,12 +29,14 @@ export const CreatePassword = ({ onSubmit }: CreatePasswordProps) => {
     register,
   } = useForm<CreatePasswordFormSchema>({ resolver: zodResolver(CreatePasswordSchema) })
 
+  const handleSubmitForm = useCallback(() => handleSubmit(onSubmit), [handleSubmit, onSubmit])
+
   return (
     <CardPage className={s.container}>
       <Typography className={s.header} variant={'large'}>
         Create new password
       </Typography>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={s.form} onSubmit={handleSubmitForm}>
         <DevTool control={control} />
         <TextField
           {...register('password')}
@@ -48,4 +51,4 @@ export const CreatePassword = ({ onSubmit }: CreatePasswordProps) => {
       </form>
     </CardPage>
   )
-}
+})

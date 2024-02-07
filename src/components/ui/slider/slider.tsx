@@ -1,3 +1,5 @@
+import { memo, useCallback } from 'react'
+
 import { Range, Root, Thumb, Track } from '@radix-ui/react-slider'
 
 import s from './slider.module.scss'
@@ -9,12 +11,13 @@ type Props = {
   values: number[]
 }
 
-export const Slider = (props: Props) => {
-  const { handleCardsCountChange, max, min, values } = props
-
-  const onValueChangeHandler = (e: number[]) => {
-    handleCardsCountChange(e)
-  }
+export const Slider = memo(({ handleCardsCountChange, max, min, values }: Props) => {
+  const onValueChangeHandler = useCallback(
+    (e: number[]) => {
+      handleCardsCountChange(e)
+    },
+    [handleCardsCountChange]
+  )
 
   return (
     <div className={s.container} style={{ display: 'flex' }}>
@@ -52,4 +55,4 @@ export const Slider = (props: Props) => {
       />
     </div>
   )
-}
+})

@@ -1,4 +1,12 @@
-import { ChangeEvent, ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
+import {
+  ChangeEvent,
+  ComponentPropsWithoutRef,
+  ElementRef,
+  forwardRef,
+  memo,
+  useCallback,
+  useState,
+} from 'react'
 import { useDispatch } from 'react-redux'
 
 import { CloseIcon } from '@/icons'
@@ -20,96 +28,101 @@ type OwnProps = {
   textValue?: string
   type?: string
 }
-type TextFieldProps = OwnProps & Omit<ComponentPropsWithoutRef<'input'>, keyof OwnProps>
+type Props = OwnProps & Omit<ComponentPropsWithoutRef<'input'>, keyof OwnProps>
 
-export const TextField = forwardRef<ElementRef<'input'>, TextFieldProps>(
-  (
-    {
-      disabled,
-      errorMessage,
-      isModal,
-      label,
-      onChange,
-      onValueChange,
-      placeholder,
-      textValue,
-      type,
-      ...props
-    },
-    ref
-  ) => {
-    const dispatch = useDispatch()
-    const [showPassword, setShowPassword] = useState<boolean>(false)
-    const [currentValue, setCurrentValue] = useState<string | undefined>(textValue)
-    const isPasswordButtonShow = type === 'password'
-    const isSearchButtonShow = type === 'search'
-    const activeColor = currentValue ? 'var(--color-light-100)' : 'var(--color-dark-300)'
+export const TextField = memo(
+  forwardRef<ElementRef<'input'>, Props>(
+    (
+      {
+        disabled,
+        errorMessage,
+        isModal,
+        label,
+        onChange,
+        onValueChange,
+        placeholder,
+        textValue,
+        type,
+        ...props
+      },
+      ref
+    ) => {
+      const dispatch = useDispatch()
+      const [showPassword, setShowPassword] = useState<boolean>(false)
+      const [currentValue, setCurrentValue] = useState<string | undefined>(textValue)
+      const isPasswordButtonShow = type === 'password'
+      const isSearchButtonShow = type === 'search'
+      const activeColor = currentValue ? 'var(--color-light-100)' : 'var(--color-dark-300)'
 
-    const classNames = {
-      errorLabel: s.errorLabel,
-      field: clsx(
-        s.field,
-        errorMessage && s.error,
-        isSearchButtonShow ? s.fieldWithSearch : s.fieldWithOutSearch,
-        disabled && s.disabledLabel
-      ),
-      fieldContainer: s.fieldContainer,
-      label: clsx(s.label, disabled ? s.disabledLabel : s.label),
-      root: clsx(!isModal && s.root),
-      showPassword: s.showPassword,
-      showSearch: s.showSearch,
-    }
+      const classNames = {
+        errorLabel: s.errorLabel,
+        field: clsx(
+          s.field,
+          errorMessage && s.error,
+          isSearchButtonShow ? s.fieldWithSearch : s.fieldWithOutSearch,
+          disabled && s.disabledLabel
+        ),
+        fieldContainer: s.fieldContainer,
+        label: clsx(s.label, disabled ? s.disabledLabel : s.label),
+        root: clsx(!isModal && s.root),
+        showPassword: s.showPassword,
+        showSearch: s.showSearch,
+      }
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      onChange?.(e)
-      setCurrentValue(e.currentTarget.value)
-      onValueChange && onValueChange(e.target.value)
-    }
+      const onChangeHandler = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+          onChange?.(e)
+          setCurrentValue(e.currentTarget.value)
+          onValueChange && onValueChange(e.target.value)
+        },
+        [onChange, onValueChange]
+      )
 
-    const onCloseClickHandler = () => {
-      dispatch(setSearchQuery({ value: '' }))
-      setCurrentValue('')
-    }
+      const onCloseClickHandler = useCallback(() => {
+        dispatch(setSearchQuery({ value: '' }))
+        setCurrentValue('')
+      }, [dispatch])
 
-    return (
-      <div className={classNames.root}>
-        <span className={classNames.label}>{label}</span>
-        <div className={classNames.fieldContainer}>
-          <input
-            className={classNames.field}
-            disabled={disabled}
-            onChange={onChangeHandler}
-            placeholder={placeholder}
-            ref={ref}
-            type={showPassword ? 'text' : type}
-            value={currentValue}
-            {...props}
-          />
-          {isPasswordButtonShow && (
-            <button
-              className={classNames.showPassword}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <EyeIcon /> : <EyeOffIcon />}
-            </button>
-          )}
-          {isSearchButtonShow && (
-            <>
-              <SearchIcon className={classNames.showSearch} fill={activeColor} />
-              {currentValue && (
-                <CloseIcon
-                  className={s.closeIcon}
-                  onClick={onCloseClickHandler}
-                  style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}
-                />
-              )}
-            </>
-          )}
+      return (
+        <div className={classNames.root}>
+          <span className={classNames.label}>{label}</span>
+          <div className={classNames.fieldContainer}>
+            <input
+              className={classNames.field}
+              disabled={disabled}
+              onChange={onChangeHandler}
+              placeholder={placeholder}
+              ref={ref}
+              type={showPassword ? 'text' : type}
+              value={currentValue}
+              {...props}
+            />
+            {isPasswordButtonShow && (
+              <button
+                className={classNames.showPassword}
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeIcon /> : <EyeOffIcon />}
+              </button>
+            )}
+            {isSearchButtonShow && (
+              <>
+                <SearchIcon className={classNames.showSearch} fill={activeColor} />
+                {currentValue && (
+                  <CloseIcon
+                    className={s.closeIcon}
+                    onClick={onCloseClickHandler}
+                    style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}
+                  />
+                )}
+              </>
+            )}
+          </div>
+          <div>
+            <span className={classNames.errorLabel}>{errorMessage}</span>
+          </div>
         </div>
-        <div>
-          <span className={classNames.errorLabel}>{errorMessage}</span>
-        </div>
-      </div>
-    )
-  }
+      )
+    }
+  )
 )

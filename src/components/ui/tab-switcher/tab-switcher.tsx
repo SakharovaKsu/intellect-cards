@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, memo, useCallback } from 'react'
 
 import { TabContent } from '@/components/ui/tab-switcher/tab-content/tab-content'
 import { TabValue } from '@/services/decks/decks.slice'
@@ -12,12 +12,17 @@ export type TabItemType = {
   label: string
   value: string
 }
-type TabSwitcherType = {
+type Props = {
   onValueChange?: (value: TabValue) => void
   tabs: TabItemType[]
 }
-export const TabSwitcher = (props: TabSwitcherType) => {
-  const { onValueChange, tabs } = props
+export const TabSwitcher = memo(({ onValueChange, tabs }: Props) => {
+  const handleTabClick = useCallback(
+    (value: TabValue) => {
+      onValueChange && onValueChange(value)
+    },
+    [onValueChange]
+  )
 
   return (
     <Root className={s.root}>
@@ -27,7 +32,7 @@ export const TabSwitcher = (props: TabSwitcherType) => {
             className={s.trigger}
             disabled={tab.disabled}
             key={tab.value}
-            onClick={() => onValueChange && onValueChange(tab.value as TabValue)}
+            onClick={() => handleTabClick(tab.value as TabValue)}
             value={tab.value}
           >
             {tab.label}
@@ -41,4 +46,4 @@ export const TabSwitcher = (props: TabSwitcherType) => {
       ))}
     </Root>
   )
-}
+})

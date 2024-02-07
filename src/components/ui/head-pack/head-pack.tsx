@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
@@ -17,7 +18,7 @@ type Props = {
   title?: string
 }
 
-export const HeadPack = ({ authorId, buttonName, cards, cover, idCard, title }: Props) => {
+export const HeadPack = memo(({ authorId, buttonName, cards, cover, idCard, title }: Props) => {
   const classNames = {
     container: clsx(s.container, cover ? s.containerImg : s.containerNotImg),
   }
@@ -42,4 +43,4 @@ export const HeadPack = ({ authorId, buttonName, cards, cover, idCard, title }: 
       )}
     </div>
   )
-}
+})

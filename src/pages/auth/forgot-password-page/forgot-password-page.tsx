@@ -1,3 +1,4 @@
+import { memo, useCallback } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -6,23 +7,26 @@ import Loader from '@/components/ui/loader/loader'
 import { Page } from '@/components/ui/page/page'
 import { useGetMeQuery, useRecoverPasswordMutation } from '@/services/auth/auth.service'
 
-export const ForgotPasswordPage = () => {
+export const ForgotPasswordPage = memo(() => {
   const { data, isLoading } = useGetMeQuery()
   const [recoverPassword] = useRecoverPasswordMutation()
   const navigate = useNavigate()
 
-  const handleForgotPassword = async (data: ForgotPasswordFormSchema) => {
-    try {
-      await recoverPassword({
-        email: data.email,
-        html: '<h1>Hi, ##name##</h1><p>Click <a href="http://localhost:5173/confirm-email/##token##">here</a> to recover your password</p>',
-      }).unwrap()
+  const handleForgotPassword = useCallback(
+    async (data: ForgotPasswordFormSchema) => {
+      try {
+        await recoverPassword({
+          email: data.email,
+          html: '<h1>Hi, ##name##</h1><p>Click <a href="http://localhost:5173/confirm-email/##token##">here</a> to recover your password</p>',
+        }).unwrap()
 
-      navigate('/check-email')
-    } catch (e: any) {
-      toast.error(e.data.message)
-    }
-  }
+        navigate('/check-email')
+      } catch (e: any) {
+        toast.error(e.data.message)
+      }
+    },
+    [recoverPassword, navigate]
+  )
 
   if (isLoading) {
     return <Loader />
@@ -37,4 +41,4 @@ export const ForgotPasswordPage = () => {
       <ForgotPassword onSubmit={handleForgotPassword} />
     </Page>
   )
-}
+})

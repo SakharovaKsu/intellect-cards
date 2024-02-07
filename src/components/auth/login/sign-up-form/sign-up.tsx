@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { memo, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
@@ -34,7 +34,7 @@ type Props = {
   onSubmit: (data: FormValues) => Promise<void>
 }
 
-export const SignUp: FC<Props> = ({ isSubmitting, onSubmit }) => {
+export const SignUp = memo(({ isSubmitting, onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -49,12 +49,14 @@ export const SignUp: FC<Props> = ({ isSubmitting, onSubmit }) => {
     resolver: zodResolver(signUpSchema),
   })
 
+  const handleSubmitForm = useCallback(() => handleSubmit(onSubmit), [handleSubmit, onSubmit])
+
   return (
     <CardPage className={s.container}>
       <Typography className={s.header} variant={'large'}>
         Sign Up
       </Typography>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={s.form} onSubmit={handleSubmitForm}>
         <DevTool control={control} />
 
         <TextField
@@ -91,4 +93,4 @@ export const SignUp: FC<Props> = ({ isSubmitting, onSubmit }) => {
       </form>
     </CardPage>
   )
-}
+})

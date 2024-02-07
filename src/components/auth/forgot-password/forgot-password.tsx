@@ -1,3 +1,4 @@
+import { memo, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
@@ -11,7 +12,7 @@ import { z } from 'zod'
 
 import s from './forgot-password.module.scss'
 
-type ForgotPasswordProps = {
+type Props = {
   onSubmit: (data: ForgotPasswordFormSchema) => void
 }
 export type ForgotPasswordFormSchema = z.infer<typeof ForgotPasswordSchema>
@@ -20,7 +21,7 @@ const ForgotPasswordSchema = z.object({
   email: z.string().email(),
 })
 
-export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
+export const ForgotPassword = memo(({ onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -28,12 +29,14 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
     register,
   } = useForm<ForgotPasswordFormSchema>({ resolver: zodResolver(ForgotPasswordSchema) })
 
+  const handleSubmitForm = useCallback(() => handleSubmit(onSubmit), [handleSubmit, onSubmit])
+
   return (
     <CardPage className={s.forgotContainer}>
       <Typography className={s.header} variant={'large'}>
         Forgot your password
       </Typography>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={s.form} onSubmit={handleSubmitForm}>
         <DevTool control={control} />
         <TextField
           {...register('email')}
@@ -54,4 +57,4 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
       </form>
     </CardPage>
   )
-}
+})

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 
 import { PackFilters } from '@/components/packs/pack-filters'
 import { PackTable } from '@/components/packs/pack-table'
@@ -24,7 +24,7 @@ export const listPage: ItemsType[] = [
   { title: '25', value: '25' },
 ]
 
-export const PacksListPage = () => {
+export const PacksListPage = memo(() => {
   const authorId = useAppSelector(authorIdSelect)
   const tabValue = useAppSelector(tabValueSelector)
   const searchQuery = useAppSelector(searchQuerySelector)
@@ -49,8 +49,6 @@ export const PacksListPage = () => {
   }
 
   if (error) {
-    // console.log(error)
-
     return <div>Error</div>
   }
 
@@ -81,4 +79,4 @@ export const PacksListPage = () => {
       />
     </Page>
   )
-}
+})

@@ -1,4 +1,11 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
+import {
+  ComponentPropsWithoutRef,
+  ElementRef,
+  forwardRef,
+  memo,
+  useCallback,
+  useState,
+} from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 
 import { Avatar } from '@/components/ui/avatar'
@@ -13,14 +20,14 @@ import { clsx } from 'clsx'
 
 import s from './dropdown.module.scss'
 
-export type DropdownProps = {
+export type Props = {
   align?: 'center' | 'end' | 'start'
   styles?: string
   userData?: AuthResponse
 } & ComponentPropsWithoutRef<typeof Root>
 
-export const Dropdown = forwardRef<ElementRef<typeof Content>, DropdownProps>(
-  ({ styles, userData }, ref) => {
+export const Dropdown = memo(
+  forwardRef<ElementRef<typeof Content>, Props>(({ styles, userData }, ref) => {
     const classNames = {
       arrow: clsx(s.arrow),
       content: clsx(s.content),
@@ -36,15 +43,14 @@ export const Dropdown = forwardRef<ElementRef<typeof Content>, DropdownProps>(
       ? userData.avatar
       : 'https://ionicframework.com/docs/img/demos/avatar.svg'
 
-    const onClickLogOut = async () => {
+    const onClickLogOut = useCallback(async () => {
       try {
         await logout().unwrap()
         setNavigateToLogin(true)
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log(error)
+        // console.log(error)
       }
-    }
+    }, [logout])
 
     if (navigateToLogin) {
       return <Navigate to={'/login'} />
@@ -108,5 +114,5 @@ export const Dropdown = forwardRef<ElementRef<typeof Content>, DropdownProps>(
         </Root>
       </div>
     )
-  }
+  })
 )

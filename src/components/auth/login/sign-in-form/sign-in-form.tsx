@@ -1,3 +1,4 @@
+import { memo, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
@@ -12,7 +13,7 @@ import { z } from 'zod'
 
 import s from './sign-in-form.module.scss'
 
-type SignInFormProps = {
+type Props = {
   disabled?: boolean
   onSubmit: (data: SignInFormSchema) => void
 }
@@ -23,7 +24,7 @@ const signInSchema = z.object({
   rememberMe: z.boolean(),
 })
 
-export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
+export const SignInForm = memo(({ disabled, onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -38,12 +39,14 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
     resolver: zodResolver(signInSchema),
   })
 
+  const handleSubmitForm = useCallback(() => handleSubmit(onSubmit), [handleSubmit, onSubmit])
+
   return (
     <CardPage className={s.container}>
       <Typography className={s.header} variant={'large'}>
         Sign In
       </Typography>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={s.form} onSubmit={handleSubmitForm}>
         <DevTool control={control} />
         <TextField {...register('email')} errorMessage={errors.email?.message} label={'Email'} />
         <TextField
@@ -73,4 +76,4 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
       </form>
     </CardPage>
   )
-}
+})

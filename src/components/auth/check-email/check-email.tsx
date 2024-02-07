@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
@@ -12,7 +12,7 @@ type Props = {
   email?: string
 }
 
-export const CheckEmail: FC<Props> = ({ email }) => {
+export const CheckEmail = memo(({ email }: Props) => {
   return (
     <CardPage className={s.checkContainer}>
       <Typography variant={'large'}>Check Email</Typography>
@@ -28,4 +28,4 @@ export const CheckEmail: FC<Props> = ({ email }) => {
       </Button>
     </CardPage>
   )
-}
+})

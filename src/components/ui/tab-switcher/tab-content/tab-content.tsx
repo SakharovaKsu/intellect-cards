@@ -1,18 +1,16 @@
-import { ReactNode } from 'react'
+import { ReactNode, memo } from 'react'
 
 import { Content } from '@radix-ui/react-tabs'
 
-type TabContentProps = {
+type Props = {
   children: ReactNode
   value: string
 }
 
-export const TabContent = (props: TabContentProps) => {
-  const { children, value } = props
-
+export const TabContent = memo(({ children, value }: Props) => {
   return (
     <Content style={{ whiteSpace: 'nowrap' }} value={value}>
       {children}
     </Content>
   )
-}
+})

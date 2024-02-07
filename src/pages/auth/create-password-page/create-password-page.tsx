@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -6,7 +7,7 @@ import Loader from '@/components/ui/loader/loader'
 import { Page } from '@/components/ui/page/page'
 import { useGetMeQuery, useResetPasswordMutation } from '@/services/auth/auth.service'
 
-export const CreatePasswordPage = () => {
+export const CreatePasswordPage = memo(() => {
   const { data, isLoading } = useGetMeQuery()
   const { token } = useParams()
   const navigate = useNavigate()
@@ -35,4 +36,4 @@ export const CreatePasswordPage = () => {
       <CreatePassword onSubmit={handleCreatePassword} />
     </Page>
   )
-}
+})

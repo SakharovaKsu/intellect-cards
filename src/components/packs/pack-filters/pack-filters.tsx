@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, memo, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { Button } from '@/components/ui/button'
@@ -32,36 +32,43 @@ const tabs = [
   },
 ]
 
-type PropsType = {
+type Props = {
   searchQuery: string
   sliderLabel?: string
   switcherLabel?: string
 }
 
-export function PackFilters(props: PropsType) {
-  const { searchQuery, sliderLabel, switcherLabel } = props
-
+export const PackFilters = memo(({ searchQuery, sliderLabel, switcherLabel }: Props) => {
   const dispatch = useDispatch()
   const maxCardsCount = useAppSelector(maxCardsCountSelector)
   const minCardsCount = useAppSelector(minCardsCountSelector)
 
-  const onSetCardsByAuthor = (tabValue: TabValue) => {
-    dispatch(setCardsByAuthor({ tabValue }))
-  }
+  const onSetCardsByAuthor = useCallback(
+    (tabValue: TabValue) => {
+      dispatch(setCardsByAuthor({ tabValue }))
+    },
+    [dispatch]
+  )
 
-  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSearchQuery({ value: event.target.value }))
-  }
+  const handleSearch = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      dispatch(setSearchQuery({ value: event.target.value }))
+    },
+    [dispatch]
+  )
 
-  const handleCardsCountChange = (value: number[]) => {
-    dispatch(setCardsCount(value))
-  }
+  const handleCardsCountChange = useCallback(
+    (value: number[]) => {
+      dispatch(setCardsCount(value))
+    },
+    [dispatch]
+  )
 
-  const handlerClearFilters = () => {
+  const handlerClearFilters = useCallback(() => {
     dispatch(setCardsByAuthor({ tabValue: 'allCards' }))
     dispatch(setSearchQuery({ value: '' }))
     dispatch(setCardsCount([0, 10]))
-  }
+  }, [dispatch])
 
   return (
     <div className={s.container}>
@@ -97,4 +104,4 @@ export function PackFilters(props: PropsType) {
       </div>
     </div>
   )
-}
+})

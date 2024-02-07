@@ -1,9 +1,11 @@
+import { memo } from 'react'
+
 import { CheckEmail } from '@/components/auth/check-email'
 import Loader from '@/components/ui/loader/loader'
 import { Page } from '@/components/ui/page/page'
 import { useGetMeQuery } from '@/services/auth/auth.service'
 
-export const CheckEmailPage = () => {
+export const CheckEmailPage = memo(() => {
   const { data, isLoading } = useGetMeQuery()
 
   if (isLoading) {
@@ -15,4 +17,4 @@ export const CheckEmailPage = () => {
       <CheckEmail email={data?.email} />
     </Page>
   )
-}
+})

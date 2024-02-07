@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { FormValues, SignUp } from '@/components/auth/login/sign-up-form'
 import { Page } from '@/components/ui/page/page'
 import { useSingUpMutation } from '@/services/auth/auth.service'
 
-export const SignUpPage = () => {
+export const SignUpPage = memo(() => {
   const [singUp] = useSingUpMutation()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
@@ -29,4 +29,4 @@ export const SignUpPage = () => {
       <SignUp isSubmitting={isSubmitting} onSubmit={onSubmit} />
     </Page>
   )
-}
+})

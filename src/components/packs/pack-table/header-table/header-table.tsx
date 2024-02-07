@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, FC } from 'react'
+import { ComponentPropsWithoutRef, memo, useCallback } from 'react'
 
 import { Column, Sort } from '@/components/packs/pack-table'
 import { TableRow } from '@/components/ui/table/table-body/table-row/table-row'
@@ -8,34 +8,37 @@ import { ArrowMiniDownIcon, ArrowMiniUpIcon } from '@/icons'
 
 import s from './header-table.module.scss'
 
-export const HeaderTable: FC<
-  Omit<
-    ComponentPropsWithoutRef<'thead'> & {
-      columns?: Column[]
-      onSort?: (sort: Sort) => void
-      pageType?: 'friends' | 'my'
-      sort?: Sort
-    },
-    'children'
-  >
-> = ({ columns, onSort, pageType, sort, ...restProps }) => {
+type Props = Omit<
+  ComponentPropsWithoutRef<'thead'> & {
+    columns?: Column[]
+    onSort?: (sort: Sort) => void
+    pageType?: 'friends' | 'my'
+    sort?: Sort
+  },
+  'children'
+>
+
+export const HeaderTable = memo(({ columns, onSort, pageType, sort, ...restProps }: Props) => {
   const isMyPage = pageType === 'my'
 
-  const handleSort = (key: string) => () => {
-    if (sort?.key !== key) {
+  const handleSort = useCallback(
+    (key: string) => () => {
+      if (sort?.key !== key) {
+        return onSort && onSort({ direction: 'asc', key })
+      }
+
+      if (sort?.direction === 'asc') {
+        return onSort && onSort({ direction: 'desc', key })
+      }
+
+      if (sort?.direction === 'desc' || !sort?.direction) {
+        return onSort && onSort({ direction: 'asc', key })
+      }
+
       return onSort && onSort({ direction: 'asc', key })
-    }
-
-    if (sort?.direction === 'asc') {
-      return onSort && onSort({ direction: 'desc', key })
-    }
-
-    if (sort?.direction === 'desc' || !sort?.direction) {
-      return onSort && onSort({ direction: 'asc', key })
-    }
-
-    return onSort && onSort({ direction: 'asc', key })
-  }
+    },
+    [sort, onSort]
+  )
 
   return (
     <TableHeader {...restProps}>
@@ -72,4 +75,4 @@ export const HeaderTable: FC<
       </TableRow>
     </TableHeader>
   )
-}
+})
