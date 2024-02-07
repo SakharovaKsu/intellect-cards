@@ -25,7 +25,7 @@ export const Slider = (props: Props) => {
         tabIndex={-1}
         value={values[0]}
       />
-      <form>
+      <form className={s.form}>
         <Root
           className={s.SliderRoot}
           defaultValue={values}

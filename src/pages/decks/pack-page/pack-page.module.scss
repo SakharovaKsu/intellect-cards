@@ -1,3 +1,11 @@
+@import '../../../styles/viewports';
+
 .container {
-  padding: 0 136px 0 136px;
+  padding: 24px 136px 0 136px;
+}
+
+@media (max-width: $mobile) {
+  .container {
+    padding: 24px 16px 0 16px;
+  }
 }

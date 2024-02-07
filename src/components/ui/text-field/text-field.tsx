@@ -17,6 +17,7 @@ type OwnProps = {
   label?: string
   onValueChange?: (value: string) => void
   placeholder?: string
+  style?: string
   textValue?: string
   type?: string
 }
@@ -32,6 +33,7 @@ export const TextField = forwardRef<ElementRef<'input'>, TextFieldProps>(
       onChange,
       onValueChange,
       placeholder,
+      style,
       textValue,
       type,
       ...props
@@ -55,7 +57,7 @@ export const TextField = forwardRef<ElementRef<'input'>, TextFieldProps>(
       ),
       fieldContainer: s.fieldContainer,
       label: clsx(s.label, disabled ? s.disabledLabel : s.label),
-      root: clsx(!isModal && s.root),
+      root: clsx(!isModal && s.root, style),
       showPassword: s.showPassword,
       showSearch: s.showSearch,
     }

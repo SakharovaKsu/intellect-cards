@@ -11,7 +11,7 @@ import { GetDesksResponse } from '@/services/decks/decks.types'
 
 import s from './pack-table.module.scss'
 
-export const columns: Column[] = [
+export const columnsTableDecks: Column[] = [
   {
     key: 'name',
     title: 'Name',
@@ -108,7 +108,7 @@ export const PackTable: FC<Props> = ({
   return (
     <div className={s.container}>
       <Table>
-        <HeaderTable columns={columns} onSort={setSort} sort={sort} />
+        <HeaderTable columns={columnsTableDecks} onSort={setSort} sort={sort} />
         <TableBody>
           {sortedDecks?.map(item => {
             const packPath =

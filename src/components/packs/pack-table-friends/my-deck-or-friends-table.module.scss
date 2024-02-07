@@ -1,3 +1,5 @@
+@import '../../../styles/viewports';
+
 .table {
   margin-top: 24px;
   border-collapse: collapse;
@@ -32,4 +34,10 @@
 .tbcIconContainer {
   display: flex;
   gap: 10px;
+}
+
+@media (max-width: $table) {
+  .tdcImg {
+    flex-wrap: wrap;
+  }
 }
