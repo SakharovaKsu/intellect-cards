@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import { Button } from '@/components/ui/button'
 import { CardPage } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -12,7 +10,7 @@ import { clsx } from 'clsx'
 
 import s from './packs-list.module.scss'
 
-type PackType = {
+type Props = {
   deletePack?: boolean
   img?: string
   isPack?: boolean
@@ -21,14 +19,7 @@ type PackType = {
   title: string
 }
 
-export const PacksList: FC<PackType> = ({
-  deletePack = false,
-  img,
-  isPack,
-  items,
-  nameButton,
-  title,
-}) => {
+export const PacksList = ({ deletePack = false, img, isPack, items, nameButton, title }: Props) => {
   const classNames = {
     buttonClose: clsx(s.buttonClose),
     container: clsx(s.container),

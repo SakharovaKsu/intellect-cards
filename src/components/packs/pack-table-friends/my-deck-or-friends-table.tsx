@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Column, Sort } from '@/components/packs/pack-table'
@@ -39,7 +39,7 @@ type Props = {
   searchQuery: string
 }
 
-export const MyDeckOrFriendsTable = ({ authorId, cards, pageType, searchQuery }: Props) => {
+export const MyDeckOrFriendsTable = memo(({ authorId, cards, pageType, searchQuery }: Props) => {
   const [sort, setSort] = useState<Sort>(null)
 
   const filteredCards = cards?.filter(card =>
@@ -60,7 +60,7 @@ export const MyDeckOrFriendsTable = ({ authorId, cards, pageType, searchQuery }:
     return 0
   })
 
-  const renderStars = (grade: number) => {
+  const renderStars = useCallback((grade: number) => {
     const stars = []
 
     for (let i = 0; i < 5; i++) {
@@ -68,7 +68,7 @@ export const MyDeckOrFriendsTable = ({ authorId, cards, pageType, searchQuery }:
     }
 
     return stars
-  }
+  }, [])
 
   return (
     <Table className={s.table}>
@@ -122,4 +122,4 @@ export const MyDeckOrFriendsTable = ({ authorId, cards, pageType, searchQuery }:
       </TableBody>
     </Table>
   )
-}
+})

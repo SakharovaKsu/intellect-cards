@@ -1,7 +1,7 @@
 import { memo, useCallback } from 'react'
 
 import { usePagination } from '@/components/ui/pagination/usePagination'
-import { Select, SelectProps } from '@/components/ui/select'
+import { ItemsType, Select } from '@/components/ui/select'
 import { Typography } from '@/components/ui/typography'
 import { ArrowMiniLeftIcon } from '@/icons/icon-components/arrow-mini-left-icon'
 import { ArrowMiniRightIcon } from '@/icons/icon-components/arrow-mini-right-icon'
@@ -9,14 +9,15 @@ import { clsx } from 'clsx'
 
 import s from './pagination.module.scss'
 
-export type Props = {
+type Props = {
   currentPage: number
+  items: ItemsType[]
   itemsPerPage: (selectValue: string) => void
   onPageChange: (pageNumber: number) => void
   pageSize: number
   siblingsCount?: number
   totalCount: number
-} & SelectProps
+}
 
 export const Pagination = memo(
   ({

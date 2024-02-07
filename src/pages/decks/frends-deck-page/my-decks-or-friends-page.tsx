@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, memo, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -20,7 +20,7 @@ type Props = {
   pageType: 'friends' | 'my'
 }
 
-export const MyDecksOrFriendsPage = ({ pageType }: Props) => {
+export const MyDecksOrFriendsPage = memo(({ pageType }: Props) => {
   const [itemPerPage, setItemPerPage] = useState(10)
   const [currentPageUse, setCurrentPageUse] = useState(1)
 
@@ -40,17 +40,20 @@ export const MyDecksOrFriendsPage = ({ pageType }: Props) => {
     question: searchQuery,
   })
 
+  const titleButton = authorId === id ? 'Add New Card' : 'Learn to Deck'
+
+  const handleSearch = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      dispatch(setSearchQuery({ value: event.target.value }))
+    },
+    [dispatch]
+  )
+
+  const itemsPerPage = useCallback((selectValue: string) => setItemPerPage(Number(selectValue)), [])
+
   if (dataDeckLoading || dataCardsLoading) {
     return <Loader />
   }
-
-  const titleButton = authorId === id ? 'Add New Card' : 'Learn to Deck'
-
-  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSearchQuery({ value: event.target.value }))
-  }
-
-  const itemsPerPage = (selectValue: string) => setItemPerPage(Number(selectValue))
 
   return (
     <div className={s.container}>
@@ -86,4 +89,4 @@ export const MyDecksOrFriendsPage = ({ pageType }: Props) => {
       />
     </div>
   )
-}
+})

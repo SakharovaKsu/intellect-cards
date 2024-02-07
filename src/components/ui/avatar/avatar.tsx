@@ -5,12 +5,12 @@ import { clsx } from 'clsx'
 
 import s from './avatar.module.scss'
 
-export type AvatarProps = {
+export type Props = {
   image: string
   size?: 'large' | 'small'
 } & ComponentPropsWithoutRef<typeof Root>
 
-export const Avatar = forwardRef<ElementRef<typeof Root>, AvatarProps>(
+export const Avatar = forwardRef<ElementRef<typeof Root>, Props>(
   ({ image, size = 'small', ...rest }, ref) => {
     const classNames = {
       image: clsx(s.image),

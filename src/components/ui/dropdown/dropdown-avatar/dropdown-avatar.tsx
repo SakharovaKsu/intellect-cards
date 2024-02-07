@@ -5,14 +5,14 @@ import { clsx } from 'clsx'
 
 import s from './dropdown-avatar.module.scss'
 
-export type DropdownWithAvatarProps = {
+export type Props = {
   avatar?: string
   mail?: string
   name?: string
   onClick: () => void
 }
 
-export const DropdownWithAvatar = forwardRef<HTMLDivElement, DropdownWithAvatarProps>(
+export const DropdownWithAvatar = forwardRef<HTMLDivElement, Props>(
   ({ avatar, mail, name, ...rest }, ref) => {
     const classNames = {
       avatar: clsx(s.avatar),

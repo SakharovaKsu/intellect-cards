@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
@@ -8,7 +9,7 @@ import { useGetMeQuery } from '@/services/auth/auth.service'
 
 import s from './header.module.scss'
 
-export const Header = () => {
+export const Header = memo(() => {
   const { data } = useGetMeQuery()
 
   return (
@@ -30,4 +31,4 @@ export const Header = () => {
       </div>
     </header>
   )
-}
+})

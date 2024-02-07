@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import {
   Navigate,
@@ -100,7 +100,7 @@ function PrivateRoutes() {
   return isLoggedIn ? <Outlet /> : <Navigate to={'/login'} />
 }
 
-export const Router = () => {
+export const Router = memo(() => {
   const { isLoading } = useGetMeQuery()
 
   if (isLoading) {
@@ -108,4 +108,4 @@ export const Router = () => {
   }
 
   return <RouterProvider router={router} />
-}
+})

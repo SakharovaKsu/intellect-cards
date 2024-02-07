@@ -6,27 +6,25 @@ import { clsx } from 'clsx'
 
 import s from './dropdown-item.module.scss'
 
-export type DropdownItemProps = {
+export type Props = {
   children?: ReactNode
   onSelect?: (event: Event) => void
 } & ComponentPropsWithoutRef<typeof Item>
 
-export const DropdownItem = forwardRef<ElementRef<typeof Item>, DropdownItemProps>(
-  ({ children }, ref) => {
-    const classNames = {
-      item: clsx(s.item),
-      itemIcon: clsx(s.itemIcon),
-    }
-
-    return (
-      <Item asChild className={classNames.item} ref={ref}>
-        {children}
-      </Item>
-    )
+export const DropdownItem = forwardRef<ElementRef<typeof Item>, Props>(({ children }, ref) => {
+  const classNames = {
+    item: clsx(s.item),
+    itemIcon: clsx(s.itemIcon),
   }
-)
 
-export type DropdownItemWithIconProps = Omit<DropdownItemProps, 'children'> & {
+  return (
+    <Item asChild className={classNames.item} ref={ref}>
+      {children}
+    </Item>
+  )
+})
+
+export type DropdownItemWithIconProps = Omit<Props, 'children'> & {
   icon: ReactNode
   label: string
 } & ComponentPropsWithoutRef<typeof Item>

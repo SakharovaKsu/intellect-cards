@@ -24,7 +24,7 @@ export type ItemsType = {
 
 export type SelectVariant = 'default' | 'fullWidth' | 'pagination'
 
-export type SelectProps = {
+export type Props = {
   className?: string
   disabled?: boolean
   items: ItemsType[]
@@ -34,7 +34,7 @@ export type SelectProps = {
 } & ComponentPropsWithoutRef<typeof Root>
 
 export const Select = memo(
-  forwardRef<ElementRef<typeof Root>, SelectProps>(
+  forwardRef<ElementRef<typeof Root>, Props>(
     (
       {
         children,

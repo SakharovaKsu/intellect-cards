@@ -19,11 +19,11 @@ type OwnProps<T extends ElementType> = {
   variant?: TypographyVariant
 }
 
-type TypographyProps<T extends ElementType> = OwnProps<T> &
+type Props<T extends ElementType> = OwnProps<T> &
   Omit<ComponentPropsWithoutRef<T>, keyof OwnProps<T>>
 
 export const TypographyRender = <T extends ElementType = 'p'>(
-  { as, children, className, variant = 'body1', ...props }: TypographyProps<T>,
+  { as, children, className, variant = 'body1', ...props }: Props<T>,
   ref: Ref<ElementRef<T>>
 ) => {
   const Component = as || elementsMap[variant]
@@ -36,7 +36,7 @@ export const TypographyRender = <T extends ElementType = 'p'>(
 }
 
 export const Typography = forwardRef(TypographyRender) as <T extends ElementType = 'p'>(
-  props: TypographyProps<T> & { ref?: Ref<ElementRef<T>> }
+  props: Props<T> & { ref?: Ref<ElementRef<T>> }
 ) => ReactElement
 
 export const elementsMap: Record<TypographyVariant, string> = {

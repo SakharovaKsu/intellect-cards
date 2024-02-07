@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -32,7 +32,7 @@ const evaluationOptions = [
   { id: 5, label: 'Knew the answer', value: 'knew_the_answer' },
 ]
 
-export const PagePack: FC<Props> = ({ numberOfAttempts = 0 }) => {
+export const PagePack = memo(({ numberOfAttempts = 0 }: Props) => {
   const dispatch = useDispatch()
   const [showAnswer, setShowAnswer] = useState(false)
   const [rating, setRating] = useState(1)
@@ -54,10 +54,6 @@ export const PagePack: FC<Props> = ({ numberOfAttempts = 0 }) => {
     title: clsx(s.title),
   }
 
-  if (dataDeckLoading || randomCardsLoading || isRatingLoading) {
-    return <Loader />
-  }
-
   const questionPicture = randomCards?.questionImg && (
     <img alt={'question imag'} className={classNames.img} src={randomCards?.questionImg} />
   )
@@ -66,7 +62,7 @@ export const PagePack: FC<Props> = ({ numberOfAttempts = 0 }) => {
     <img alt={'answer imag'} className={classNames.img} src={randomCards?.answerImg} />
   )
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = useCallback(() => {
     if (randomCards) {
       saveRating({
         cardId: randomCards.id,
@@ -75,15 +71,22 @@ export const PagePack: FC<Props> = ({ numberOfAttempts = 0 }) => {
       })
       setShowAnswer(false)
     }
-  }
+  }, [randomCards, rating, saveRating, id])
 
-  const handleShowAnswer = () => {
+  const handleShowAnswer = useCallback(() => {
     setShowAnswer(true)
-  }
+  }, [setShowAnswer])
 
-  const handleChangeOption = (order: number) => {
-    setRating(order)
-    dispatch(setOrderBy({ order }))
+  const handleChangeOption = useCallback(
+    (order: number) => {
+      setRating(order)
+      dispatch(setOrderBy({ order }))
+    },
+    [setRating, dispatch]
+  )
+
+  if (dataDeckLoading || randomCardsLoading || isRatingLoading) {
+    return <Loader />
   }
 
   return (
@@ -130,4 +133,4 @@ export const PagePack: FC<Props> = ({ numberOfAttempts = 0 }) => {
       )}
     </CardPage>
   )
-}
+})
